@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/colliders/RayCollider.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/engine2D/Window.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/colliders/BoxCollider.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/engine2D/Renderer.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/CollisionCodes.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/engine2D/Input.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/Laser.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/engine2D/GameContainer.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/colliders/AbstractCollider.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/Camera.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/Player.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/Vector2.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/audio/SoundClip.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/colliders/CircleCollider.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/PowerUp.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/engine2D/Config.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/GravPool.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/Asteroid.java</file>
+            <file>file:/C:/Users/Familia/Desktop/KometKevin/src/game/objects/Projectile.java</file>
+        </group>
+    </open-files>
+</project-private>

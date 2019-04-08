@@ -1,0 +1,48 @@
+package game.objects;
+
+import engine2D.GameContainer;
+import engine2D.Renderer;
+import game.GameManager;
+import game.Vector2;
+import game.colliders.CircleCollider;
+import gfx.Image;
+
+/**
+ *
+ * @author
+ */
+public class Projectile extends GameObject {
+
+    private Image image; 
+    
+    public Projectile(int x, int y) {
+        this.tag = "aplayer";
+        this.image = new Image("/projectiles/fire.png");
+        
+        this.width = image.getW();
+        this.height = image.getH();
+
+        this.position = new Vector2(x - width/2, y - height/2);
+        this.center = new Vector2(x, y);
+        this.velocity = new Vector2(0,0);
+        this.aiming = new Vector2(1,0); // Todas las naves apuntan hacia la der
+        
+        collCode = CollisionCodes.FIRE1.getValue();
+        collides = CollisionCodes.FIRE1_COL.getValue();
+        this.collider = new CircleCollider(this, 4);
+    }
+    
+    @Override
+    public void update(GameContainer gc, GameManager gm, float dt) {
+        position.add(velocity);
+        center.set(position.x + width/2, position.y + height/2);
+        aiming.set(velocity.getNormalized());
+    }
+
+    @Override
+    public void render(GameContainer gc, Renderer r) {
+        r.drawRotatedImage(image, (int)position.x, (int)position.y, aiming.getAngle());
+        //r.drawFillCircle((int)center.x, (int)center.y, 4, 0xff00ff00);
+        //r.setPixel((int)center.x, (int)center.y, 0xffff0000);
+    }
+}
