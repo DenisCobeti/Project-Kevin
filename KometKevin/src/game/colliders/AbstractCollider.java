@@ -4,6 +4,9 @@ import game.Vector2;
 import game.objects.GameObject;
 
 /**
+ * Colisionador abstracto.
+ * Tiene tantos metodos como colisionadores implementados
+ * 
  * @author Project Kevin
  */
 public abstract class AbstractCollider {    
