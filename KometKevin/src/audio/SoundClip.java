@@ -20,7 +20,7 @@ public class SoundClip {
     
     private Clip clip = null;
     private FloatControl volume;
-    
+    private int boom;
     
     /**
      * Construtor de la clase
