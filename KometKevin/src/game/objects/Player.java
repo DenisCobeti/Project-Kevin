@@ -10,6 +10,11 @@ import gfx.ImageTile;
 /**
  * Ojo que el eje Y esta invertido, asi de guay es java.
  * 
+ * H: 111, 11   112, 52     rot 0.015
+ * A: 90, 92    72, 46      rot 0.03
+ * S:
+ * B: 56, 48    48, 30
+ * 
  * @author Project Kevin
  */
 public class Player extends GameObject {
@@ -30,7 +35,7 @@ public class Player extends GameObject {
     
     public Player(int x, int y) {
         this.tag = "player";
-        this.image = new ImageTile("/ships/hammerShip.png",120,64);
+        this.image = new ImageTile("/ships/aphelionShip.png",90,92);
 
         this.width = ((ImageTile) image).getTileW();
         this.height = ((ImageTile) image).getTileH();
@@ -43,7 +48,7 @@ public class Player extends GameObject {
         
         collCode = CollisionCodes.TEAM1.getValue();
         collides = CollisionCodes.TEAM1_COL.getValue();
-        this.collider = new BoxCollider(this, 112, 52);
+        this.collider = new BoxCollider(this, 72, 46);
     }
 
     @Override
@@ -125,12 +130,11 @@ public class Player extends GameObject {
         
         if(gc.getInput().isKey(gc.getConfig().getKeyHability1())) {
             // TODO: piun piun
-            anim2=1;
+            anim2=0;
         }
         
         if(gc.getInput().isKey(gc.getConfig().getKeyHability2())) {
             // TODO: piun piun
-            anim2=2;
         }
 
         // Gestión de la animación
@@ -148,8 +152,8 @@ public class Player extends GameObject {
         // Vertices de los dos rectangulos
         Vector2 verticesA[] = new Vector2[4];
         
-        double max = (int) (Math.sqrt(112 * 112 + 52 * 52) / 2);
-        double angle = Math.atan(112 / 52);
+        double max = (int) (Math.sqrt(72 * 72 + 46 * 46) / 2);
+        double angle = Math.atan(72 / 46);
         
         verticesA[0] = Vector2.toCartesian(max, aiming.getAngle() + angle + Math.PI/2);
         verticesA[1] = Vector2.toCartesian(max, aiming.getAngle() - angle + Math.PI/2);

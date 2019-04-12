@@ -1,15 +1,22 @@
 package gui;
 
+import engine2D.Window;
+import java.awt.Color;
+import javax.swing.JLabel;
+
 /**
  *
- * @author Familia
+ * @author Project Kevin
  */
 public class MainMenu extends javax.swing.JPanel {
 
+    private Window window;
+    
     /**
      * Creates new form MainMenu
      */
-    public MainMenu() {
+    public MainMenu(Window window) {
+        this.window = window;
         initComponents();
     }
 
@@ -22,19 +29,58 @@ public class MainMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        startLabel = new javax.swing.JLabel();
+
+        startLabel.setBackground(new java.awt.Color(64, 64, 64));
+        startLabel.setFont(new java.awt.Font("BankGothic Md BT", 0, 36)); // NOI18N
+        startLabel.setForeground(new java.awt.Color(255, 255, 255));
+        startLabel.setText("  START");
+        startLabel.setName(""); // NOI18N
+        startLabel.setOpaque(true);
+        startLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                startLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                startLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                startLabelMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 75, Short.MAX_VALUE)
+                .addComponent(startLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(152, Short.MAX_VALUE)
+                .addComponent(startLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void startLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startLabelMouseClicked
+        window.getCardLayout().next(window.getCards());
+        window.getGameContainer().resume();
+    }//GEN-LAST:event_startLabelMouseClicked
+
+    private void startLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startLabelMouseEntered
+        startLabel.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_startLabelMouseEntered
+
+    private void startLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startLabelMouseExited
+        startLabel.setBackground(Color.DARK_GRAY);
+    }//GEN-LAST:event_startLabelMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel startLabel;
     // End of variables declaration//GEN-END:variables
 }

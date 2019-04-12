@@ -9,8 +9,9 @@ import gfx.MonoFont;
  * @author Project Kevin
  */
 public class GameContainer implements Runnable {
+    private final double UPDATE_CAP = 1.0/60.0; // min. 1/25 - max. 1/60
     
-    private final double UPDATE_CAP = 1.0/60.0; // deltaTime min. 1/25 max. 1/60
+    private double deltaTime = UPDATE_CAP;
     private Config config;
     
     private Thread thread;
@@ -19,28 +20,26 @@ public class GameContainer implements Runnable {
     private Input input;
     private AbstractGame game;
     
-    private final Object pauseLock = new Object();
     private boolean running = false;
-    private boolean paused = false;
 
     /**
      * Constructor de la clase
-     * @param game Juego que hace uso del motor gráfico
      */
-    public GameContainer(AbstractGame game) {
-        this.game = game;
+    public GameContainer() {
         config = Config.getInstance();
         window = new Window(this);
     }
     
     /**
-     * Crea las instancias de los objetos del motor y lanza su thread
+     * Crea las instancias restantes del motor y lanza su thread
+     * @param game Juego que hace uso del motor gráfico
      */
-    public void start() {
-        window.loadCanvas();
-        renderer = new Renderer(this);
+    public void start(AbstractGame game) {
+        this.game = game;
+        window.execGame();
+        renderer = new Renderer(window);
         renderer.setBackground(game.getBackground());
-        input = new Input(this);
+        input = new Input(window.getCanvas());
         
         thread = new Thread(this);
         thread.run();
@@ -51,7 +50,7 @@ public class GameContainer implements Runnable {
      */
     public void stop() {
         running = false;
-        if (paused) resume();
+        if (deltaTime == 0) resume();
     }
     
     @Override
@@ -84,11 +83,11 @@ public class GameContainer implements Runnable {
             frameTime += passedTime;
             
             // Se llevan a cabo tantas actualizaciones como sean necesarias
-            while(unprocessedTime >= UPDATE_CAP) {
-                unprocessedTime -= UPDATE_CAP;
+            while(unprocessedTime >= deltaTime) {
+                unprocessedTime -= deltaTime;
                 render = true;
                 
-                game.update(this, (float)UPDATE_CAP);
+                game.update(this, (float)deltaTime);
                 
                 input.update();
                 
@@ -123,15 +122,6 @@ public class GameContainer implements Runnable {
                     ex.printStackTrace();
                 }
             }
-            
-            // Se pausa el motor de ser necesario
-            if(paused) {
-                try {
-                    pauseLock.wait();
-                } catch (InterruptedException ex) {
-                    break;
-                }
-            }
         }
         dispose();
     }
@@ -140,18 +130,14 @@ public class GameContainer implements Runnable {
      * Se pausa el motor
      */
     public void pause() {
-        //if (!running) throw new NotRunningException();
-        paused = true;
+        if (running) deltaTime = 0;
     }
     
     /**
-     * Si el motor estaba pausado se reanuda si ejecución
+     * Si el motor estaba pausado se reanuda su ejecución
      */
     public void resume() {
-        synchronized (pauseLock) {
-            paused = false;
-            pauseLock.notifyAll();
-        }
+        deltaTime = UPDATE_CAP;
     }
 
     /**

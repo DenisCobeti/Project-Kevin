@@ -1,35 +1,66 @@
 package engine2D;
 
-import java.awt.BorderLayout;
+import game.GameManager;
+import gui.MainMenu;
 import java.awt.Canvas;
+import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Clase con un JFrame para la representación de la ventana de la aplicación.
- * La configuración de la ventana reside en GameContainer
+ * Contiene los menus iniciales y el canvas para el dibujado
  * 
  * @author Project Kevin
  */
-public class Window {
-    private static final String GAME_NAME = "Kommet Kevin v.0.2.0";
-   
-    private JFrame frame;
-    private BufferedImage image;
+public class Window extends JFrame{
+    private static final String GAME_NAME = "Kommet Kevin v.0.2.1";
+    
+    private Config config;
+    private GameContainer gc;
+    
+    private JPanel cards;
+    private MainMenu menu;
     private Canvas canvas;
+    
+    private BufferedImage image;
     private BufferStrategy bs;
     private Graphics g;
     
-    public Window(GameContainer gc) {
+    public Window(GameContainer gc) { 
+        super(GAME_NAME);
+        
+        this.gc = gc;
+        cards = new JPanel();
+        menu = new MainMenu(this);
+        canvas = new Canvas();
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+  
+        cards.setLayout(new CardLayout());
+        cards.add(menu);
+        cards.add(canvas);
+        add(cards);
+        
+        setResizable(false);
+        setVisible(true);
+    }
+    
+    /**
+     * Se crea el juego con las propiedades establecidas y se dimensiona el 
+     * canvas para el motor en el JFrame
+     */
+    public void execGame(){       
         image = new BufferedImage(gc.getConfig().getScreenWidth(), 
                                   gc.getConfig().getScreenHeight(), 
                                   BufferedImage.TYPE_INT_RGB);
-        
-        canvas = new Canvas();
         Dimension s = new Dimension((int)(gc.getConfig().getScreenWidth()  * 
                                                 gc.getConfig().getScale()), 
                                     (int)(gc.getConfig().getScreenHeight() *
@@ -38,26 +69,11 @@ public class Window {
         canvas.setMaximumSize(s);
         canvas.setMinimumSize(s);
         
-        frame = new JFrame(GAME_NAME);
-        
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Ocupa toda la pantalla
-        frame.setUndecorated(true);                    // Fuera la barra
-        frame.setLocationRelativeTo(null);             // Ventana centrada  
-
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }
-    
-    public void loadCanvas() {
-        frame.setLayout(new BorderLayout());
-        frame.add(canvas, BorderLayout.CENTER);
-        
         canvas.createBufferStrategy(2);
         bs = canvas.getBufferStrategy();
         g = bs.getDrawGraphics();
          
-        frame.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+        setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
     }
     
     /**
@@ -68,8 +84,15 @@ public class Window {
         bs.show();
     }
     
+    public static void main(String args[]) {
+        GameContainer gc = new GameContainer();
+        gc.start(new GameManager());
+    }
+    
     // Getters
+    public GameContainer getGameContainer() {return gc;}
     public BufferedImage getImage() {return image;}
     public Canvas getCanvas() {return canvas;}
-    public JFrame getFrame() {return frame;}
+    public JPanel getCards() {return cards;}
+    public CardLayout getCardLayout() {return (CardLayout) cards.getLayout();}
 }

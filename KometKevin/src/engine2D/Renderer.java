@@ -22,14 +22,13 @@ public class Renderer {
     
     /**
      * Constructor de la clase.
-     * @param gc GameContainer que contiene la ventana en la que dibujar y las 
-     * dimensiones de su Canvas
+     * @param win ventana en la que dibujar
      */
-    public Renderer(GameContainer gc) {
-        screenWidth = gc.getConfig().getScreenWidth();
-        screenHeight = gc.getConfig().getScreenHeight();
+    public Renderer(Window win) {
+        screenWidth = Config.getInstance().getScreenWidth();
+        screenHeight = Config.getInstance().getScreenHeight();
         
-        pixels = ((DataBufferInt)gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
+        pixels = ((DataBufferInt)win.getImage().getRaster().getDataBuffer()).getData();
     }
     
     /**
