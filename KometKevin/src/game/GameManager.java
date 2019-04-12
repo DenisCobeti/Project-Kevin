@@ -4,7 +4,6 @@ import game.objects.GameObject;
 import engine2D.AbstractGame;
 import engine2D.GameContainer;
 import engine2D.Renderer;
-import audio.SoundClip;
 import game.objects.*;
 import gfx.Image;
 import java.awt.event.KeyEvent;
@@ -17,10 +16,8 @@ import java.util.ArrayList;
  * @author Prokect Kevin
  */
 public class GameManager extends AbstractGame {
-
     private Camera camera;
-    private SoundClip music;
-
+    
     /**
      * Constructor de la clase
      */
@@ -85,10 +82,5 @@ public class GameManager extends AbstractGame {
         for (GameObject obj : objects) {
             obj.render(gc, r);
         }
-    }
-
-    public static void main(String args[]) {
-        GameContainer gc = new GameContainer(new GameManager());
-        gc.start();
     }
 }
