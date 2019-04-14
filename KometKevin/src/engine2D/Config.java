@@ -73,7 +73,7 @@ public class Config {
         keyDumpers = KeyEvent.VK_X;
         
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/bankgotic/bgothl.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/fonts/bgothl.ttf"));
         } catch (Exception ex) {
             font = Font.getFont(Font.SERIF);
         }
