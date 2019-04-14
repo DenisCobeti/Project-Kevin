@@ -1,5 +1,6 @@
 package engine2D;
 
+import audio.SoundClip;
 import game.GameManager;
 import gui.MainMenu;
 import java.awt.Canvas;
@@ -9,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,6 +22,9 @@ import javax.swing.JPanel;
  */
 public class Window extends JFrame{
     private static final String GAME_NAME = "Kommet Kevin v.0.2.1";
+    
+    private SoundClip menuClip;
+    private SoundClip gameClip;        
     
     private Config config;
     private GameContainer gc;
@@ -35,6 +40,13 @@ public class Window extends JFrame{
     public Window(GameContainer gc) { 
         super(GAME_NAME);
         
+        try {
+            menuClip = new SoundClip("music/ObservingTheStar.ogg");
+            gameClip = new SoundClip("music/IDoKnow.ogg");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
         this.gc = gc;
         cards = new JPanel();
         menu = new MainMenu(this);
@@ -48,6 +60,8 @@ public class Window extends JFrame{
         cards.add(menu);
         cards.add(canvas);
         add(cards);
+        
+        menuClip.loop();
         
         setResizable(false);
         setVisible(true);
@@ -95,4 +109,7 @@ public class Window extends JFrame{
     public Canvas getCanvas() {return canvas;}
     public JPanel getCards() {return cards;}
     public CardLayout getCardLayout() {return (CardLayout) cards.getLayout();}
+
+    public SoundClip getMenuClip() {return menuClip;}
+    public SoundClip getGameClip() {return gameClip;}
 }

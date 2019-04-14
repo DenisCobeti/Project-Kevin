@@ -104,6 +104,9 @@ public class MainMenu extends javax.swing.JPanel {
     
     private void startLabelMouseClicked(MouseEvent evt) {//GEN-FIRST:event_startLabelMouseClicked
         window.getCardLayout().next(window.getCards());
+        window.getCanvas().requestFocus();
+        window.getMenuClip().stop();
+        window.getGameClip().loop();
         window.getGameContainer().resume();
     }
     
