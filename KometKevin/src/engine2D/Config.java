@@ -1,7 +1,12 @@
 package engine2D;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Clase que aglutina todos los parametros a personalizar por el usuario.
@@ -10,6 +15,7 @@ import java.awt.event.MouseEvent;
  */
 public class Config {
     private static final Config SINGLETON = new Config();
+    
 
     // Configuraciones de la ventana
     private int screenWidth;
@@ -32,11 +38,13 @@ public class Config {
     private int primaryFire;
     private int secondaryFire;
     
+    private Font font;
     /**
      * Constructor Singleton de la clase
      */
     private Config() {
         setDefaultValues();
+        
     }
     
     public static Config getInstance() {
@@ -47,8 +55,8 @@ public class Config {
      * Establece los valores por defecto para la aplicación
      */
     public void setDefaultValues() {
-        screenWidth = 1360;
-        screenHeight = 768;
+        screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+        screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         fullScreen = true;
         scale = 1f;
 
@@ -63,6 +71,12 @@ public class Config {
         keyHability1 = KeyEvent.VK_Q;
         keyHability2 = KeyEvent.VK_E;
         keyDumpers = KeyEvent.VK_X;
+        
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("./resources/bankgotic/bgothl.ttf"));
+        } catch (Exception ex) {
+            font = Font.getFont(Font.SERIF);
+        }
     }
 
     // Getters & Setters
@@ -79,6 +93,7 @@ public class Config {
     public int getKeyDumpers() {return keyDumpers;}
     public int getPrimaryFire() {return primaryFire;}
     public int getSecondaryFire() {return secondaryFire;}
+    public Font getFont() {return font;}
     
     public void setScreenWidth(int screenWidth) {this.screenWidth = screenWidth;}
     public void setScreenHeight(int screenHeight) {this.screenHeight = screenHeight;}
@@ -93,4 +108,5 @@ public class Config {
     public void setKeyDumpers(int keyDumpers) {this.keyDumpers = keyDumpers;}
     public void setPrimaryFire(int primaryFire) {this.primaryFire = primaryFire;}
     public void setSecondaryFire(int secondaryFire) {this.secondaryFire = secondaryFire;}
+    
 }
