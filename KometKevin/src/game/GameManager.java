@@ -20,6 +20,7 @@ public class GameManager extends AbstractGame {
     
     /**
      * Constructor de la clase
+     * 
      */
     public GameManager() {
         background = new Image("/space/background.png");
