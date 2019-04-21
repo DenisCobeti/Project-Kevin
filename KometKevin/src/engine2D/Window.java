@@ -44,6 +44,7 @@ public class Window extends JFrame{
             menuClip = new SoundClip("music/ObservingTheStar.ogg");
             gameClip = new SoundClip("music/IDoKnow.ogg");
         } catch (IOException ex) {
+            //necesitamos mejor tratamiento de errores
             ex.printStackTrace();
         }
         

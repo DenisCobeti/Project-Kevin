@@ -1,5 +1,6 @@
 package gui;
 
+import audio.SoundClip;
 import engine2D.Window;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
@@ -29,6 +31,9 @@ public class MainMenu extends javax.swing.JPanel {
     private final String SCORES_TEXT = "SCORES";
     private final String EXIT_TEXT = "EXIT";
     
+    private final String NEXT_SHIP = ">";
+    private final String PREVIOUS_SHIP = "<";
+    
     private static final Font FONT = Config.getInstance().getFont();
     
     private static final int SCREEN_HEIGHT = Config.getInstance().getScreenHeight();
@@ -36,40 +41,67 @@ public class MainMenu extends javax.swing.JPanel {
     
     private static final int SPACE_BETWEEN_MENUS = SCREEN_HEIGHT/50;
     private static final int MENU_TOP_SPACE = SCREEN_HEIGHT/3;
+    // hay que cambiarlo para qeu sea relativo a la resolucion.
     private static final float FONT_SIZE = 50.0f;
     
     private static final String BG = "./resources/menu/background.png";
+    private SoundClip menuSelect;
     
-    private Window window;
-    
-    private JLabel start, options, scores, exit; 
+    private Window window; 
+    private JLabel start, options, scores, exit, startSelect, next, previous; 
 
     /**
      * Creates new form MainMenu
      */
     public MainMenu(Window window) {
         this.window = window;
+        
+        try {
+            // Sonido para la selecion de menu
+            menuSelect = new SoundClip("menu/menuHover.ogg");
+        } catch (IOException ex) {
+            //necesitamos mejor tratamiento de errores
+            ex.printStackTrace();
+        }
         initMenu();
     }                     
 
     private void initMenu() {
+ 
+        Dimension buttonSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
         
+        start = initMenuButton(START_TEXT, buttonSize);
+        startSelect = initMenuButton(START_TEXT, buttonSize);
+        options = initMenuButton(OPTIONS_TEXT, buttonSize);
+        scores = initMenuButton(SCORES_TEXT, buttonSize);
+        exit = initMenuButton(EXIT_TEXT, buttonSize);
         
-        start = initMenuButton(START_TEXT);
-        options = initMenuButton(OPTIONS_TEXT);
-        scores = initMenuButton(SCORES_TEXT);
-        exit = initMenuButton(EXIT_TEXT);
+        Dimension selectSize = new Dimension(SCREEN_WIDTH/20, SCREEN_HEIGHT/20);
         
+        next = initMenuButton(NEXT_SHIP, selectSize);
+        previous = initMenuButton(PREVIOUS_SHIP, selectSize);
+        
+        //Mouse Listeners de cada elemento mdel menu al hacer click
         start.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
                 startLabelMouseClicked(evt);
+            }
+        });
+        
+        startSelect.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+                startSelectLabelMouseClicked(evt);
             }
         });
         
         options.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
                 optionsLabelMouseClicked(evt);
             }
         });
@@ -77,32 +109,74 @@ public class MainMenu extends javax.swing.JPanel {
         scores.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
                 scoresLabelMouseClicked(evt);
             }
         });
         
         exit.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
                 exitLabelMouseClicked(evt);
+            }
+        });
+        
+        next.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+            }
+        });
+        
+        previous.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
             }
         });
         
         Box box = Box.createVerticalBox();
         
-        box.add(Box.createRigidArea(new Dimension(0,MENU_TOP_SPACE)));
+        //elments of the initial menu and spaces between the buttons
+        box.add(Box.createVerticalStrut(MENU_TOP_SPACE));
         box.add(start);
-        box.add(Box.createRigidArea(new Dimension(0,SPACE_BETWEEN_MENUS)));
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         box.add(options);
-        box.add(Box.createRigidArea(new Dimension(0,SPACE_BETWEEN_MENUS)));
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         box.add(scores);
-        box.add(Box.createRigidArea(new Dimension(0,SPACE_BETWEEN_MENUS * 3)));
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
         box.add(exit);
         
         this.setLayout(new BorderLayout(100,100));
         this.add(box, BorderLayout.EAST);
     }
     
-    private void startLabelMouseClicked(MouseEvent evt) {//GEN-FIRST:event_startLabelMouseClicked
+    private void startLabelMouseClicked(MouseEvent evt) {
+        setVisibleMenu(false);
+        
+        Box box = Box.createHorizontalBox();
+        JPanel panel = new JPanel();
+        
+        Dimension shipSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
+        
+        panel.setBackground(new Color(0,0,0,0));
+        panel.setPreferredSize(shipSize);
+        panel.setMaximumSize(shipSize);
+        panel.setLayout(new BorderLayout(100,100));
+        
+        //panel.add(imagenNave, BorderLayout.CENTRE);
+        panel.add(startSelect, BorderLayout.SOUTH);
+        
+        box.add(Box.createHorizontalStrut(MENU_TOP_SPACE));
+        box.add(previous);
+        box.add(Box.createHorizontalStrut(SPACE_BETWEEN_MENUS));
+        box.add(panel);
+        box.add(Box.createHorizontalStrut(SPACE_BETWEEN_MENUS));
+        box.add(next);
+        
+        this.setLayout(new BorderLayout(100,100));
+        this.add(box, BorderLayout.CENTER);
+    }
+    
+    private void startSelectLabelMouseClicked(MouseEvent evt) {
         window.getCardLayout().next(window.getCards());
         window.getCanvas().requestFocus();
         window.getMenuClip().stop();
@@ -110,7 +184,7 @@ public class MainMenu extends javax.swing.JPanel {
         window.getGameContainer().resume();
     }
     
-    private void optionsLabelMouseClicked(MouseEvent evt) {                                        
+    private void optionsLabelMouseClicked(MouseEvent evt) {
         
     } 
     private void scoresLabelMouseClicked(MouseEvent evt) {                                        
@@ -121,21 +195,22 @@ public class MainMenu extends javax.swing.JPanel {
         System.exit(0);
     }
    
-    private JLabel initMenuButton(String text){
+    private JLabel initMenuButton(String text, Dimension size){
         
         JLabel label = new javax.swing.JLabel(text);
-        Dimension dimension = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
-        Color labelBackground = new Color(0, 0, 0, 220);
+        //Dimension dimension = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
+        //Color labelBackground = new Color(0, 0, 0, 220);
         
-        label.setPreferredSize(dimension);
-        label.setMaximumSize(dimension);
-        label.setMinimumSize(dimension);
+        label.setPreferredSize(size);
+        label.setMaximumSize(size);
+        label.setMinimumSize(size);
         
         label.setFont(MainMenu.FONT.deriveFont(FONT_SIZE)); // NOI18N
         label.setForeground(Color.WHITE);
         label.setOpaque(true);
-        label.setBackground(labelBackground);
+        label.setBackground(Color.BLACK);
         
+        //Hover listeners
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent evt) {
@@ -144,22 +219,33 @@ public class MainMenu extends javax.swing.JPanel {
             }
             @Override
             public void mouseExited(MouseEvent evt) {
-                label.setBackground(labelBackground);
+                label.setBackground(Color.BLACK);
                 label.setForeground(Color.WHITE);
             }
         });
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
+        
         return label;
+    }
+    
+    
+    private void setVisibleMenu(Boolean visible){
+        start.setVisible(visible);
+        options.setVisible(visible);
+        scores.setVisible(visible);
+        exit.setVisible(visible);
     }
     
     @Override
     protected void paintComponent(Graphics g) {
+        //paint the background image
         super.paintComponent(g);
         try {
             g.drawImage(ImageIO.read(new File(BG)).getScaledInstance
                              (SCREEN_WIDTH, SCREEN_HEIGHT, 1), 0, 0, null);
         } catch (IOException ex) {
+            //mejor tratamiento de error
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }                 
