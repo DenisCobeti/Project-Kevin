@@ -133,6 +133,7 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
         
+        
         Box box = Box.createVerticalBox();
         
         //elments of the initial menu and spaces between the buttons
