@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/MainMenu.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/audio/SoundClip.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/Input.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/Vector2.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/Projectile.java</file>
             <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/Window.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/Renderer.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/GameContainer.java</file>
         </group>
     </open-files>
 </project-private>
