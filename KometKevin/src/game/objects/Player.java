@@ -18,6 +18,7 @@ import gfx.ImageTile;
  * @author Project Kevin
  */
 public class Player extends GameObject {
+    
     private float anim = 0;
     private float anim2 = 0;
     

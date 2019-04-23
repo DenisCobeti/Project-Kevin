@@ -2,23 +2,33 @@ package gui;
 
 import audio.SoundClip;
 import engine2D.Window;
+import engine2D.Config;
+import game.objects.Ships;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.Box;
-import javax.swing.JLabel;
-import engine2D.Config;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+
 
 /**
  *
@@ -44,25 +54,38 @@ public class MainMenu extends javax.swing.JPanel {
     // hay que cambiarlo para qeu sea relativo a la resolucion.
     private static final float FONT_SIZE = 50.0f;
     
-    private static final String BG = "./resources/menu/background.png";
+    private static final String BG = "resources/menu/background.png";
+    private static final String menuSound = "menu/menuHover.ogg";
     private SoundClip menuSelect;
     
     private Window window; 
-    private JLabel start, options, scores, exit, startSelect, next, previous; 
+    private JLabel start, options, scores, exit, startSelect, next, previous, ship;
+    
+    private  ArrayList<Image> shipIcons;
+    private ListIterator shipsIterator;
 
     /**
      * Creates new form MainMenu
      */
-    public MainMenu(Window window) {
+    public MainMenu(Window window)  {
         this.window = window;
+        shipIcons = new ArrayList<>();
         
-        try {
-            // Sonido para la selecion de menu
-            menuSelect = new SoundClip("menu/menuHover.ogg");
-        } catch (IOException ex) {
-            //necesitamos mejor tratamiento de errores
-            ex.printStackTrace();
+        //Estos valoren deberan cambian en getScaledInstance, ya que no son genericos,
+        for (int i = 0; i < Ships.values().length; i++){
+            try {
+                shipIcons.add(ImageIO.read(new File(Ships.values()[i].getSprite()))
+                        .getSubimage(0, 0, Ships.values()[i].getSizeX(), Ships.values()[i].getSizeY())
+                        .getScaledInstance(Ships.values()[i].getSizeX()*3, 
+                                            Ships.values()[i].getSizeY()*3, 
+                                            Image.SCALE_AREA_AVERAGING));
+            } catch (IOException ex) {}
         }
+        shipsIterator = shipIcons.listIterator();
+        try {
+            menuSelect = new SoundClip(menuSound);
+        } catch (IOException ex) {}
+        
         initMenu();
     }                     
 
@@ -123,13 +146,15 @@ public class MainMenu extends javax.swing.JPanel {
         
         next.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
+                //menuSelect.play();
+                nextLabelMouseClicked(evt);
             }
         });
         
         previous.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
+                //menuSelect.play();
+                previousLabelMouseClicked(evt);
             }
         });
         
@@ -155,16 +180,29 @@ public class MainMenu extends javax.swing.JPanel {
         
         Box box = Box.createHorizontalBox();
         JPanel panel = new JPanel();
-        
-        Dimension shipSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
+        JPanel panelShips = new JPanel();
+        Dimension shipSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/2);
+        Dimension shipSizeIcon = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/2);
+
+        ship = new JLabel(new ImageIcon((Image)shipsIterator.next()));
+        ship.setOpaque(true);
+        ship.setVisible(true);
         
         panel.setBackground(new Color(0,0,0,0));
         panel.setPreferredSize(shipSize);
         panel.setMaximumSize(shipSize);
+        panel.setMinimumSize(shipSize);
         panel.setLayout(new BorderLayout(100,100));
         
-        //panel.add(imagenNave, BorderLayout.CENTRE);
+        panelShips.setBackground(new Color(0,0,0,0));
+        panelShips.setPreferredSize(shipSizeIcon);
+        panelShips.setMaximumSize(shipSizeIcon);
+        panelShips.setMinimumSize(shipSizeIcon);
+        panelShips.setLayout(new BorderLayout(0,0));
+        
         panel.add(startSelect, BorderLayout.SOUTH);
+        panelShips.add(ship, BorderLayout.NORTH);
+        panel.add(panelShips, BorderLayout.NORTH);
         
         box.add(Box.createHorizontalStrut(MENU_TOP_SPACE));
         box.add(previous);
@@ -185,6 +223,16 @@ public class MainMenu extends javax.swing.JPanel {
         window.getGameContainer().resume();
     }
     
+    private void nextLabelMouseClicked(MouseEvent evt) {
+        try{
+            ship.setIcon(new ImageIcon((Image)shipsIterator.next()));
+        }catch(java.util.NoSuchElementException ex){}
+    } 
+    private void previousLabelMouseClicked(MouseEvent evt) {
+        try{
+            ship.setIcon(new ImageIcon((Image)shipsIterator.previous()));
+        }catch(java.util.NoSuchElementException ex){}
+    } 
     private void optionsLabelMouseClicked(MouseEvent evt) {
         
     } 
