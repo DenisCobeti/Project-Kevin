@@ -27,20 +27,25 @@ public class GravPool extends GameObject{
 
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
+        // La gravedad no puede ser destruida, no se llama a super update
         while(!collisions.empty()) {
-            GameObject go = collisions.pop();
-            Vector2 distance = this.center.getSubtracted(go.center);
-            if ((go.collCode & CollisionCodes.TEAMS.getValue()) > 0) {
-                go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity / 5, distance.getAngle()));
-            } else {
-                go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity, distance.getAngle()));
-            }
-            if (400 >= distance.getLength()) go.setDispose(true);
+            effect(collisions.pop());
         }
     }
-
+    
     @Override
     public void render(GameContainer gc, Renderer r) {
         
+    }
+
+    @Override
+    public void effect(GameObject go) {
+        Vector2 distance = this.center.getSubtracted(go.center);
+        if ((go.collCode & CollisionCodes.TEAMS.getValue()) > 0) {
+            go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity / 5, distance.getAngle()));
+        } else {
+            go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity, distance.getAngle()));
+        }
+        if (400 >= distance.getLength()) go.setDispose(true);
     }
 }

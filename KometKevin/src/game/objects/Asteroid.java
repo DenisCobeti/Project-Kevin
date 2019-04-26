@@ -14,6 +14,7 @@ import gfx.Image;
 public class Asteroid extends GameObject {
     private boolean borrar = false;
     private double angle = 0;
+    private double damage = 1;
     
     public Asteroid(int x, int y) {
         this.tag = "asteroid";
@@ -33,10 +34,7 @@ public class Asteroid extends GameObject {
     
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
-        while(!collisions.empty()) {
-            collisions.pop();//.setDead(true);
-            borrar = true;
-        }
+        super.update(gc, gm, dt);
         angle+=0.01;
         
         position.add(velocity);
@@ -50,6 +48,12 @@ public class Asteroid extends GameObject {
             r.drawFillCircle((int)center.x, (int)center.y, 26, 0xffff0000);
         }
         borrar = false;
+    }
+
+    @Override
+    public void effect(GameObject go) {
+        go.setHealthPoints(go.getHealthPoints() - damage);
+        borrar = true;
     }
     
 }

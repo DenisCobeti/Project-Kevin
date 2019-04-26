@@ -29,12 +29,38 @@ public abstract class GameObject {
     protected AbstractCollider collider;   
     protected Stack<GameObject> collisions = new Stack<>();
     
-    protected double healthPoints = 0;
-    protected double energyPoints = 0;
+    protected double healthPoints = 1;
+    protected double energyPoints = 1;
     protected boolean dispose = false;
     
-    public abstract void update(GameContainer gc, GameManager gm, float dt);
+    /**
+     * Metodo para gestionar los calculos de la simulación del objeto. Por 
+     * defecto informa de su defunción y desapila sus colisiones
+     * @param gc GameContainer, permite el acceso a los objetos del motor
+     * @param gm GameManager, permite acceso a todos los objetos del juego
+     * @param dt deltaTime, referencia al tiempo de simulación 
+     */
+    public void update(GameContainer gc, GameManager gm, float dt) {
+        while(!collisions.empty()) {
+            effect(collisions.pop());
+        }
+        if (healthPoints < 0) {
+            dispose = true;
+        }
+    }
+    
+    /**
+     * Metodo para dibujar el objeto en pantalla.
+     * @param gc GameContainer, permite el acceso a los objetos del motor
+     * @param r Renderer, contiene todos los metodos de dibujado del motor
+     */
     public abstract void render(GameContainer gc, Renderer r);
+    
+    /**
+     * Efecto que aplica un objeto a otro con el que colisiona
+     * @param go GameObject con el que colisiona 
+     */
+    public abstract void effect(GameObject go);
     
     /**
      * Informa si el objeto colisiona con otro

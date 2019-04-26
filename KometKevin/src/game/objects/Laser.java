@@ -12,6 +12,8 @@ import game.Vector2;
  */
 public class Laser extends GameObject {
     private Vector2 hitPoint = new Vector2(0,0);
+    private GameObject closer = null;
+    private double damage = 0;
     
     public Laser(Player support) {
         this.tag = "Laserrrrr";
@@ -27,20 +29,12 @@ public class Laser extends GameObject {
     }
     
     @Override
-    public void update(GameContainer gc, GameManager gm, float dt) {
-        GameObject closer = null;
-        GameObject aux = null;
-        
+    public void update(GameContainer gc, GameManager gm, float dt) {       
         hitPoint = Vector2.toCartesian(9999, aiming.getAngle()).getAdded(center);
-        while (!collisions.empty()) {
-            aux = collisions.pop();
-            if (closer == null)
-                closer = aux;
-            else if (aux.center.distance(center) < closer.center.distance(center)) {
-                closer = aux;
-            }
-            hitPoint = center.getSubtracted(closer.center);
-            hitPoint = Vector2.toCartesian(hitPoint.getLength(), aiming.getAngle()).getAdded(center);
+        closer = null;
+        // El laser no puede ser destruido, no se llama a super update
+        while(!collisions.empty()) {
+            effect(collisions.pop());
         }
     }
 
@@ -48,5 +42,16 @@ public class Laser extends GameObject {
     public void render(GameContainer gc, Renderer r) {
         r.drawLine((int)center.x, (int)center.y,(int)hitPoint.x, (int)hitPoint.y, 0xffff0000);
     }
-    
+
+    @Override
+    public void effect(GameObject go) {
+        if (closer == null)
+            closer = go;
+        else if (go.center.distance(center) < closer.center.distance(center)) {
+            closer = go;
+        }
+        hitPoint = center.getSubtracted(closer.center);
+        hitPoint = Vector2.toCartesian(hitPoint.getLength(), aiming.getAngle()).getAdded(center);
+        go.setHealthPoints(go.getHealthPoints() - damage);
+    }
 }

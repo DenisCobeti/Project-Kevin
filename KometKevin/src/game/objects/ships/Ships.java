@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package game.objects;
+package game.objects.ships;
 
 /**
  *
- * @author 
+ * @author Project Kevin
  */
 public enum Ships {
     /**
      *
      */
-    Hammerhead("resources/ships/hammerShip.png", 115, 64),
+    Hammer("resources/ships/hammerShip.png", 115, 64),
     Aphelion("resources/ships/aphelionShip.png", 90, 92),
     Bartleby("resources/ships/bartlebyShip.png", 55, 49),
-    Ramiro("resources/ships/bartlebyShip.png", 90, 92);
+    Sekul("resources/ships/bartlebyShip.png", 90, 92);
     
     private String sprite;
     private int sizeX, sizeY;

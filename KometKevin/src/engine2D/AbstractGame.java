@@ -14,14 +14,14 @@ public abstract class AbstractGame {
     protected Image background;
     
     /**
-     * Metodo para gestionar los calculos de la simulación del programa
+     * Metodo para gestionar los calculos de la simulación del programa.
      * @param gc GameContainer, permite el acceso a los objetos del motor
      * @param dt deltaTime, referencia al tiempo de simulación 
      */
     public abstract void update(GameContainer gc, float dt);
     
     /**
-     * Metodo para dibujar en pantalla
+     * Metodo para dibujar en pantalla.
      * @param gc GameContainer, permite el acceso a los objetos del motor
      * @param r Renderer, contiene todos los metodos de dibujado del motor
      */

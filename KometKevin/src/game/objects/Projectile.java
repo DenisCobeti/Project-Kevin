@@ -13,7 +13,8 @@ import gfx.Image;
  */
 public class Projectile extends GameObject {
 
-    private Image image; 
+    private Image image;
+    private double damage = 1;
     
     public Projectile(int x, int y) {
         this.tag = "aplayer";
@@ -37,12 +38,16 @@ public class Projectile extends GameObject {
         position.add(velocity);
         center.set(position.x + width/2, position.y + height/2);
         aiming.set(velocity.getNormalized());
+        super.update(gc, gm, dt);
     }
 
     @Override
     public void render(GameContainer gc, Renderer r) {
         r.drawRotatedImage(image, (int)position.x, (int)position.y, aiming.getAngle());
-        //r.drawFillCircle((int)center.x, (int)center.y, 4, 0xff00ff00);
-        //r.setPixel((int)center.x, (int)center.y, 0xffff0000);
+    }
+
+    @Override
+    public void effect(GameObject go) {
+        go.setHealthPoints(go.getHealthPoints() - damage);
     }
 }

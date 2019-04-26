@@ -53,7 +53,9 @@ public class Player extends GameObject {
     }
 
     @Override
-    public void update(GameContainer gc, GameManager gm, float dt) {       
+    public void update(GameContainer gc, GameManager gm, float dt) { 
+        super.update(gc, gm, dt);
+        
         // Gestión del autoaiming al raton
         Vector2 dir = new Vector2(gc.getInput().getMouseX(), gc.getInput().getMouseY());
         dir.subtract(center);
@@ -171,5 +173,10 @@ public class Player extends GameObject {
         
         r.drawFillRect(10, 30, 100, 10, 0xff0000ff);
         r.drawFillRect(10, 30, 100,  6, 0xff6060ff);
+    }
+
+    @Override
+    public void effect(GameObject go) {
+        
     }
 }

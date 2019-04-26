@@ -3,7 +3,7 @@ package gui;
 import audio.SoundClip;
 import engine2D.Window;
 import engine2D.Config;
-import game.objects.Ships;
+import game.objects.ships.Ships;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
