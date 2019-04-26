@@ -23,21 +23,22 @@ import javax.swing.SwingConstants;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 /**
  *
  * @author Project Kevin
  */
-public class MainMenu extends javax.swing.JPanel {
+public class MainMenu extends JPanel {
 
     private final String START_TEXT = "START"; 
-    private final String OPTIONS_TEXT = "OPTIONS"; 
+    private final String OPTIONS_TEXT = "CONTROLS"; 
     private final String SCORES_TEXT = "SCORES";
     private final String EXIT_TEXT = "EXIT";
     
@@ -61,27 +62,29 @@ public class MainMenu extends javax.swing.JPanel {
     private Window window; 
     private JLabel start, options, scores, exit, startSelect, next, previous, ship;
     
-    private  ArrayList<Image> shipIcons;
-    private ListIterator shipsIterator;
-
+    private  Image[] shipIcons;
+    private int shipsIterator;
+    
     /**
      * Creates new form MainMenu
      */
+   
     public MainMenu(Window window)  {
         this.window = window;
-        shipIcons = new ArrayList<>();
+        
+        shipIcons = new Image[Ships.values().length];
         
         //Estos valoren deberan cambian en getScaledInstance, ya que no son genericos,
-        for (int i = 0; i < Ships.values().length; i++){
+        for (int i = 0; i < shipIcons.length; i++){
             try {
-                shipIcons.add(ImageIO.read(new File(Ships.values()[i].getSprite()))
+                shipIcons[i] = (ImageIO.read(new File(Ships.values()[i].getSprite()))
                         .getSubimage(0, 0, Ships.values()[i].getSizeX(), Ships.values()[i].getSizeY())
                         .getScaledInstance(Ships.values()[i].getSizeX()*3, 
                                             Ships.values()[i].getSizeY()*3, 
                                             Image.SCALE_AREA_AVERAGING));
             } catch (IOException ex) {}
         }
-        shipsIterator = shipIcons.listIterator();
+        shipsIterator = 0;
         try {
             menuSelect = new SoundClip(menuSound);
         } catch (IOException ex) {}
@@ -171,7 +174,7 @@ public class MainMenu extends javax.swing.JPanel {
         box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
         box.add(exit);
         
-        this.setLayout(new BorderLayout(100,100));
+        this.setLayout(new BorderLayout(100, 100));
         this.add(box, BorderLayout.EAST);
     }
     
@@ -183,9 +186,9 @@ public class MainMenu extends javax.swing.JPanel {
         JPanel panelShips = new JPanel();
         Dimension shipSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/2);
         Dimension shipSizeIcon = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/2);
-
-        ship = new JLabel(new ImageIcon((Image)shipsIterator.next()));
-        ship.setOpaque(true);
+        
+        ship = new JLabel(new ImageIcon(shipIcons[shipsIterator]));
+        ship.setOpaque(false);
         ship.setVisible(true);
         
         panel.setBackground(new Color(0,0,0,0));
@@ -194,7 +197,8 @@ public class MainMenu extends javax.swing.JPanel {
         panel.setMinimumSize(shipSize);
         panel.setLayout(new BorderLayout(100,100));
         
-        panelShips.setBackground(new Color(0,0,0,0));
+        panelShips.setBackground(new Color(0,0,0,255));
+        
         panelShips.setPreferredSize(shipSizeIcon);
         panelShips.setMaximumSize(shipSizeIcon);
         panelShips.setMinimumSize(shipSizeIcon);
@@ -211,7 +215,6 @@ public class MainMenu extends javax.swing.JPanel {
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_MENUS));
         box.add(next);
         
-        this.setLayout(new BorderLayout(100,100));
         this.add(box, BorderLayout.CENTER);
     }
     
@@ -224,17 +227,36 @@ public class MainMenu extends javax.swing.JPanel {
     }
     
     private void nextLabelMouseClicked(MouseEvent evt) {
-        try{
-            ship.setIcon(new ImageIcon((Image)shipsIterator.next()));
-        }catch(java.util.NoSuchElementException ex){}
+        shipsIterator = (++shipsIterator) % shipIcons.length;
+        ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
+                    
     } 
+    
     private void previousLabelMouseClicked(MouseEvent evt) {
-        try{
-            ship.setIcon(new ImageIcon((Image)shipsIterator.previous()));
-        }catch(java.util.NoSuchElementException ex){}
+        shipsIterator = (--shipsIterator) % shipIcons.length;
+        ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
     } 
+    
     private void optionsLabelMouseClicked(MouseEvent evt) {
+        setVisibleMenu(false);
+        Dimension size = new Dimension(SCREEN_HEIGHT, SCREEN_WIDTH/3);
+        Dimension sizeItem = new Dimension(SCREEN_HEIGHT/10, SCREEN_WIDTH/3);
         
+        JMenu optionsMenu = new JMenu("Controls");
+        JPanel panel = new JPanel();
+        
+        optionsMenu.setPreferredSize(size);
+        optionsMenu.setMaximumSize(size);
+        optionsMenu.setMinimumSize(size);
+        
+        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
+        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
+        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
+        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
+        
+        optionsMenu.setVisible(true);
+        this.setLayout(new BorderLayout(100,100));
+        this.add(optionsMenu, BorderLayout.EAST);
     } 
     private void scoresLabelMouseClicked(MouseEvent evt) {                                        
         
@@ -246,7 +268,7 @@ public class MainMenu extends javax.swing.JPanel {
    
     private JLabel initMenuButton(String text, Dimension size){
         
-        JLabel label = new javax.swing.JLabel(text);
+        JLabel label = new JLabel(text);
         //Dimension dimension = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
         //Color labelBackground = new Color(0, 0, 0, 220);
         
@@ -278,6 +300,35 @@ public class MainMenu extends javax.swing.JPanel {
         return label;
     }
     
+    private JMenuItem initOptionsControlMenu(String text, Dimension size){
+        
+        JMenuItem item = new JMenuItem(text);
+        
+        item.setPreferredSize(size);
+        item.setMaximumSize(size);
+        item.setMinimumSize(size);
+        
+        item.setFont(MainMenu.FONT.deriveFont(FONT_SIZE)); // NOI18N
+        item.setForeground(Color.WHITE);
+        item.setOpaque(true);
+        item.setBackground(Color.BLACK);
+        
+        //Hover listeners
+        item.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                item.setBackground(Color.WHITE);
+                item.setForeground(Color.BLACK);
+            }
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                item.setBackground(Color.BLACK);
+                item.setForeground(Color.WHITE);
+            }
+        });
+        
+        return item;
+    }
     
     private void setVisibleMenu(Boolean visible){
         start.setVisible(visible);
