@@ -1,10 +1,12 @@
 package game;
 
+import game.objects.ships.aphelion.Laser;
 import game.objects.GameObject;
 import engine2D.AbstractGame;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.objects.*;
+import game.objects.ships.hammer.*;
 import gfx.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class GameManager extends AbstractGame {
         background = new Image("/space/background.png");
 
         objects = new ArrayList<>();
-        Player player = new Player(100, 100);
+        Player player = new HammerHead(100, 100);
 
 //        for (int i = 0; i < 25; i++) /* Test de eficiencia */
         objects.add(player);

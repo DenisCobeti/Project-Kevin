@@ -45,8 +45,8 @@ public class PowerUp extends GameObject {
         TODO: aqui pues se podria hacer un switch con efectos, estableciendo 
         un enum en esta clase con todos ellos
         */
-        switch (tipo) {
-            // TODO Lo que sea
-        }
+//        switch (tipo) {
+//            // TODO Lo que sea
+//        }
     }
 }

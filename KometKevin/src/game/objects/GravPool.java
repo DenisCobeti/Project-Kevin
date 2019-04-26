@@ -40,12 +40,12 @@ public class GravPool extends GameObject{
 
     @Override
     public void effect(GameObject go) {
-        Vector2 distance = this.center.getSubtracted(go.center);
-        if ((go.collCode & CollisionCodes.TEAMS.getValue()) > 0) {
-            go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity / 5, distance.getAngle()));
-        } else {
-            go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity, distance.getAngle()));
+            Vector2 distance = this.center.getSubtracted(go.center);
+            if ((go.collCode & CollisionCodes.TEAMS.getValue()) > 0) {
+                go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity / 5, distance.getAngle()));
+            } else {
+                go.velocity.add(Vector2.toCartesian(1/distance.getLength() * gravity, distance.getAngle()));
+            }
+            if (400 >= distance.getLength()) go.setDispose(true);
         }
-        if (400 >= distance.getLength()) go.setDispose(true);
     }
-}

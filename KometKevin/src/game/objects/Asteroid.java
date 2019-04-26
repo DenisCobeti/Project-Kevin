@@ -14,7 +14,7 @@ import gfx.Image;
 public class Asteroid extends GameObject {
     private boolean borrar = false;
     private double angle = 0;
-    private double damage = 1;
+    private double damage = 2;
     
     public Asteroid(int x, int y) {
         this.tag = "asteroid";
@@ -49,11 +49,10 @@ public class Asteroid extends GameObject {
         }
         borrar = false;
     }
-
+    
     @Override
     public void effect(GameObject go) {
         go.setHealthPoints(go.getHealthPoints() - damage);
         borrar = true;
-    }
-    
+    }  
 }

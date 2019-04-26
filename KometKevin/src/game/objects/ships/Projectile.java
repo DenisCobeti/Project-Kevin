@@ -1,24 +1,27 @@
-package game.objects;
+package game.objects.ships;
 
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
 import game.Vector2;
 import game.colliders.CircleCollider;
+import game.objects.CollisionCodes;
+import game.objects.GameObject;
 import gfx.Image;
 
 /**
  *
- * @author
+ * @author Project Kevin
  */
 public class Projectile extends GameObject {
+    private static final int RADIUS = 4;
 
-    private Image image;
+    private Image image; 
     private double damage = 1;
     
-    public Projectile(int x, int y) {
+    public Projectile(int x, int y, Image image) {
         this.tag = "aplayer";
-        this.image = new Image("/projectiles/fire.png");
+        this.image = image;
         
         this.width = image.getW();
         this.height = image.getH();
@@ -30,9 +33,9 @@ public class Projectile extends GameObject {
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
-        this.collider = new CircleCollider(this, 4);
+        this.collider = new CircleCollider(this, RADIUS);
     }
-    
+
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
         position.add(velocity);

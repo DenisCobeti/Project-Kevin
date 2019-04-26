@@ -59,12 +59,12 @@ public class MainMenu extends JPanel {
     private static final String menuSound = "menu/menuHover.ogg";
     private SoundClip menuSelect;
     
-    private Window window; 
+    private Window window;
     private JLabel start, options, scores, exit, startSelect, next, previous, ship;
     
     private  Image[] shipIcons;
     private int shipsIterator;
-    
+
     /**
      * Creates new form MainMenu
      */
@@ -93,7 +93,7 @@ public class MainMenu extends JPanel {
     }                     
 
     private void initMenu() {
- 
+        
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
         
         start = initMenuButton(START_TEXT, buttonSize);
@@ -238,7 +238,7 @@ public class MainMenu extends JPanel {
         ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
     } 
     
-    private void optionsLabelMouseClicked(MouseEvent evt) {
+    private void optionsLabelMouseClicked(MouseEvent evt) {                                        
         setVisibleMenu(false);
         Dimension size = new Dimension(SCREEN_HEIGHT, SCREEN_WIDTH/3);
         Dimension sizeItem = new Dimension(SCREEN_HEIGHT/10, SCREEN_WIDTH/3);
@@ -316,7 +316,7 @@ public class MainMenu extends JPanel {
         
         //Hover listeners
         item.addMouseListener(new MouseAdapter() {
-            @Override
+    @Override
             public void mouseEntered(MouseEvent evt) {
                 item.setBackground(Color.WHITE);
                 item.setForeground(Color.BLACK);

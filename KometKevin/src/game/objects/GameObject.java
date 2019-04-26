@@ -90,6 +90,7 @@ public abstract class GameObject {
     public int getCollides() {return collides;}
     public AbstractCollider getCollider() {return collider;}
     public Stack<GameObject> getCollisions() {return collisions;}
+    public Image getImage() {return image;}
     public double getHealthPoints() {return healthPoints;}
     public double getEnergyPoints() {return energyPoints;}
     public boolean isDispose() {return dispose;}
@@ -104,7 +105,6 @@ public abstract class GameObject {
     public void setCollCode(int collCode) {this.collCode = collCode;}
     public void setCollides(int collides) {this.collides = collides;}
     public void setCollider(AbstractCollider collider) {this.collider = collider;}
-    public Image getImage() {return image;}
     public void setImage(Image image) {this.image = image;}
     public void setHealthPoints(double healthPoints) {this.healthPoints = healthPoints;}
     public void setEnergyPoints(double energyPoints) {this.energyPoints = energyPoints;}

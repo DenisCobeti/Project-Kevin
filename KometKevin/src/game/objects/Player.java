@@ -4,42 +4,33 @@ import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
 import game.Vector2;
-import game.colliders.BoxCollider;
 import gfx.ImageTile;
 
 /**
  * Ojo que el eje Y esta invertido, asi de guay es java.
- * 
- * H: 111, 11   112, 52     rot 0.015
- * A: 90, 92    72, 46      rot 0.03
- * S:
- * B: 56, 48    48, 30
- * 
  * @author Project Kevin
  */
-public class Player extends GameObject {
+public abstract class Player extends GameObject {
     
     private float anim = 0;
     private float anim2 = 0;
     
-    private double fowardsAccel = 2.9;
-    private double backwardsAccel = 1.9;
-    private double lateralAccel = 1.1;
-    private double rotationSpeed = 0.015;
+    protected double fowardsAccel;
+    protected double backwardsAccel;
+    protected double lateralAccel;
+    protected double rotationSpeed;
     
-    private double coldDownF1 = 0;
-    private double coldDownF2 = 0;
-    private double coldDownH1 = 0;
-    private double coldDownH2 = 0;
+    protected double fire1Cd;
+    protected double fire2Cd;
+    protected double hability1Cd;
+    protected double hability2Cd;
+
+    public double[] cds = new double[4];
     
     private boolean dumpers; // Mecanismo automatizado de frenada
     
     public Player(int x, int y) {
         this.tag = "player";
-        this.image = new ImageTile("/ships/aphelionShip.png",90,92);
-
-        this.width = ((ImageTile) image).getTileW();
-        this.height = ((ImageTile) image).getTileH();
         
         this.dumpers = true;
         this.position = new Vector2(x, y);
@@ -49,15 +40,18 @@ public class Player extends GameObject {
         
         collCode = CollisionCodes.TEAM1.getValue();
         collides = CollisionCodes.TEAM1_COL.getValue();
-        this.collider = new BoxCollider(this, 72, 46);
+        
+        for (int i=0; i<cds.length;i++){
+            cds[i] = 0;
+        }
     }
 
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) { 
         super.update(gc, gm, dt);
-        
+   
         // Gestión del autoaiming al raton
-        Vector2 dir = new Vector2(gc.getInput().getMouseX(), gc.getInput().getMouseY());
+        Vector2 dir = new Vector2(gc.getInput().getMouseX(), gc.getInput().getMouseY());        
         dir.subtract(center);
         dir.rotateBy(Math.PI - aiming.getAngle());
         if (Math.abs(dir.getAngle()) < Math.PI - 0.01) {
@@ -117,66 +111,71 @@ public class Player extends GameObject {
         position.add(velocity);
         center.set(position.x + width/2, position.y + height/2);
         
-        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire())){
-            if (coldDownF1 <= 0) {
-                Projectile fire = new Projectile((int)center.x, (int)center.y);
-                fire.setVelocity(velocity.getAdded(aiming.getMultiplied(14)));
-                fire.setAiming(aiming.clone());
-                gm.getObjects().add(0,fire);
-                coldDownF1 = 0.25;
-            }
+        // Gestión de las habilidades
+        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
+            cds[0] = fire1(gm);
         }
+        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
+            cds[1] = fire2(gm);
+        }
+        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
+            cds[2] = hability1(gm);
+        }
+        if(gc.getInput().isKey(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
+            cds[3] = hability2(gm);
+        }  
         
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire())){
-            // TODO: piun piun
-        }
-        
-        if(gc.getInput().isKey(gc.getConfig().getKeyHability1())) {
-            // TODO: piun piun
-            anim2=0;
-        }
-        
-        if(gc.getInput().isKey(gc.getConfig().getKeyHability2())) {
-            // TODO: piun piun
-        }
-
         // Gestión de la animación
         anim += dt * 15;
         if (anim >= anim_fin) anim = anim_ini;
         
         // Gestión coldDowns
-        if (coldDownF1 > 0) coldDownF1 -= dt;
-    }
-
+        for (int i=0; i<cds.length; i++){
+            if (cds[i] > 0) cds[i] -= dt;
+        }
+    }   
+    
     @Override
     public void render(GameContainer gc, Renderer r) {
         r.drawRotatedImageTile((ImageTile) image, (int)position.x, (int)position.y, (int)anim2, (int)anim, aiming.getAngle());
         
-        // Vertices de los dos rectangulos
-        Vector2 verticesA[] = new Vector2[4];
-        
-        double max = (int) (Math.sqrt(72 * 72 + 46 * 46) / 2);
-        double angle = Math.atan(72 / 46);
-        
-        verticesA[0] = Vector2.toCartesian(max, aiming.getAngle() + angle + Math.PI/2);
-        verticesA[1] = Vector2.toCartesian(max, aiming.getAngle() - angle + Math.PI/2);
-        verticesA[2] = verticesA[0].getReversed();
-        verticesA[3] = verticesA[1].getReversed();
-        
-        for (int i = 0; i < 4; i++) {
-            verticesA[i].add(center);
-            r.setPixel((int)verticesA[i].x, (int)verticesA[i].y, 0xffff0000);
-        }
-        
-        r.drawFillRect(10, 10, 180, 10, 0xffff7d00);
-        r.drawFillRect(10, 10, 180,  6, 0xffffd660);
-        
-        r.drawFillRect(10, 30, 100, 10, 0xff0000ff);
-        r.drawFillRect(10, 30, 100,  6, 0xff6060ff);
+//        // Vertices de los dos rectangulos
+//        Vector2 verticesA[] = new Vector2[4];
+//        
+//        double max = (int) (Math.sqrt(72 * 72 + 46 * 46) / 2);
+//        double angle = Math.atan(72 / 46);
+//        
+//        verticesA[0] = Vector2.toCartesian(max, aiming.getAngle() + angle + Math.PI/2);
+//        verticesA[1] = Vector2.toCartesian(max, aiming.getAngle() - angle + Math.PI/2);
+//        verticesA[2] = verticesA[0].getReversed();
+//        verticesA[3] = verticesA[1].getReversed();
+//        
+//        for (int i = 0; i < 4; i++) {
+//            verticesA[i].add(center);
+//            r.setPixel((int)verticesA[i].x, (int)verticesA[i].y, 0xffff0000);
+//        }
+//        
+//        r.drawFillRect(10, 10, 180, 10, 0xffff7d00);
+//        r.drawFillRect(10, 10, 180,  6, 0xffffd660);
+//        
+//        r.drawFillRect(10, 30, 100, 10, 0xff0000ff);
+//        r.drawFillRect(10, 30, 100,  6, 0xff6060ff);
     }
-
+    
     @Override
     public void effect(GameObject go) {
-        
+        go.setHealthPoints(go.getHealthPoints() - Double.MAX_VALUE);
     }
+    
+    // Habilidades a implementar en cada una de las naves
+    public abstract double fire1(GameManager gm);
+    public abstract double fire2(GameManager gm);
+    public abstract double hability1(GameManager gm);
+    public abstract double hability2(GameManager gm);
+    
+    // Getters & Setters
+    public void setForwardAccel(double value){fowardsAccel = value;}
+    public double getForwardAccel(){return fowardsAccel;}
+    public void addForwardAccel(double value){fowardsAccel += value;}   
+    public void subForwardAccel(double value){fowardsAccel -= value;}
 }

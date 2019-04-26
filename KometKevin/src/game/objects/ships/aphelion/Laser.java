@@ -1,13 +1,16 @@
-package game.objects;
+package game.objects.ships.aphelion;
 
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
 import game.colliders.RayCollider;
 import game.Vector2;
+import game.objects.CollisionCodes;
+import game.objects.GameObject;
+import game.objects.Player;
 
 /**
- *
+ * Esta clase necesita mucho amor, pq este codigo es un asco
  * @author
  */
 public class Laser extends GameObject {
@@ -18,9 +21,10 @@ public class Laser extends GameObject {
     public Laser(Player support) {
         this.tag = "Laserrrrr";
         
-        this.position = support.position;
-        this.center = support.center;
-        this.aiming = support.aiming;
+        // Ojo con estos vectores que son punteros a los de la nave
+        this.position = support.getPosition();
+        this.center = support.getCenter();
+        this.aiming = support.getAiming();
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
@@ -29,28 +33,28 @@ public class Laser extends GameObject {
     }
     
     @Override
-    public void update(GameContainer gc, GameManager gm, float dt) {       
+    public void update(GameContainer gc, GameManager gm, float dt) {
         hitPoint = Vector2.toCartesian(9999, aiming.getAngle()).getAdded(center);
         closer = null;
-        // El laser no puede ser destruido, no se llama a super update
+        // El laser no puede ser destruido, no se llama a super.update
         while(!collisions.empty()) {
             effect(collisions.pop());
+            }
         }
-    }
 
     @Override
     public void render(GameContainer gc, Renderer r) {
         r.drawLine((int)center.x, (int)center.y,(int)hitPoint.x, (int)hitPoint.y, 0xffff0000);
     }
-
+    
     @Override
     public void effect(GameObject go) {
         if (closer == null)
             closer = go;
-        else if (go.center.distance(center) < closer.center.distance(center)) {
+        else if (go.getCenter().distance(center) < closer.getCenter().distance(center)) {
             closer = go;
         }
-        hitPoint = center.getSubtracted(closer.center);
+        hitPoint = center.getSubtracted(closer.getCenter());
         hitPoint = Vector2.toCartesian(hitPoint.getLength(), aiming.getAngle()).getAdded(center);
         go.setHealthPoints(go.getHealthPoints() - damage);
     }
