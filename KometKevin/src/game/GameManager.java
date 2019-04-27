@@ -22,17 +22,16 @@ public class GameManager extends AbstractGame {
     
     /**
      * Constructor de la clase
-     * 
      */
     public GameManager() {
         background = new Image("/space/background.png");
 
         objects = new ArrayList<>();
-        Player player = new HammerHead(100, 100);
+        Player player = new HammerHead(100, 100, this);
 
 //        for (int i = 0; i < 25; i++) /* Test de eficiencia */
-        objects.add(player);
-        objects.add(0, new Laser(player));
+        objects.add(0,player);
+
         objects.add(new Asteroid(350, 350));
         objects.add(new PowerUp(200, 100));
         objects.add(new PowerUp(300, 50));

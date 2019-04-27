@@ -22,13 +22,15 @@ public class HammerHead extends Player {
     private Shield shield;
     private FlakSwarm swarm;
        
-    public HammerHead(int x, int y) {
+    public HammerHead(int x, int y, GameManager gm) {
         super(x, y);
         image = new ImageTile("/ships/hammerShip.png",120,64);
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         
         collider = new BoxCollider(this, 112, 52);
+        shield = new Shield(this);
+        gm.getObjects().add(shield);
         
         fowardsAccel = 2.9;
         backwardsAccel = 1.9;
@@ -38,7 +40,7 @@ public class HammerHead extends Player {
         fire1Cd = 0.25;
         fire2Cd = 0.25;
         hability1Cd = 0.25;
-        hability2Cd = 0.25;
+        hability2Cd = 0;
     }
 
     @Override
@@ -64,7 +66,6 @@ public class HammerHead extends Player {
 
     @Override
     public double hability2(GameManager gm) {
-        // TODO: se activan los escudos
-        return hability2Cd;
+        return shield.activate(hability2Cd);
     }
 }

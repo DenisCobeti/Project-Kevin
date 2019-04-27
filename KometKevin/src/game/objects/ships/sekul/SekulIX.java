@@ -9,7 +9,7 @@ import game.objects.Player;
  */
 public class SekulIX extends Player {
     
-    public SekulIX(int x, int y) {
+    public SekulIX(int x, int y, GameManager gm) {
         super(x, y);
     }
 

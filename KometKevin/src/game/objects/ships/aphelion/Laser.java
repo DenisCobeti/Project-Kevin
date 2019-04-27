@@ -8,15 +8,16 @@ import game.Vector2;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
+import game.objects.ships.AdvancedHability;
 
 /**
  * Esta clase necesita mucho amor, pq este codigo es un asco
- * @author
+ * @author ProjectKevin
  */
-public class Laser extends GameObject {
+public class Laser extends AdvancedHability {
     private Vector2 hitPoint = new Vector2(0,0);
     private GameObject closer = null;
-    private double damage = 0;
+    private double damage = 1;
     
     public Laser(Player support) {
         this.tag = "Laserrrrr";
@@ -30,6 +31,11 @@ public class Laser extends GameObject {
         collides = CollisionCodes.FIRE1_COL.getValue();
         collides &= ~CollisionCodes.GRAVPOOL.getValue(); // Se desactiva la colision con el pozo gravitatorio
         this.collider = new RayCollider(this);
+    }
+    
+    @Override
+    public double activate(double cd) {
+        return 0.0;
     }
     
     @Override

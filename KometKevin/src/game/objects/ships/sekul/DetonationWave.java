@@ -3,13 +3,19 @@ package game.objects.ships.sekul;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.objects.GameObject;
+import game.objects.ships.AdvancedHability;
 
 /**
  *
  * @author 
  */
-public class DetonationWave extends GameObject {
+public class DetonationWave extends AdvancedHability {
 
+    @Override
+    public double activate(double cd) {
+        return 0.0;
+    }
+    
     @Override
     public void render(GameContainer gc, Renderer r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

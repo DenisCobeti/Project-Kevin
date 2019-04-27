@@ -11,7 +11,7 @@ import gfx.ImageTile;
  */
 public class Bartleby extends Player {
     
-    public Bartleby(int x, int y) {
+    public Bartleby(int x, int y, GameManager gm) {
         super(x, y);
         image = new ImageTile("/ships/bartlebyShip.png",56,48);
         width = ((ImageTile) image).getTileW();

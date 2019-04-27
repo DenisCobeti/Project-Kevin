@@ -7,11 +7,11 @@ import gfx.ImageTile;
 
 /**
  *
- * @author
+ * @author ProjectKevin
  */
 public class Aphelion extends Player {
     
-    public Aphelion(int x, int y) {
+    public Aphelion(int x, int y, GameManager gm) {
         super(x, y);
         image = new ImageTile("/ships/aphelionShip.png",90,92);
         width = ((ImageTile) image).getTileW();
