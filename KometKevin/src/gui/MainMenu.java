@@ -53,7 +53,9 @@ public class MainMenu extends JPanel {
     private static final int SPACE_BETWEEN_MENUS = SCREEN_HEIGHT/50;
     private static final int MENU_TOP_SPACE = SCREEN_HEIGHT/3;
     // hay que cambiarlo para qeu sea relativo a la resolucion.
-    private static final float FONT_SIZE = 50.0f;
+    private static final int STANDARD_FONT_SIZE = 50;
+    private static final int STANDARD_SCREEN_SIZE = 1080;
+    private float fontSize = 50.0f;
     
     private static final String BG = "resources/menu/background.png";
     private static final String menuSound = "menu/menuHover.ogg";
@@ -84,6 +86,7 @@ public class MainMenu extends JPanel {
                                             Image.SCALE_AREA_AVERAGING));
             } catch (IOException ex) {}
         }
+        fontSize = (float)((SCREEN_HEIGHT * STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
         shipsIterator = 0;
         try {
             menuSelect = new SoundClip(menuSound);
@@ -277,7 +280,7 @@ public class MainMenu extends JPanel {
         label.setMaximumSize(size);
         label.setMinimumSize(size);
         
-        label.setFont(MainMenu.FONT.deriveFont(FONT_SIZE)); // NOI18N
+        label.setFont(MainMenu.FONT.deriveFont(fontSize)); // NOI18N
         label.setForeground(Color.WHITE);
         label.setOpaque(true);
         label.setBackground(Color.BLACK);
@@ -309,7 +312,7 @@ public class MainMenu extends JPanel {
         item.setMaximumSize(size);
         item.setMinimumSize(size);
         
-        item.setFont(MainMenu.FONT.deriveFont(FONT_SIZE)); // NOI18N
+        item.setFont(MainMenu.FONT.deriveFont(fontSize)); // NOI18N
         item.setForeground(Color.WHITE);
         item.setOpaque(true);
         item.setBackground(Color.BLACK);
