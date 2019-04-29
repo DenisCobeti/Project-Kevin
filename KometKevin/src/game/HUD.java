@@ -18,7 +18,6 @@ public class HUD {
     private static final int TEXT_OFFSET_X = 1;
     private static final int TEXT_OFFSET_Y = 1;
     
-    
     private static final int BAR_LENGHT = 1;
     
     private GameObject target = null;
