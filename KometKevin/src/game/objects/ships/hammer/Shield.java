@@ -6,14 +6,14 @@ import game.GameManager;
 import game.colliders.CircleCollider;
 import game.objects.GameObject;
 import game.objects.Player;
-import game.objects.ships.AdvancedHability;
+import game.objects.ships.AdvancedAbility;
 import gfx.ImageTile;
 
 /**
  * Cuarta habilidad de la HammerHead
  * @author ProjectKevin
  */
-public class Shield extends AdvancedHability {
+public class Shield extends AdvancedAbility {
     public Player support;
     public double anim = 0;
 

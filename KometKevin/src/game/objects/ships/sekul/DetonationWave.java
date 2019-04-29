@@ -3,13 +3,13 @@ package game.objects.ships.sekul;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.objects.GameObject;
-import game.objects.ships.AdvancedHability;
+import game.objects.ships.AdvancedAbility;
 
 /**
  *
  * @author 
  */
-public class DetonationWave extends AdvancedHability {
+public class DetonationWave extends AdvancedAbility {
 
     @Override
     public double activate(double cd) {

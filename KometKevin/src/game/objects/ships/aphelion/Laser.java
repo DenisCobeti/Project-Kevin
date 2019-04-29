@@ -8,13 +8,13 @@ import game.Vector2;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
-import game.objects.ships.AdvancedHability;
+import game.objects.ships.AdvancedAbility;
 
 /**
  * Esta clase necesita mucho amor, pq este codigo es un asco
  * @author ProjectKevin
  */
-public class Laser extends AdvancedHability {
+public class Laser extends AdvancedAbility {
     private Vector2 hitPoint = new Vector2(0,0);
     private GameObject closer = null;
     private double damage = 1;

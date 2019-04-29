@@ -6,7 +6,8 @@ import game.objects.GameObject;
  * Habilidad que depende de la nave
  * @author KometKevin
  */
-public abstract class AdvancedHability extends GameObject {
+public abstract class AdvancedAbility extends GameObject {
+    
     public boolean active = false;
     
     /**

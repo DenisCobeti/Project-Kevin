@@ -3,13 +3,13 @@ package game.objects.ships.hammer;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.objects.GameObject;
-import game.objects.ships.AdvancedHability;
+import game.objects.ships.AdvancedAbility;
 
 /**
  * Segunda habilidad de la HammerHead
  * @author
  */
-public class FlakSwarm extends AdvancedHability{
+public class FlakSwarm extends AdvancedAbility{
     
     @Override
     public double activate(double cd) {

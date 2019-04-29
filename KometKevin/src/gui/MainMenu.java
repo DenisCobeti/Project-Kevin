@@ -233,7 +233,7 @@ public class MainMenu extends JPanel {
     } 
     
     private void previousLabelMouseClicked(MouseEvent evt) {
-        shipsIterator = (--shipsIterator) % shipIcons.length;
+        shipsIterator--;
         if(shipsIterator == -1) shipsIterator = shipIcons.length - 1;
         ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
     } 
