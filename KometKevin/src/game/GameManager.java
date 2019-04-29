@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class GameManager extends AbstractGame {
     private Camera camera;
+    private HUD hud;
     
     /**
      * Constructor de la clase
@@ -38,6 +39,7 @@ public class GameManager extends AbstractGame {
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
                 
         camera = new Camera(player);
+        hud = new HUD(player);
     }
 
     @Override
@@ -84,5 +86,6 @@ public class GameManager extends AbstractGame {
         for (GameObject obj : objects) {
             obj.render(gc, r);
         }
+        hud.render(gc, r);
     }
 }

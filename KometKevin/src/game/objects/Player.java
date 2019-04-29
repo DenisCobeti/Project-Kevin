@@ -12,8 +12,12 @@ import gfx.ImageTile;
  */
 public abstract class Player extends GameObject {
     
-    private float anim = 0;
-    private float anim2 = 0;
+    protected double MaxHealthPoints = 1;
+    protected double MaxEnergyPoints = 1;
+    protected double energyRegen = 1;
+    
+    private float animY = 0;
+    private float animX = 0;
     
     protected double fowardsAccel;
     protected double backwardsAccel;
@@ -25,12 +29,12 @@ public abstract class Player extends GameObject {
     protected double ability1Cd;
     protected double ability2Cd;
 
-    public double[] cds = new double[4];
+    protected double[] cds = new double[4];
     
     private boolean dumpers; // Mecanismo automatizado de frenada
     
     public Player(int x, int y) {
-        this.tag = "player";
+        this.tag = "";
         
         this.dumpers = true;
         this.position = new Vector2(x, y);
@@ -66,68 +70,52 @@ public abstract class Player extends GameObject {
         int anim_ini = 0;
         int anim_fin = 2;  
         
+        if(gc.getInput().isKeyDown(gc.getConfig().getKeyDumpers())) {
+            dumpers = !dumpers;
+        }
+        
         // Gestión de los propulsores por teclado
-        double aux = 0;
+        boolean up    = gc.getInput().isKey(gc.getConfig().getKeyFoward());
+        boolean down  = gc.getInput().isKey(gc.getConfig().getKeyBackward());
+        boolean right = gc.getInput().isKey(gc.getConfig().getKeyRight());
+        boolean left  = gc.getInput().isKey(gc.getConfig().getKeyLeft());
         
-        if(gc.getInput().isKey(gc.getConfig().getKeyFoward())) {
-            velocity.add(Vector2.toCartesian(
-                dt * fowardsAccel, aiming.getAngle()));    
+        // Gestión de la animación
+        if (up || down || left || right) {
             anim_ini = 2;
             anim_fin = 4;
-        } else if(dumpers && velocity.getLength() > 0) {
-//            aux = velocity.project(aiming.getPerp());
-//            if (aux > dt * fowardsAccel) aux = dt * fowardsAccel;
-//            velocity.add(Vector2.toCartesian(aux, aiming.getAngle())); 
         }
-        if(gc.getInput().isKey(gc.getConfig().getKeyBackward())) {
-            velocity.subtract(Vector2.toCartesian(
-                dt * backwardsAccel, aiming.getAngle()));
-            anim_ini = 2;
-            anim_fin = 4;
-        } else if(dumpers && velocity.getLength() > 0) {
-            
-        }
-        if(gc.getInput().isKey(gc.getConfig().getKeyLeft())) {
-            velocity.subtract(Vector2.toCartesian(
-                dt * lateralAccel, aiming.getPerp().getAngle()));
-             anim_ini = 2;
-            anim_fin = 4;
-        } else if(dumpers && velocity.getLength() > 0) {
-            
-        }
-        if(gc.getInput().isKey(gc.getConfig().getKeyRight())) {
-            velocity.add(Vector2.toCartesian(
-                dt * lateralAccel, aiming.getPerp().getAngle()));
-            anim_ini = 2;
-            anim_fin = 4;
-        } else if(dumpers && velocity.getLength() > 0) {
-            
-        }
+        animY += dt * 15;
+        if (animY >= anim_fin) animY = anim_ini;
         
-        if(gc.getInput().isKey(gc.getConfig().getKeyDumpers())) {
-            velocity.set(0, 0);
+        // Gestión de velocidad y frenada
+        if(up) velocity.add(Vector2.toCartesian(dt * fowardsAccel, aiming.getAngle()));
+        if(down) velocity.subtract(Vector2.toCartesian(dt * backwardsAccel, aiming.getAngle()));
+        if(left) velocity.subtract(Vector2.toCartesian(dt * lateralAccel, aiming.getPerp().getAngle()));
+        if(right) velocity.add(Vector2.toCartesian(dt * lateralAccel, aiming.getPerp().getAngle()));
+        if (dumpers || gc.getInput().isKey(gc.getConfig().getKeybrake())) {
+            if (!up && !down && !right && !left && velocity.getLength() < 0.04) {
+                velocity.set(0, 0);
+            }
+            if (velocity.project(aiming) > 0 && !up)
+                velocity.subtract(Vector2.toCartesian(dt * backwardsAccel, aiming.getAngle()));
+            if (velocity.project(aiming) < 0 && !down)
+                velocity.add(Vector2.toCartesian(dt * fowardsAccel, aiming.getAngle()));
+            if (velocity.project(aiming.getPerp()) > 0 && !right)
+                velocity.subtract(Vector2.toCartesian(dt * lateralAccel, aiming.getPerp().getAngle()));
+            if (velocity.project(aiming.getPerp()) < 0 && !left)
+                velocity.add(Vector2.toCartesian(dt * lateralAccel, aiming.getPerp().getAngle()));
         }
         
         position.add(velocity);
         center.set(position.x + width/2, position.y + height/2);
         
         // Gestión de las habilidades
-        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
-            cds[0] = fire1(gm);
-        }
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
-            cds[1] = fire2(gm);
-        }
-        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
-            cds[2] = hability1(gm);
-        }
-        if(gc.getInput().isKey(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
-            cds[3] = hability2(gm);
-        }  
+        abilitiesCode(gc, gm, dt); 
         
-        // Gestión de la animación
-        anim += dt * 15;
-        if (anim >= anim_fin) anim = anim_ini;
+        // Recarga de energia
+        energyPoints += energyRegen * dt;
+        if (energyPoints > MaxEnergyPoints) energyPoints = MaxEnergyPoints;
         
         // Gestión coldDowns
         for (int i=0; i<cds.length; i++){
@@ -137,41 +125,21 @@ public abstract class Player extends GameObject {
     
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawRotatedImageTile((ImageTile) image, (int)position.x, (int)position.y, (int)anim2, (int)anim, aiming.getAngle());
-        
-//        // Vertices de los dos rectangulos
-//        Vector2 verticesA[] = new Vector2[4];
-//        
-//        double max = (int) (Math.sqrt(72 * 72 + 46 * 46) / 2);
-//        double angle = Math.atan(72 / 46);
-//        
-//        verticesA[0] = Vector2.toCartesian(max, aiming.getAngle() + angle + Math.PI/2);
-//        verticesA[1] = Vector2.toCartesian(max, aiming.getAngle() - angle + Math.PI/2);
-//        verticesA[2] = verticesA[0].getReversed();
-//        verticesA[3] = verticesA[1].getReversed();
-//        
-//        for (int i = 0; i < 4; i++) {
-//            verticesA[i].add(center);
-//            r.setPixel((int)verticesA[i].x, (int)verticesA[i].y, 0xffff0000);
-//        }
-//        
-//        r.drawFillRect(10, 10, 180, 10, 0xffff7d00);
-//        r.drawFillRect(10, 10, 180,  6, 0xffffd660);
-//        
-//        r.drawFillRect(10, 30, 100, 10, 0xff0000ff);
-//        r.drawFillRect(10, 30, 100,  6, 0xff6060ff);
+        r.drawRotatedImageTile((ImageTile) image, (int)position.x, (int)position.y, (int)animX, (int)animY, aiming.getAngle());
     }
     
     @Override
     public void effect(GameObject go) {
-        go.setHealthPoints(go.getHealthPoints() - Double.MAX_VALUE);
+        go.setHealthPoints(go.getHealthPoints() - healthPoints);
     }
     
-    // Habilidades a implementar en cada una de las naves
-    public abstract double fire1(GameManager gm);
-    public abstract double fire2(GameManager gm);
-    public abstract double hability1(GameManager gm);
-    public abstract double hability2(GameManager gm);
+    /**
+     * Codigo de gestión de las habilidades a implementar para cada nave
+     * @param gc GameContainer, permite el acceso a los objetos del motor
+     * @param gm GameManager, permite acceso a todos los objetos del juego
+     * @param dt deltaTime, referencia al tiempo de simulación 
+     */
+    protected abstract void abilitiesCode(GameContainer gc, GameManager gm, float dt); 
     
     // Getters & Setters
     public void setForwardAccel(double value){fowardsAccel = value;}

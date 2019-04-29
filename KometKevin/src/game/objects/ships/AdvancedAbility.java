@@ -16,4 +16,7 @@ public abstract class AdvancedAbility extends GameObject {
      * @return Devuelve el coldown o un 0
      */
     public abstract double activate(double cd);
+
+    // Getter
+    public boolean isActive() {return active;}
 }

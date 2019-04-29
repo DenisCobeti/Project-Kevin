@@ -32,6 +32,7 @@ public class Config {
     private int keyHability1;
     private int keyHability2;
     
+    private int keybrake;
     private int keyDumpers;
     
     // Botones del raton
@@ -70,6 +71,7 @@ public class Config {
         secondaryFire = MouseEvent.BUTTON2;
         keyHability1 = KeyEvent.VK_Q;
         keyHability2 = KeyEvent.VK_E;
+        keybrake = KeyEvent.VK_SPACE;
         keyDumpers = KeyEvent.VK_X;
         
         try {
@@ -90,6 +92,7 @@ public class Config {
     public int getKeyLeft() {return keyLeft;}   
     public int getKeyHability1() {return keyHability1;}
     public int getKeyHability2() {return keyHability2;}
+    public int getKeybrake() {return keybrake;}
     public int getKeyDumpers() {return keyDumpers;}
     public int getPrimaryFire() {return primaryFire;}
     public int getSecondaryFire() {return secondaryFire;}
@@ -105,6 +108,7 @@ public class Config {
     public void setKeyLeft(int keyLeft) {this.keyLeft = keyLeft;}   
     public void setKeyHability1(int keyHability1) {this.keyHability1 = keyHability1;}
     public void setKeyHability2(int keyHability2) {this.keyHability2 = keyHability2;}
+    public void setKeybrake(int keybrake) {this.keybrake = keybrake;}
     public void setKeyDumpers(int keyDumpers) {this.keyDumpers = keyDumpers;}
     public void setPrimaryFire(int primaryFire) {this.primaryFire = primaryFire;}
     public void setSecondaryFire(int secondaryFire) {this.secondaryFire = secondaryFire;}

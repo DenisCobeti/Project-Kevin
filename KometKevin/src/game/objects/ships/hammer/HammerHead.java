@@ -1,5 +1,6 @@
 package game.objects.ships.hammer;
 
+import engine2D.GameContainer;
 import game.GameManager;
 import game.colliders.BoxCollider;
 import game.objects.Player;
@@ -10,7 +11,6 @@ import gfx.ImageTile;
 
 /**
  * Nave de tipo HammerHead
- * H: 111, 11   112, 52     rot 0.015
  * @author ProjectKevin
  */
 public class HammerHead extends Player {
@@ -26,7 +26,7 @@ public class HammerHead extends Player {
     public HammerHead(int x, int y, GameManager gm) {
         super(x, y);
         image = new ImageTile(Ships.Hammer.getSprite(),Ships.Hammer.getSizeX(),
-                                Ships.Hammer.getSizeY());
+                                                       Ships.Hammer.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         
@@ -46,28 +46,22 @@ public class HammerHead extends Player {
     }
 
     @Override
-    public double fire1(GameManager gm) {
-        Projectile fire = new Projectile((int)center.x, (int)center.y, artillery);
-        fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
-        fire.setAiming(aiming.clone());
-        gm.getObjects().add(0,fire);
-        return fire1Cd;
-    }
-
-    @Override
-    public double fire2(GameManager gm) {
-        // TODO: Se activa el flakswarm
-        return fire2Cd;
-    }
-
-    @Override
-    public double hability1(GameManager gm) {
-        // TODO: se lanzan las naves
-        return ability1Cd;
-    }
-
-    @Override
-    public double hability2(GameManager gm) {
-        return shield.activate(ability2Cd);
+    protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {  
+        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
+            Projectile fire = new Projectile((int)center.x, (int)center.y, artillery);
+            fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
+            fire.setAiming(aiming.clone());
+            gm.getObjects().add(0,fire);
+            cds[0] = fire1Cd;
+        }
+        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
+            cds[1] = fire2Cd;
+        }
+        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
+            cds[2] = ability1Cd;
+        }
+        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
+            cds[3] = shield.activate(ability2Cd);
+        }  
     }
 }
