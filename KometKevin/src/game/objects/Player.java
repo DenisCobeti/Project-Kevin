@@ -22,8 +22,8 @@ public abstract class Player extends GameObject {
     
     protected double fire1Cd;
     protected double fire2Cd;
-    protected double hability1Cd;
-    protected double hability2Cd;
+    protected double ability1Cd;
+    protected double ability2Cd;
 
     public double[] cds = new double[4];
     

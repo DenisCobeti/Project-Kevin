@@ -3,6 +3,7 @@ package game.objects.ships.aphelion;
 import game.GameManager;
 import game.colliders.BoxCollider;
 import game.objects.Player;
+import game.objects.ships.Ships;
 import gfx.ImageTile;
 
 /**
@@ -13,7 +14,8 @@ public class Aphelion extends Player {
     
     public Aphelion(int x, int y, GameManager gm) {
         super(x, y);
-        image = new ImageTile("/ships/aphelionShip.png",90,92);
+        image = new ImageTile(Ships.Aphelion.getSprite(),Ships.Aphelion.getSizeX(),
+                                Ships.Aphelion.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         

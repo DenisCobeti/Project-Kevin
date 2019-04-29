@@ -4,6 +4,7 @@ import game.GameManager;
 import game.colliders.BoxCollider;
 import game.objects.Player;
 import game.objects.ships.Projectile;
+import game.objects.ships.Ships;
 import gfx.Image;
 import gfx.ImageTile;
 
@@ -15,7 +16,7 @@ import gfx.ImageTile;
 public class HammerHead extends Player {
     private static final int FIRE1_SPEED = 14;
     private static final int FIRE2_SPEED = 14;
-    private static final int HABILITY1_SPEED = 14;
+    private static final int ABILITY1_SPEED = 14;
     
     private Image artillery = new Image("/projectiles/fire.png");
     
@@ -24,7 +25,8 @@ public class HammerHead extends Player {
        
     public HammerHead(int x, int y, GameManager gm) {
         super(x, y);
-        image = new ImageTile("/ships/hammerShip.png",120,64);
+        image = new ImageTile(Ships.Hammer.getSprite(),Ships.Hammer.getSizeX(),
+                                Ships.Hammer.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         
@@ -39,8 +41,8 @@ public class HammerHead extends Player {
         
         fire1Cd = 0.25;
         fire2Cd = 0.25;
-        hability1Cd = 0.25;
-        hability2Cd = 0;
+        ability1Cd = 0.25;
+        ability2Cd = 0;
     }
 
     @Override
@@ -61,11 +63,11 @@ public class HammerHead extends Player {
     @Override
     public double hability1(GameManager gm) {
         // TODO: se lanzan las naves
-        return hability1Cd;
+        return ability1Cd;
     }
 
     @Override
     public double hability2(GameManager gm) {
-        return shield.activate(hability2Cd);
+        return shield.activate(ability2Cd);
     }
 }

@@ -3,6 +3,7 @@ package game.objects.ships.bartleby;
 import game.GameManager;
 import game.colliders.BoxCollider;
 import game.objects.Player;
+import game.objects.ships.Ships;
 import gfx.ImageTile;
 
 /**
@@ -13,7 +14,8 @@ public class Bartleby extends Player {
     
     public Bartleby(int x, int y, GameManager gm) {
         super(x, y);
-        image = new ImageTile("/ships/bartlebyShip.png",56,48);
+        image = new ImageTile(Ships.Bartleby.getSprite(),Ships.Bartleby.getSizeX(),
+                                Ships.Bartleby.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         

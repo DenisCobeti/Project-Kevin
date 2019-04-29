@@ -8,9 +8,9 @@ public enum Ships {
     /**
      *
      */
-    Hammer("resources/ships/hammerShip.png", 115, 64),
+    Hammer("/ships/hammerShip.png", 120, 64),
     Aphelion("resources/ships/aphelionShip.png", 90, 92),
-    Bartleby("resources/ships/bartlebyShip.png", 55, 49),
+    Bartleby("resources/ships/bartlebyShip.png", 56, 48),
     Sekul("resources/ships/bartlebyShip.png", 90, 92);
     
     private String sprite;

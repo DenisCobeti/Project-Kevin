@@ -77,7 +77,7 @@ public class MainMenu extends JPanel {
         //Estos valoren deberan cambian en getScaledInstance, ya que no son genericos,
         for (int i = 0; i < shipIcons.length; i++){
             try {
-                shipIcons[i] = (ImageIO.read(new File(Ships.values()[i].getSprite()))
+                shipIcons[i] = (ImageIO.read(new File("resources" + Ships.values()[i].getSprite()))
                         .getSubimage(0, 0, Ships.values()[i].getSizeX(), Ships.values()[i].getSizeY())
                         .getScaledInstance(Ships.values()[i].getSizeX()*3, 
                                             Ships.values()[i].getSizeY()*3, 
