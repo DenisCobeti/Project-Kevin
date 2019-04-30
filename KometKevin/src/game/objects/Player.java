@@ -12,9 +12,11 @@ import gfx.ImageTile;
  */
 public abstract class Player extends GameObject {
     
+    
     protected double MaxHealthPoints = 1;
     protected double MaxEnergyPoints = 1;
     protected double energyRegen = 1;
+    protected double rotationTolerance;
     
     private float animY = 0;
     private float animX = 0;
@@ -58,7 +60,7 @@ public abstract class Player extends GameObject {
         Vector2 dir = new Vector2(gc.getInput().getMouseX(), gc.getInput().getMouseY());        
         dir.subtract(center);
         dir.rotateBy(Math.PI - aiming.getAngle());
-        if (Math.abs(dir.getAngle()) < Math.PI - 0.01) {
+        if (Math.abs(dir.getAngle()) < Math.PI - rotationTolerance) {
             if (dir.getAngle() > 0)
                 aiming.rotateBy(-rotationSpeed);
             else if (dir.getAngle() < 0) {

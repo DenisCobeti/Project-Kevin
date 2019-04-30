@@ -37,7 +37,9 @@ public class HammerHead extends Player {
         fowardsAccel = 2.9;
         backwardsAccel = 1.9;
         lateralAccel = 1.1;
+        
         rotationSpeed = 0.015;
+        rotationTolerance = 0.01;
         
         fire1Cd = 0.25;
         fire2Cd = 0.25;

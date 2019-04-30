@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class GameManager extends AbstractGame {
     private Camera camera;
+    private AsteroidManager am;
     private HUD hud;
     
     /**
@@ -40,6 +41,7 @@ public class GameManager extends AbstractGame {
                 
         camera = new Camera(player);
         hud = new HUD(player);
+        am = new AsteroidManager(camera,this);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class GameManager extends AbstractGame {
         GameObject obj;
         int x, y, i;
 
+        am.generateAsteriods(dt);
         // Se actualizan todos los tipos de objetos
         for (i = 0; i < objects.size(); i++) {
             obj = objects.get(i);
@@ -75,6 +78,10 @@ public class GameManager extends AbstractGame {
             }
         }
         
+        if (gc.getInput().isKeyDown(KeyEvent.VK_P)) {
+            //TODO: Parar el motor y mostrar el menu de juego
+            gc.pause(); // BOOM
+        }
         if (gc.getInput().isKeyDown(KeyEvent.VK_ESCAPE)) {
             //TODO: Parar el motor y mostrar el menu de juego
             System.exit(0); // BOOM

@@ -12,7 +12,7 @@ import gfx.Image;
  * @author 
  */
 public class Asteroid extends GameObject {
-    private boolean borrar = false;
+    
     private double angle = 0;
     private double damage = 2;
     
@@ -44,15 +44,11 @@ public class Asteroid extends GameObject {
     @Override
     public void render(GameContainer gc, Renderer r) {
         r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
-        if (borrar) {
-            r.drawFillCircle((int)center.x, (int)center.y, 26, 0xffff0000);
-        }
-        borrar = false;
+        
     }
     
     @Override
     public void effect(GameObject go) {
         go.setHealthPoints(go.getHealthPoints() - damage);
-        borrar = true;
     }  
 }
