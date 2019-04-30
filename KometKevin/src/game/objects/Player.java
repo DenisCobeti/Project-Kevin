@@ -144,8 +144,9 @@ public abstract class Player extends GameObject {
     protected abstract void abilitiesCode(GameContainer gc, GameManager gm, float dt); 
     
     // Getters & Setters
-    public void setForwardAccel(double value){fowardsAccel = value;}
     public double getForwardAccel(){return fowardsAccel;}
-    public void addForwardAccel(double value){fowardsAccel += value;}   
-    public void subForwardAccel(double value){fowardsAccel -= value;}
+    public double[] getCds() {return cds;}
+    public boolean getDumpers() {return dumpers;}
+    
+    public void setForwardAccel(double value){fowardsAccel = value;}
 }

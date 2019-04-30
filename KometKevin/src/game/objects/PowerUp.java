@@ -18,7 +18,7 @@ public class PowerUp extends GameObject {
     
     public PowerUp(int x, int y /*, stipo*/) {
         this.tag = "player";
-        this.image = new ImageTile("/ships/hammerIcon.png", 64, 64);
+        this.image = null;
         
         this.width = ((ImageTile)image).getTileW();
         this.height = ((ImageTile)image).getTileH();

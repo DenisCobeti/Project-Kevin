@@ -35,8 +35,6 @@ public class GameManager extends AbstractGame {
         objects.add(0,player);
 
         objects.add(new Asteroid(350, 350));
-        objects.add(new PowerUp(200, 100));
-        objects.add(new PowerUp(300, 50));
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
                 
         camera = new Camera(player);
@@ -49,7 +47,6 @@ public class GameManager extends AbstractGame {
         GameObject obj;
         int x, y, i;
 
-        am.generateAsteriods(dt);
         // Se actualizan todos los tipos de objetos
         for (i = 0; i < objects.size(); i++) {
             obj = objects.get(i);
@@ -67,6 +64,7 @@ public class GameManager extends AbstractGame {
 
         // Se calculan los offsets de la camara
         camera.update(gc, this, dt);
+        am.generateAsteriods(dt);
 
         // Se calculan las colisiones para la proxima iteración del motor
         for (i = 0; i < objects.size(); i++) {
