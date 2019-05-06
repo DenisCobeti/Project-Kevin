@@ -12,6 +12,7 @@ import gfx.ImageTile;
  */
 public abstract class Player extends GameObject {
     
+    protected static final int NUM_ABILITIES = 4;
     
     protected double MaxHealthPoints = 1;
     protected double MaxEnergyPoints = 1;
@@ -26,12 +27,9 @@ public abstract class Player extends GameObject {
     protected double lateralAccel;
     protected double rotationSpeed;
     
-    protected double fire1Cd;
-    protected double fire2Cd;
-    protected double ability1Cd;
-    protected double ability2Cd;
-
-    protected double[] cds = new double[4];
+    protected boolean[] isActive = new boolean[NUM_ABILITIES];
+    protected double[] cdValues = new double[NUM_ABILITIES];
+    protected double[] cds = new double[NUM_ABILITIES];
     
     private boolean dumpers; // Mecanismo automatizado de frenada
     
@@ -47,7 +45,9 @@ public abstract class Player extends GameObject {
         collCode = CollisionCodes.TEAM1.getValue();
         collides = CollisionCodes.TEAM1_COL.getValue();
         
-        for (int i=0; i<cds.length;i++){
+        for (int i = 0; i < NUM_ABILITIES; i++){
+            isActive[i] = false;
+            cdValues[i] = 1;
             cds[i] = 0;
         }
     }

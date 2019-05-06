@@ -2,6 +2,7 @@ package game.objects.ships.hammer;
 
 import engine2D.GameContainer;
 import game.GameManager;
+import game.Vector2;
 import game.colliders.BoxCollider;
 import game.objects.Player;
 import game.objects.ships.Projectile;
@@ -15,10 +16,18 @@ import gfx.ImageTile;
  */
 public class HammerHead extends Player {
     private static final int FIRE1_SPEED = 14;
+    private static final int FIRE1_LONG = 37;
+    private static final double FIRE1_ANGLE = 0.52;
+    
     private static final int FIRE2_SPEED = 14;
+    private static final int FIRE2_LONG = 37;
+    private static final double FIRE2_ANGLE = 2;
+    
     private static final int ABILITY1_SPEED = 14;
     
     private Image artillery = new Image("/projectiles/fire.png");
+    
+    private int dual = 1;
     
     private Shield shield;
     private FlakSwarm swarm;
@@ -41,29 +50,34 @@ public class HammerHead extends Player {
         rotationSpeed = 0.015;
         rotationTolerance = 0.01;
         
-        fire1Cd = 0.25;
-        fire2Cd = 0.25;
-        ability1Cd = 0.25;
-        ability2Cd = 0;
+        cdValues[0] = 0.17;
+        cdValues[1] = 5;
+        cdValues[2] = 0.25;
+        cdValues[3] = 0;
     }
 
     @Override
     protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {  
         if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
-            Projectile fire = new Projectile((int)center.x, (int)center.y, artillery);
+            dual *= -1; 
+            
+            Vector2 spawn = Vector2.toCartesian(FIRE1_LONG, aiming.getAngle() + FIRE1_ANGLE * dual);
+            spawn.add(center);
+            
+            Projectile fire = new Projectile((int)spawn.x, (int)spawn.y, artillery);
             fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
             fire.setAiming(aiming.clone());
             gm.getObjects().add(0,fire);
-            cds[0] = fire1Cd;
+            cds[0] = cdValues[0];
         }
         if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
-            cds[1] = fire2Cd;
+            cds[1] = cdValues[1];
         }
         if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
-            cds[2] = ability1Cd;
+            cds[2] = cdValues[2];
         }
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
-            cds[3] = shield.activate(ability2Cd);
+            cds[3] = shield.activate(cdValues[3]);
         }  
     }
 }
