@@ -144,7 +144,20 @@ public abstract class Player extends GameObject {
     protected abstract void abilitiesCode(GameContainer gc, GameManager gm, float dt); 
     
     // Getters & Setters
+    public int getHealthPercentage() {
+        return 0;
+    }
+    
+    public int getEnergyPercentage() {
+        return 0;
+    }
+    
+    public int getAbilityCdPercentage(int index) {
+        return 0;
+    }
+    
     public double getForwardAccel(){return fowardsAccel;}
+    public boolean[] getIsActive() {return isActive;}
     public double[] getCds() {return cds;}
     public boolean getDumpers() {return dumpers;}
     
