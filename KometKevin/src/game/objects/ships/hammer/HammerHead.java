@@ -70,7 +70,8 @@ public class HammerHead extends Player {
             gm.getObjects().add(0,fire);
             cds[0] = cdValues[0];
         }
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
+        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && !isActive[1]) {
+            isActive[1] = !isActive[1];
             cds[1] = cdValues[1];
         }
         if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
