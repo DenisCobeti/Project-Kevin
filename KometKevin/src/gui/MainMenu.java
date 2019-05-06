@@ -216,7 +216,7 @@ public class MainMenu extends JPanel {
         player = ShipFactory.getPlayer(Ships.values()[shipsIterator], (GameManager)window.getGameContainer().getGame());
         
         if(player != null){
-            ((GameManager)(window.getGameContainer().getGame())).setPlayer(player);
+            ((GameManager)(window.getGameContainer().getGame())).addPlayer(player);
             window.getCardLayout().next(window.getCards());
             window.getCanvas().requestFocus();
             window.getMenuClip().stop();

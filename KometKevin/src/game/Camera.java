@@ -17,9 +17,11 @@ public class Camera {
      * Constructor de la clase
      * @param target Objeto al que sigue la camara
      */
-    public Camera(GameObject target){
+    public Camera(GameObject target) {
         this.target = target;
     }
+    
+    public Camera() {}
     
     /**
      * Método para gestionar los calculos para el manejo de la cámara
@@ -28,31 +30,31 @@ public class Camera {
      * @param dt deltaTime, referencia al tiempo de simulación 
      */
     public void update(GameContainer gc, GameManager gm, float dt) {
-        if(target == null) {
-            return;
+        if (target != null) {
+            camX = (float) (target.getCenter().x - gc.getConfig().getScreenWidth() / 2);
+            camY = (float) (target.getCenter().y - gc.getConfig().getScreenHeight() / 2);
+
+            if (camX < 0) camX = 0;
+            if (camY < 0) camY = 0;
+            if (camX > gm.getBackground().getW() - gc.getConfig().getScreenWidth()) 
+                camX = gm.getBackground().getW() - gc.getConfig().getScreenWidth();
+            if (camY > gm.getBackground().getH() - gc.getConfig().getScreenHeight()) 
+                camY = gm.getBackground().getH() - gc.getConfig().getScreenHeight();
+
+            gc.getRenderer().setCamX((int) camX);
+            gc.getRenderer().setCamY((int) camY);
+
+            gc.getInput().setCamX((int) camX);
+            gc.getInput().setCamY((int) camY);
         }
-        
-        camX = (float) (target.getCenter().x - gc.getConfig().getScreenWidth() / 2);
-        camY = (float) (target.getCenter().y - gc.getConfig().getScreenHeight() / 2);
-               
-        if (camX < 0) camX = 0;
-        if (camY < 0) camY = 0;
-        if (camX > gm.getBackground().getW() - gc.getConfig().getScreenWidth()) 
-            camX = gm.getBackground().getW() - gc.getConfig().getScreenWidth();
-        if (camY > gm.getBackground().getH() - gc.getConfig().getScreenHeight()) 
-            camY = gm.getBackground().getH() - gc.getConfig().getScreenHeight();
-        
-        gc.getRenderer().setCamX((int) camX);
-        gc.getRenderer().setCamY((int) camY);
-        
-        gc.getInput().setCamX((int) camX);
-        gc.getInput().setCamY((int) camY);
     }
 
     // Getters & Setters
+    public GameObject getTarget() {return target;}
     public float getOffX() {return camX;}
     public float getOffY() {return camY;}
-    
+
+    public void setTarget(GameObject target) {this.target = target;}
     public void setOffX(float offX) {this.camX = offX;}
     public void setOffY(float offY) {this.camY = offY;}
 }

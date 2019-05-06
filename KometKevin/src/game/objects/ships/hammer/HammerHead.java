@@ -53,7 +53,7 @@ public class HammerHead extends Player {
         cdValues[0] = 0.17;
         cdValues[1] = 5;
         cdValues[2] = 0.25;
-        cdValues[3] = 0;
+        cdValues[3] = 5;
     }
 
     @Override

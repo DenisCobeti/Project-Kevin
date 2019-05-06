@@ -37,7 +37,7 @@ public class GameManager extends AbstractGame {
         objects.add(new Asteroid(350, 350));
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
                 
-        camera = new Camera(player);
+        camera = new Camera();
         hud = new HUD(player);
         am = new AsteroidManager(camera,this);
     }
@@ -94,10 +94,11 @@ public class GameManager extends AbstractGame {
         hud.render(gc, r);
     }
 
-    public void setPlayer(Player player) {
+    public void addPlayer(Player player) {
         this.player = player;
         objects.add(0, this.player);
-         
+        camera.setTarget(player);
+        hud.setTarget(player);
     }
     
 }

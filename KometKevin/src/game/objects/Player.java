@@ -12,10 +12,10 @@ import gfx.ImageTile;
  */
 public abstract class Player extends GameObject {
     
-    protected static final int NUM_ABILITIES = 4;
+    public static final int NUM_ABILITIES = 4;
     
-    protected double MaxHealthPoints = 1;
-    protected double MaxEnergyPoints = 1;
+    protected double maxHealthPoints = 1;
+    protected double maxEnergyPoints = 1;
     protected double energyRegen = 1;
     protected double rotationTolerance;
     
@@ -117,7 +117,7 @@ public abstract class Player extends GameObject {
         
         // Recarga de energia
         energyPoints += energyRegen * dt;
-        if (energyPoints > MaxEnergyPoints) energyPoints = MaxEnergyPoints;
+        if (energyPoints > maxEnergyPoints) energyPoints = maxEnergyPoints;
         
         // Gestión coldDowns
         for (int i=0; i<cds.length; i++){
@@ -144,16 +144,16 @@ public abstract class Player extends GameObject {
     protected abstract void abilitiesCode(GameContainer gc, GameManager gm, float dt); 
     
     // Getters & Setters
-    public int getHealthPercentage() {
-        return 0;
+    public double getHealthPercentage() {
+        return healthPoints / maxHealthPoints;
     }
     
-    public int getEnergyPercentage() {
-        return 0;
+    public double getEnergyPercentage() {
+        return energyPoints / maxEnergyPoints;
     }
     
-    public int getAbilityCdPercentage(int index) {
-        return 0;
+    public double getAbilityCdPercentage(int index) {
+        return cds[index] / cdValues[index];
     }
     
     public double getForwardAccel(){return fowardsAccel;}

@@ -68,7 +68,7 @@ public class Config {
         keyLeft = KeyEvent.VK_A;
 
         primaryFire = MouseEvent.BUTTON1;
-        secondaryFire = MouseEvent.BUTTON2;
+        secondaryFire = MouseEvent.BUTTON3;
         keyHability1 = KeyEvent.VK_Q;
         keyHability2 = KeyEvent.VK_E;
         keybrake = KeyEvent.VK_SPACE;
