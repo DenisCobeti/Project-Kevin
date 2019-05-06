@@ -21,6 +21,19 @@ public class Bartleby extends Player {
         height = ((ImageTile) image).getTileH();
         
         collider = new BoxCollider(this, 48, 30);
+        
+        
+        fowardsAccel = 2.9;
+        backwardsAccel = 1.9;
+        lateralAccel = 1.1;
+        
+        rotationSpeed = 0.015;
+        rotationTolerance = 0.01;
+        
+        cdValues[0] = 0.17;
+        cdValues[1] = 5;
+        cdValues[2] = 0.25;
+        cdValues[3] = 0;
     }
 
     @Override

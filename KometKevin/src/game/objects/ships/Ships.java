@@ -8,19 +8,27 @@ public enum Ships {
     /**
      *
      */
-    Hammer("/ships/hammerShip.png", 120, 64),
-    Aphelion("resources/ships/aphelionShip.png", 90, 92),
-    Bartleby("resources/ships/bartlebyShip.png", 56, 48),
-    Sekul("resources/ships/bartlebyShip.png", 90, 92);
+    Hammer("/ships/hammerShip.png", 120, 64,
+            "resources/menu/backgroundHammer.png"),
     
-    private String sprite;
-    private int sizeX, sizeY;
-    private String selectMenu;
+    Aphelion("/ships/aphelionShip.png", 90, 92,
+            "resources/menu/backgroundAphelion.png"),
     
-    Ships(String sprite, int sizeX, int sizeY){
+    Bartleby("/ships/bartlebyShip.png", 56, 48,
+            "resources/menu/backgroundBartleby.png"),
+    
+    Sekul("/ships/bartlebyShip.png", 90, 92,
+            "resources/menu/backgroundSekul.png");
+    
+    private final String sprite;
+    private final int sizeX, sizeY;
+    private final String selectMenu;
+    
+    Ships(String sprite, int sizeX, int sizeY, String selectMenu){
         this.sprite = sprite;
         this.sizeX = sizeX; 
         this.sizeY = sizeY;
+        this.selectMenu = selectMenu;
     }
 
     public String getSprite() {
@@ -35,5 +43,8 @@ public enum Ships {
         return sizeY;
     }
 
+    public String getSelectMenu() {
+        return selectMenu;
+    }
     
 }

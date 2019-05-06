@@ -33,7 +33,6 @@ public class GameManager extends AbstractGame {
         //Player player = new HammerHead(100, 100, this);
 
 //        for (int i = 0; i < 25; i++) /* Test de eficiencia */
-        objects.add(0,player);
 
         objects.add(new Asteroid(350, 350));
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
@@ -98,6 +97,7 @@ public class GameManager extends AbstractGame {
     public void setPlayer(Player player) {
         this.player = player;
         objects.add(0, this.player);
+         
     }
     
 }

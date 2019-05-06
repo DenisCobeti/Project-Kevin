@@ -50,17 +50,20 @@ public class HUD {
         r.drawFillRect(MARGIN_X, 30, 100,  6, 0xff6060ff);
         
         r.drawImageTile(image, MARGIN_X, 50,  0, 0);
-        if (target.getCds()[0] > 0) r.drawFillRect(MARGIN_X + 2, 50 + 2, 59, 59, 0xa0ffffff);
+        if (target != null) 
+            if (target.getCds()[0] > 0) r.drawFillRect(MARGIN_X + 2, 50 + 2, 59, 59, 0xa0ffffff);
             
         r.drawImageTile(image, MARGIN_X, 130, 1, 0);
         r.drawImageTile(image, MARGIN_X, 210, 2, 0);
         r.drawImageTile(image, MARGIN_X, 290, 3, 0);
         
+        if (target != null) 
         r.drawText("Speed:" + String.valueOf((int)(target.getVelocity().getLength() * 25)), 
                    MonoFont.STANDARD, 2, gc.getConfig().getScreenHeight() - 42, 0xffffffff);
         
         String dumpers = "OFF";
-        if (target.getDumpers()) dumpers = "ON";
+        if (target != null) 
+            if (target.getDumpers()) dumpers = "ON";
         
         r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, gc.getConfig().getScreenHeight() - 20, 0xffff9900);
     }   

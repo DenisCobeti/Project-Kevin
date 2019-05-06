@@ -21,6 +21,19 @@ public class Aphelion extends Player {
         height = ((ImageTile) image).getTileH();
         
         collider = new BoxCollider(this, 72, 46);
+        
+        fowardsAccel = 4;
+        backwardsAccel = 4;
+        lateralAccel = 4;
+        
+        //hay que pulir
+        rotationSpeed = 0.06;
+        rotationTolerance = 0.027;
+        
+        cdValues[0] = 0.17;
+        cdValues[1] = 5;
+        cdValues[2] = 0.25;
+        cdValues[3] = 0;
     }
 
     @Override

@@ -5,6 +5,7 @@ import engine2D.Window;
 import engine2D.Config;
 import game.GameManager;
 import game.objects.Player;
+import game.objects.ships.ShipFactory;
 import game.objects.ships.Ships;
 import game.objects.ships.hammer.HammerHead;
 
@@ -18,15 +19,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -53,9 +51,9 @@ public class MainMenu extends JPanel {
     
     private static final int SPACE_BETWEEN_MENUS = SCREEN_HEIGHT/50;
     private static final int MENU_TOP_SPACE = SCREEN_HEIGHT/3;
-    // hay que cambiarlo para qeu sea relativo a la resolucion.
     private static final int STANDARD_FONT_SIZE = 50;
     private static final int STANDARD_SCREEN_SIZE = 1080;
+    
     private float fontSize = 50.0f;
     
     private static final String BG = "resources/menu/backgroundHammer.png";
@@ -68,7 +66,7 @@ public class MainMenu extends JPanel {
     private JLabel start, options, scores, exit, startSelect, next, previous, ship;
     
     private  Image[] shipIcons;
-    private int shipsIterator;
+    private int shipsIterator = 0;
 
     /**
      * Creates new form MainMenu
@@ -82,15 +80,19 @@ public class MainMenu extends JPanel {
         //Estos valoren deberan cambian en getScaledInstance, ya que no son genericos,
         for (int i = 0; i < shipIcons.length; i++){
             try {
-                shipIcons[i] = (ImageIO.read(new File("resources" + Ships.values()[i].getSprite()))
+                shipIcons[i] = ImageIO.read(new File(Ships.values()[i].getSelectMenu()))
+                            .getScaledInstance(SCREEN_WIDTH, SCREEN_HEIGHT, 1);
+                /*shipIcons[i] = (ImageIO.read(new File("resources" + Ships.values()[i].getSprite()))
                         .getSubimage(0, 0, Ships.values()[i].getSizeX(), Ships.values()[i].getSizeY())
                         .getScaledInstance(Ships.values()[i].getSizeX()*3, 
                                             Ships.values()[i].getSizeY()*3, 
-                                            Image.SCALE_AREA_AVERAGING));
+                                            Image.SCALE_AREA_AVERAGING));*/
             } catch (IOException ex) {}
         }
+        
         fontSize = (float)((SCREEN_HEIGHT * STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
         shipsIterator = 0;
+        
         try {
             menuSelect = new SoundClip(menuSound);
         } catch (IOException ex) {}
@@ -189,13 +191,7 @@ public class MainMenu extends JPanel {
         
         Box box = Box.createHorizontalBox();
         JPanel panel = new JPanel();
-        JPanel panelShips = new JPanel();
-        Dimension shipSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/2);
-        Dimension shipSizeIcon = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/2);
-        
-        ship = new JLabel(new ImageIcon(shipIcons[shipsIterator]));
-        ship.setOpaque(false);
-        ship.setVisible(true);
+        Dimension shipSize = new Dimension(SCREEN_WIDTH/2, SCREEN_HEIGHT-200);
         
         panel.setBackground(new Color(0,0,0,0));
         panel.setPreferredSize(shipSize);
@@ -203,18 +199,9 @@ public class MainMenu extends JPanel {
         panel.setMinimumSize(shipSize);
         panel.setLayout(new BorderLayout(100,100));
         
-        panelShips.setBackground(new Color(0,0,0,255));
-        
-        panelShips.setPreferredSize(shipSizeIcon);
-        panelShips.setMaximumSize(shipSizeIcon);
-        panelShips.setMinimumSize(shipSizeIcon);
-        panelShips.setLayout(new BorderLayout(0,0));
-        
         panel.add(startSelect, BorderLayout.SOUTH);
-        panelShips.add(ship, BorderLayout.NORTH);
-        panel.add(panelShips, BorderLayout.NORTH);
         
-        box.add(Box.createHorizontalStrut(MENU_TOP_SPACE));
+        box.add(Box.createHorizontalStrut(SPACE_BETWEEN_MENUS));
         box.add(previous);
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_MENUS));
         box.add(panel);
@@ -225,7 +212,8 @@ public class MainMenu extends JPanel {
     }
     
     private void startSelectLabelMouseClicked(MouseEvent evt) {
-        player = new HammerHead(0,0, (GameManager)window.getGameContainer().getGame());
+        //player = new HammerHead(0,0, (GameManager)window.getGameContainer().getGame());
+        player = ShipFactory.getPlayer(Ships.values()[shipsIterator], (GameManager)window.getGameContainer().getGame());
         
         if(player != null){
             ((GameManager)(window.getGameContainer().getGame())).setPlayer(player);
@@ -239,14 +227,16 @@ public class MainMenu extends JPanel {
     
     private void nextLabelMouseClicked(MouseEvent evt) {
         shipsIterator = (++shipsIterator) % shipIcons.length;
-        ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
+        //ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
+        this.repaint();
                     
     } 
     
     private void previousLabelMouseClicked(MouseEvent evt) {
         shipsIterator--;
         if(shipsIterator == -1) shipsIterator = shipIcons.length - 1;
-        ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
+        //ship.setIcon(new ImageIcon(shipIcons[shipsIterator]));
+        this.repaint();
     } 
     
     private void optionsLabelMouseClicked(MouseEvent evt) {                                        
@@ -255,7 +245,6 @@ public class MainMenu extends JPanel {
         Dimension sizeItem = new Dimension(SCREEN_HEIGHT/10, SCREEN_WIDTH/3);
         
         JMenu optionsMenu = new JMenu("Controls");
-        JPanel panel = new JPanel();
         
         optionsMenu.setPreferredSize(size);
         optionsMenu.setMaximumSize(size);
@@ -327,7 +316,7 @@ public class MainMenu extends JPanel {
         
         //Hover listeners
         item.addMouseListener(new MouseAdapter() {
-    @Override
+            @Override
             public void mouseEntered(MouseEvent evt) {
                 item.setBackground(Color.WHITE);
                 item.setForeground(Color.BLACK);
@@ -353,12 +342,7 @@ public class MainMenu extends JPanel {
     protected void paintComponent(Graphics g) {
         //paint the background image
         super.paintComponent(g);
-        try {
-            g.drawImage(ImageIO.read(new File(BG)).getScaledInstance
-                             (SCREEN_WIDTH, SCREEN_HEIGHT, 1), 0, 0, null);
-        } catch (IOException ex) {
-            //mejor tratamiento de error
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        g.drawImage(shipIcons[shipsIterator], 0, 0, null);
+        
     }                 
 }
