@@ -2,6 +2,7 @@ package engine2D;
 
 import audio.SoundClip;
 import game.GameManager;
+import game.objects.Player;
 import gui.MainMenu;
 import java.awt.Canvas;
 import java.awt.CardLayout;

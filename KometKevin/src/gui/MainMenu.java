@@ -3,7 +3,10 @@ package gui;
 import audio.SoundClip;
 import engine2D.Window;
 import engine2D.Config;
+import game.GameManager;
+import game.objects.Player;
 import game.objects.ships.Ships;
+import game.objects.ships.hammer.HammerHead;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,8 +25,6 @@ import javax.swing.SwingConstants;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -57,8 +58,10 @@ public class MainMenu extends JPanel {
     private static final int STANDARD_SCREEN_SIZE = 1080;
     private float fontSize = 50.0f;
     
-    private static final String BG = "resources/menu/background.png";
+    private static final String BG = "resources/menu/backgroundHammer.png";
     private static final String menuSound = "menu/menuHover.ogg";
+    
+    private Player player;
     private SoundClip menuSelect;
     
     private Window window;
@@ -222,11 +225,16 @@ public class MainMenu extends JPanel {
     }
     
     private void startSelectLabelMouseClicked(MouseEvent evt) {
-        window.getCardLayout().next(window.getCards());
-        window.getCanvas().requestFocus();
-        window.getMenuClip().stop();
-        window.getGameClip().loop();
-        window.getGameContainer().resume();
+        player = new HammerHead(0,0, (GameManager)window.getGameContainer().getGame());
+        
+        if(player != null){
+            ((GameManager)(window.getGameContainer().getGame())).setPlayer(player);
+            window.getCardLayout().next(window.getCards());
+            window.getCanvas().requestFocus();
+            window.getMenuClip().stop();
+            window.getGameClip().loop();
+            window.getGameContainer().resume();
+        }
     }
     
     private void nextLabelMouseClicked(MouseEvent evt) {

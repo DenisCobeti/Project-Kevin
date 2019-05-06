@@ -15,6 +15,7 @@ public enum Ships {
     
     private String sprite;
     private int sizeX, sizeY;
+    private String selectMenu;
     
     Ships(String sprite, int sizeX, int sizeY){
         this.sprite = sprite;

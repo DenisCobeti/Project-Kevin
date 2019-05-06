@@ -21,6 +21,7 @@ public class GameManager extends AbstractGame {
     private Camera camera;
     private AsteroidManager am;
     private HUD hud;
+    private Player player;
     
     /**
      * Constructor de la clase
@@ -29,7 +30,7 @@ public class GameManager extends AbstractGame {
         background = new Image("/space/background.png");
 
         objects = new ArrayList<>();
-        Player player = new HammerHead(100, 100, this);
+        //Player player = new HammerHead(100, 100, this);
 
 //        for (int i = 0; i < 25; i++) /* Test de eficiencia */
         objects.add(0,player);
@@ -93,4 +94,10 @@ public class GameManager extends AbstractGame {
         }
         hud.render(gc, r);
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        objects.add(0, this.player);
+    }
+    
 }

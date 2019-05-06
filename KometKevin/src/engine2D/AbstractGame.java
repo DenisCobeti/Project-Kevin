@@ -29,5 +29,6 @@ public abstract class AbstractGame {
     
     // Getters
     public ArrayList<GameObject> getObjects() {return objects;}
-    public Image getBackground() {return background;}    
+    public Image getBackground() {return background;}
+    
 }
