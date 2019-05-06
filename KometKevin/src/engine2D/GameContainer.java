@@ -151,6 +151,7 @@ public class GameContainer implements Runnable {
     
     // Getters
     public Config getConfig() {return config;}
+    public AbstractGame getGame() {return game;}
     public Window getWindow() {return window;}
     public Input getInput() {return input;}
     public Renderer getRenderer() {return renderer;}
