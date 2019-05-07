@@ -1,12 +1,11 @@
 package game;
 
-import game.objects.ships.aphelion.Laser;
-import game.objects.GameObject;
 import engine2D.AbstractGame;
 import engine2D.GameContainer;
 import engine2D.Renderer;
+
+import game.objects.GameObject;
 import game.objects.*;
-import game.objects.ships.hammer.*;
 import gfx.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -57,7 +56,12 @@ public class GameManager extends AbstractGame {
             y = (int) obj.getCenter().y;
             if (obj.isDispose() || x < 0 || x > background.getW()
                     || y < 0 || y > background.getH()) {
+                if(obj instanceof Player){
+                    gc.pause();
+                    gc.getWindow().deadPLayer((Player)obj);
+                }
                 objects.remove(i);
+                
                 i--;
             }
         }

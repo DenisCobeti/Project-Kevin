@@ -9,6 +9,7 @@ import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.PopupMenu;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -103,6 +104,14 @@ public class Window extends JFrame{
     public static void main(String args[]) {
         GameContainer gc = new GameContainer();
         gc.start(new GameManager());
+    }
+    
+    public void deadPLayer(Player player){
+        PopupMenu popup = new PopupMenu("DEAD!");
+        //cards.add(popup, WIDTH);
+        //this.getCardLayout().next(getCards());
+        //getCanvas().requestFocus();
+        getMenuClip().stop();
     }
     
     // Getters

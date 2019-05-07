@@ -7,7 +7,6 @@ import game.GameManager;
 import game.objects.Player;
 import game.objects.ships.ShipFactory;
 import game.objects.ships.Ships;
-import game.objects.ships.hammer.HammerHead;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -213,7 +212,8 @@ public class MainMenu extends JPanel {
     
     private void startSelectLabelMouseClicked(MouseEvent evt) {
         //player = new HammerHead(0,0, (GameManager)window.getGameContainer().getGame());
-        player = ShipFactory.getPlayer(Ships.values()[shipsIterator], (GameManager)window.getGameContainer().getGame());
+        player = ShipFactory.getPlayer(Ships.values()[shipsIterator], 
+                    (GameManager)window.getGameContainer().getGame());
         
         if(player != null){
             ((GameManager)(window.getGameContainer().getGame())).addPlayer(player);
