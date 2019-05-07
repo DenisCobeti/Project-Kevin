@@ -58,7 +58,7 @@ public class AsteroidManager {
         int screenW=gm.getBackground().getW(); //Anchura total de la pantalla 
         int horizontal=random.nextInt(screenW);
         if(horizontal>x-50 && horizontal<x+anchura+50){
-            return generarHorizontal();
+            return -1;
         }
         return horizontal;
     }
@@ -68,7 +68,7 @@ public class AsteroidManager {
         int screenH=gm.getBackground().getH(); //Altura total de la pantalla
         int vertical=random.nextInt(screenH);
         if(vertical>y-50 && vertical<y+altura+50){
-            return generarvertical();
+            return -1;
         }
         return vertical;
     }
