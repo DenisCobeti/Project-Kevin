@@ -4,21 +4,19 @@ import audio.SoundClip;
 import game.GameManager;
 import game.objects.Player;
 import gui.MainMenu;
-import gui.ScorePanel;
+import gui.ScorePopup;
 import java.awt.Canvas;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.PopupMenu;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javafx.stage.PopupWindow;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 
 /**
  * Clase con un JFrame para la representación de la ventana de la aplicación.
@@ -42,6 +40,9 @@ public class Window extends JFrame{
     private BufferedImage image;
     private BufferStrategy bs;
     private Graphics g;
+    
+    private int screenWidth;
+    private int screenHeight;
     
     public Window(GameContainer gc) { 
         super(GAME_NAME);
@@ -71,6 +72,9 @@ public class Window extends JFrame{
         
         menuClip.loop();
         
+        screenWidth = gc.getConfig().getScreenWidth();
+        screenHeight = gc.getConfig().getScreenHeight();
+        
         setResizable(false);
         setVisible(true);
     }
@@ -80,13 +84,10 @@ public class Window extends JFrame{
      * canvas para el motor en el JFrame
      */
     public void execGame(){       
-        image = new BufferedImage(gc.getConfig().getScreenWidth(), 
-                                  gc.getConfig().getScreenHeight(), 
+        image = new BufferedImage(screenWidth, screenHeight, 
                                   BufferedImage.TYPE_INT_RGB);
-        Dimension s = new Dimension((int)(gc.getConfig().getScreenWidth()  * 
-                                                gc.getConfig().getScale()), 
-                                    (int)(gc.getConfig().getScreenHeight() *
-                                                gc.getConfig().getScale()));
+        Dimension s = new Dimension((int)(screenWidth  * gc.getConfig().getScale()), 
+                                    (int)(screenHeight * gc.getConfig().getScale()));
         canvas.setPreferredSize(s);
         canvas.setMaximumSize(s);
         canvas.setMinimumSize(s);
@@ -112,14 +113,17 @@ public class Window extends JFrame{
     }
     
     public void deadPLayer(Player player){
-        JPopupMenu popup = new JPopupMenu("boom");
+        ScorePopup popup = new ScorePopup("boom", player.getScore());
+        
+        popup.exit.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                //menuSelect.play();
+                System.exit(0);
+            }
+        });
         popup.setEnabled(true);
-        JMenuItem item;
-        popup.add(item = new JMenuItem("Left"));
-        //ScorePanel panel = new ScorePanel();
-        popup.show(this, 0, 0);
-        //getCanvas().requestFocus();
-        getMenuClip().stop();
+        popup.show(this, screenWidth/3, screenHeight/3);
+        getGameClip().stop();
     }
     
     // Getters

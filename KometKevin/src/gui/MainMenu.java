@@ -43,7 +43,7 @@ public class MainMenu extends JPanel {
     private final String NEXT_SHIP = ">";
     private final String PREVIOUS_SHIP = "<";
     
-    private static final Font FONT = Config.getInstance().getFont();
+    protected static final Font FONT = Config.getInstance().getFont();
     
     private static final int SCREEN_HEIGHT = Config.getInstance().getScreenHeight();
     private static final int SCREEN_WIDTH = Config.getInstance().getScreenWidth();
@@ -53,7 +53,8 @@ public class MainMenu extends JPanel {
     private static final int STANDARD_FONT_SIZE = 50;
     private static final int STANDARD_SCREEN_SIZE = 1080;
     
-    private float fontSize = 50.0f;
+    protected static final float FONT_SIZE = (float)((SCREEN_HEIGHT *
+                                    STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
     
     private static final String BG = "resources/menu/backgroundHammer.png";
     private static final String menuSound = "menu/menuHover.ogg";
@@ -89,7 +90,7 @@ public class MainMenu extends JPanel {
             } catch (IOException ex) {}
         }
         
-        fontSize = (float)((SCREEN_HEIGHT * STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
+        //fontSize = (float)((SCREEN_HEIGHT * STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
         shipsIterator = 0;
         
         try {
@@ -277,7 +278,7 @@ public class MainMenu extends JPanel {
         label.setMaximumSize(size);
         label.setMinimumSize(size);
         
-        label.setFont(MainMenu.FONT.deriveFont(fontSize)); // NOI18N
+        label.setFont(MainMenu.FONT.deriveFont(FONT_SIZE)); // NOI18N
         label.setForeground(Color.WHITE);
         label.setOpaque(true);
         label.setBackground(Color.BLACK);
@@ -301,7 +302,7 @@ public class MainMenu extends JPanel {
         return label;
     }
     
-    private JMenuItem initOptionsControlMenu(String text, Dimension size){
+    private  JMenuItem initOptionsControlMenu(String text, Dimension size){
         
         JMenuItem item = new JMenuItem(text);
         
@@ -309,7 +310,7 @@ public class MainMenu extends JPanel {
         item.setMaximumSize(size);
         item.setMinimumSize(size);
         
-        item.setFont(MainMenu.FONT.deriveFont(fontSize)); // NOI18N
+        item.setFont(MainMenu.FONT.deriveFont(FONT_SIZE)); // NOI18N
         item.setForeground(Color.WHITE);
         item.setOpaque(true);
         item.setBackground(Color.BLACK);

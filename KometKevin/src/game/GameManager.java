@@ -104,5 +104,4 @@ public class GameManager extends AbstractGame {
         camera.setTarget(player);
         hud.setTarget(player);
     }
-    
 }

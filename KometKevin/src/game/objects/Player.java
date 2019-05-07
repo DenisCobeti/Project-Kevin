@@ -31,6 +31,7 @@ public abstract class Player extends GameObject {
     protected double[] cdValues = new double[NUM_ABILITIES];
     protected double[] cds = new double[NUM_ABILITIES];
     
+    private int score = 0;
     private boolean dumpers; // Mecanismo automatizado de frenada
     
     public Player(int x, int y) {
@@ -160,6 +161,9 @@ public abstract class Player extends GameObject {
     public boolean[] getIsActive() {return isActive;}
     public double[] getCds() {return cds;}
     public boolean getDumpers() {return dumpers;}
+
+    public int getScore() { return score; }
+    
     
     public void setForwardAccel(double value){fowardsAccel = value;}
 }
