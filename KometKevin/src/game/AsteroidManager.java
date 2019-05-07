@@ -18,28 +18,22 @@ public class AsteroidManager {
     private Camera camera;
     private GameManager gm;
     private Config config;
-    private float count;
     private Random random;
     
     public AsteroidManager(Camera camera,GameManager gm){  
         this.camera=camera;
         this.gm=gm;
         this.config=Config.getInstance();
-        count=0;
+
         this.random=new Random();
     }
     
     public void generateAsteriods(float dt){   
-        count++;
-        if(count==15){
-            if(gm.getObjects().size()<500){
-                int horizontal=generarHorizontal();
-                int vertical=generarvertical();
-            //no mayor que las variables alturas y anchuras
-            //no mayor total que screenW y screenH
-            //variables mayor que 0
-            //horizonte debe de ser menor que x y mayor que x+anchura
-            //vertical debe ser menor que y , mayor que y+altura
+        if(gm.getObjects().size()<500){
+            int horizontal=generarHorizontal();
+            int vertical=generarvertical();
+
+            if(horizontal!=-1 && vertical!=-1){
                 Asteroid kevin= new Asteroid(horizontal,vertical);
                 double x=2+random.nextDouble();
                 double y=2+random.nextDouble();
@@ -55,16 +49,15 @@ public class AsteroidManager {
                 kevin.setVelocity(new Vector2(x, y));
                 gm.getObjects().add(kevin);
             }
-            count=0;
         }
-        
+
     }
     private int generarHorizontal(){
         int x=(int)camera.getOffX();
         int anchura=config.getScreenWidth(); //anchura
         int screenW=gm.getBackground().getW(); //Anchura total de la pantalla 
         int horizontal=random.nextInt(screenW);
-        if(horizontal>x && horizontal<anchura){
+        if(horizontal>x-50 && horizontal<x+anchura+50){
             return generarHorizontal();
         }
         return horizontal;
@@ -74,7 +67,7 @@ public class AsteroidManager {
         int altura=config.getScreenHeight(); //altura   
         int screenH=gm.getBackground().getH(); //Altura total de la pantalla
         int vertical=random.nextInt(screenH);
-        if(vertical>y && vertical<altura){
+        if(vertical>y-50 && vertical<y+altura+50){
             return generarvertical();
         }
         return vertical;
