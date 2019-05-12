@@ -2,24 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/ships/aphelion/Aphelion.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/audio/SoundClip.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/engine2D/GameContainer.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/ships/hammer/FlakSwarm.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/ships/AdvancedAbility.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/engine2D/AbstractGame.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/ships/sekul/SekulIX.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/ships/bartleby/Bartleby.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/ships/hammer/HammerHead.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/GravPool.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/engine2D/Window.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/Player.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/GameObject.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/Vector2.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/AsteroidManager.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/HUD.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/GameManager.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

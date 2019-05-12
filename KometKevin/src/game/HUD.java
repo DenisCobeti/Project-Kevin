@@ -12,7 +12,7 @@ import gfx.MonoFont;
  */
 public class HUD {
     private static final int MARGIN_X = 10;
-    private static final int MARGIN_Y = 50;
+    private static final int MARGIN_Y = 10;
     private static final int ICON_SEPARATION = 80;
     
     private static final int CD_OFFSET = 2;
@@ -55,17 +55,12 @@ public class HUD {
      */
     public void render(GameContainer gc, Renderer r) {
         if (target != null) { 
+            int sH = gc.getConfig().getScreenHeight();
+            int sW = gc.getConfig().getScreenWidth();
+            
             // Se resetean los valores de la camara para dibujado fijado
             r.setCamX(0);
             r.setCamY(0);
-
-            // Barra de Salud
-            r.drawFillRect(MARGIN_X, 10, 180, 10, 0xffff7d00);
-            r.drawFillRect(MARGIN_X, 10, 180,  6, 0xffffd660);
-
-            // Barra de Energia
-            r.drawFillRect(MARGIN_X, 30, 100, 10, 0xff0000ff);
-            r.drawFillRect(MARGIN_X, 30, 100,  6, 0xff6060ff);
 
             // Dibujado de iconos
             for (int i = 0; i < Player.NUM_ABILITIES; i++) {
@@ -75,16 +70,40 @@ public class HUD {
                 if (target.getCds()[i] > 0) 
                     r.drawFillRect(MARGIN_X + CD_OFFSET, MARGIN_Y + CD_OFFSET + i * ICON_SEPARATION, (int)(CD_SIZE * target.getAbilityCdPercentage(i)), CD_SIZE, CD_COLOR);
             }
-
-            r.drawFillRect(240, gc.getConfig().getScreenHeight() - 42, 180, 15, 0xffff7d00);
+            
+            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 15, 0xffff7d00);
+            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 6, 0xffffd660);
+            
+//            r.drawFillRect(sW / 2 - sW/4, sH - 20, sW/2, 15, 0xff0000ff);
+//            r.drawFillRect(sW / 2 - sW/4, sH - 20, sW/2, 6, 0xff6060ff);
+            drawBar(gc, r, target.getEnergyPercentage(), sW / 2 - sW/4, sH - 20, 0xff0000ff, 0xff6060ff);
             
             r.drawText("Speed:" + String.valueOf((int)(target.getVelocity().getLength() * 25)), 
-                       MonoFont.STANDARD, 2, gc.getConfig().getScreenHeight() - 42, 0xffffffff);
+                       MonoFont.STANDARD, 2, sH - 42, 0xffffffff);
 
             String dumpers = "OFF";
             if (target.getDumpers()) dumpers = "ON";
 
-            r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, gc.getConfig().getScreenHeight() - 20, 0xffff9900);
+            r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, sH - 20, 0xffff9900);
+        }
+    }
+    
+    public void drawBar(GameContainer gc, Renderer r, double percentage, int offX, int offY, int color, int color2) {
+        int y = 0;
+        int x = 0;
+        
+        while(y <= 15) {
+            x = 0;
+            while (x <= gc.getConfig().getScreenWidth()/2) {
+                if (x % 60 != 0 && x % 60 != 1 && x % 60 != 2 && x % 60 != 3) {
+                    if (y > 6)
+                        r.setPixel(x + offX, y + offY, color);
+                    else
+                        r.setPixel(x + offX, y + offY, color2);
+                }
+                x++;
+            } 
+            y++;
         }
     }
     
