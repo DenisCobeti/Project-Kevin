@@ -19,8 +19,8 @@ public abstract class Player extends GameObject {
     protected double energyRegen = 1;
     protected double rotationTolerance;
     
-    private float animY = 0;
-    private float animX = 0;
+    protected float animY = 0;
+    protected float animX = 0;
     
     protected double fowardsAccel;
     protected double backwardsAccel;

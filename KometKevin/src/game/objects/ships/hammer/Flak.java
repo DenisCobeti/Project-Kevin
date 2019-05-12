@@ -1,4 +1,4 @@
-package game.objects.ships;
+package game.objects.ships.hammer;
 
 import engine2D.GameContainer;
 import engine2D.Renderer;
@@ -7,23 +7,32 @@ import game.Vector2;
 import game.colliders.CircleCollider;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
-import gfx.Image;
+import gfx.ImageTile;
 
 /**
- *
- * @author Project Kevin
+ * Proyectil de la segunda habilidad de la HammerHead.
+ * Provoca una explosión al chocar o tras un tiempo.
+ * @author
  */
-public class Projectile extends GameObject {
+public class Flak extends GameObject{ 
     private int radius = 4;
-    private Image image; 
+    private int explosionRadius = 5;
+
+    private boolean detonated = false;
+    
+    private ImageTile image; 
+    private int anim;
+    
+    private double timer = 0.3;
     private double damage = 1;
     
-    public Projectile(int x, int y, Image image) {
+    public Flak(int x, int y, ImageTile image) {
         this.tag = "projectile";
         this.image = image;
         
-        this.width = image.getW();
-        this.height = image.getH();
+        this.width = image.getTileH();
+        this.height = image.getTileH();
+        this.anim = 0;
 
         this.position = new Vector2(x - width/2, y - height/2);
         this.center = new Vector2(x, y);
@@ -40,12 +49,24 @@ public class Projectile extends GameObject {
         position.add(velocity);
         center.set(position.x + width/2, position.y + height/2);
         aiming.set(velocity.getNormalized());
-        super.update(gc, gm, dt);
+        while(!collisions.empty()) {
+            if (detonated) effect(collisions.pop());
+            else collisions.pop();
+        }
+        if (healthPoints < 0 || timer < 0) {
+            detonated = true;
+            ((CircleCollider)collider).setRadius(width);
+        }
+        if (detonated) {
+            anim += dt * 60;
+            if (anim >= (image.getW() / width)) dispose = true;
+        }
+        timer -= dt;
     }
 
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawRotatedImage(image, (int)position.x, (int)position.y, aiming.getAngle());
+        r.drawRotatedImageTile(image, (int)position.x, (int)position.y, anim, 0, aiming.getAngle());
     }
 
     @Override

@@ -29,13 +29,7 @@ public class GameManager extends AbstractGame {
         background = new Image("/space/background.png");
 
         objects = new ArrayList<>();
-        //Player player = new HammerHead(100, 100, this);
-
-//        for (int i = 0; i < 25; i++) /* Test de eficiencia */
-
-        objects.add(new Asteroid(350, 350));
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
-                
         camera = new Camera();
         hud = new HUD(player);
         am = new AsteroidManager(camera,this);
@@ -68,6 +62,7 @@ public class GameManager extends AbstractGame {
 
         // Se calculan los offsets de la camara
         camera.update(gc, this, dt);
+        // Se crean asteroides
         am.generateAsteriods(dt);
 
         // Se calculan las colisiones para la proxima iteración del motor

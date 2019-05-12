@@ -6,15 +6,15 @@ import game.GameManager;
 import game.colliders.CircleCollider;
 import game.objects.GameObject;
 import game.objects.Player;
-import game.objects.ships.AdvancedAbility;
 import gfx.ImageTile;
 
 /**
  * Cuarta habilidad de la HammerHead
  * @author ProjectKevin
  */
-public class Shield extends AdvancedAbility {
+public class Shield extends GameObject {
     public Player support;
+    public boolean active = false;
     public double anim = 0;
 
     public Shield(Player support) {
@@ -34,13 +34,11 @@ public class Shield extends AdvancedAbility {
         this.collider = new CircleCollider(this,68);
     }
     
-    @Override
-    public double activate(double cd) {
-        active = !active;
-        if (active) {
-            return 0;
-        } else {
-            return cd;
+    public void activate(double[] cd, boolean[] isActive, int numHab) {
+        isActive[numHab] = !isActive[numHab];
+        active = isActive[numHab];
+        if (!active) {
+            cd[numHab] = support.getCds()[numHab];
         }
     }
     
