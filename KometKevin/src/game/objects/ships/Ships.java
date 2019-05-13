@@ -17,7 +17,7 @@ public enum Ships {
     Bartleby("/ships/bartlebyShip.png", 56, 48,
             "resources/menu/backgroundBartleby.png"),
     
-    Sekul("/ships/bartlebyShip.png", 90, 92,
+    Sekul("/ships/sekulShip.png", 76, 58,
             "resources/menu/backgroundSekul.png");
     
     private final String sprite;
