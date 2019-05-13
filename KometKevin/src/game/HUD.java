@@ -71,9 +71,9 @@ public class HUD {
                     r.drawFillRect(MARGIN_X + CD_OFFSET, MARGIN_Y + CD_OFFSET + i * ICON_SEPARATION, (int)(CD_SIZE * target.getAbilityCdPercentage(i)), CD_SIZE, CD_COLOR);
             }
             
-            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 15, 0xffff7d00);
-            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 6, 0xffffd660);
-            
+//            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 15, 0xffff7d00);
+//            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 6, 0xffffd660);
+            drawBar(gc, r, target.getHealthPercentage(), sW / 2 - sW/4, sH - 42, 0xffff7d00, 0xffffd660);
 //            r.drawFillRect(sW / 2 - sW/4, sH - 20, sW/2, 15, 0xff0000ff);
 //            r.drawFillRect(sW / 2 - sW/4, sH - 20, sW/2, 6, 0xff6060ff);
             drawBar(gc, r, target.getEnergyPercentage(), sW / 2 - sW/4, sH - 20, 0xff0000ff, 0xff6060ff);
@@ -92,10 +92,13 @@ public class HUD {
         int y = 0;
         int x = 0;
         
-        while(y <= 15) {
+        int width = gc.getConfig().getScreenWidth()/2;
+        int height = 15;        
+        
+        while(y <= height) {
             x = 0;
-            while (x <= gc.getConfig().getScreenWidth()/2) {
-                if (x % 60 != 0 && x % 60 != 1 && x % 60 != 2 && x % 60 != 3) {
+            while (x <= width) {
+                if (x % 60 != 0 && x % 60 != 1 && x % 60 != 2 && x % 60 != 3 && x <= width * percentage) {
                     if (y > 6)
                         r.setPixel(x + offX, y + offY, color);
                     else

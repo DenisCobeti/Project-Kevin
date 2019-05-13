@@ -12,7 +12,7 @@ import gfx.ImageTile;
 /**
  * Proyectil de la segunda habilidad de la HammerHead.
  * Provoca una explosión al chocar o tras un tiempo.
- * @author
+ * @author Project Kevin
  */
 public class Flak extends GameObject{ 
     private int radius = 4;
@@ -23,7 +23,7 @@ public class Flak extends GameObject{
     private ImageTile image; 
     private int anim;
     
-    private double timer = 0.3;
+    private double timer = 0.4;
     private double damage = 1;
     
     public Flak(int x, int y, ImageTile image) {
@@ -53,7 +53,7 @@ public class Flak extends GameObject{
             if (detonated) effect(collisions.pop());
             else collisions.pop();
         }
-        if (healthPoints < 0 || timer < 0) {
+        if (healthPoints <= 0 || timer < 0) {
             detonated = true;
             ((CircleCollider)collider).setRadius(width);
         }

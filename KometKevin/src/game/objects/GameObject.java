@@ -44,7 +44,7 @@ public abstract class GameObject {
         while(!collisions.empty()) {
             effect(collisions.pop());
         }
-        if (healthPoints < 0) {
+        if (healthPoints <= 0) {
             dispose = true;
         }
     }
