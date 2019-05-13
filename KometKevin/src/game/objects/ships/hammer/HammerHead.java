@@ -42,7 +42,7 @@ public class HammerHead extends Player {
         height = ((ImageTile) image).getTileH();
         
         collider = new BoxCollider(this, 112, 52);
-        shield = new Shield(this);
+        shield = new Shield(this, 3);
         gm.getObjects().add(shield);
         
         fowardsAccel = 2.9;
@@ -55,8 +55,13 @@ public class HammerHead extends Player {
         rotationSpeed = 0.015;
         rotationTolerance = 0.01;
         
+        energyCost[0] = 0.2;
+        energyCost[1] = 0.4;
+        energyCost[2] = 0.1;
+        energyCost[3] = 0.1;
+        
         cdValues[0] = 0.17;
-        cdValues[1] = 1;//5;
+        cdValues[1] = 3;
         cdValues[2] = 0.25;
         cdValues[3] = 5;
     }
@@ -64,7 +69,7 @@ public class HammerHead extends Player {
     @Override
     protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {  
         // Primera Habilidad
-        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
+        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 && energyPoints - energyCost[0] >= 0) {
             dual *= -1; 
             
             Vector2 spawn = Vector2.toCartesian(FIRE1_LONG, aiming.getAngle() + FIRE1_ANGLE * dual);
@@ -74,12 +79,14 @@ public class HammerHead extends Player {
             fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
             fire.setAiming(aiming.clone());
             gm.getObjects().add(0,fire);
+            energyPoints -= energyCost[0];
             cds[0] = cdValues[0];
         }
         
         // Segunda Habilidad
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && !isActive[1]) {
+        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1] >= 0 && !isActive[1]) {
             isActive[1] = true;
+            energyPoints -= energyCost[1];
             flakCounter = 0;
             flakAngle = 0;
         }
@@ -117,7 +124,7 @@ public class HammerHead extends Player {
         
         // Cuarta Habilidad
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
-            shield.activate(cdValues, isActive, 3);
+            shield.activate();
         }  
     }
 }

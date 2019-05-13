@@ -98,7 +98,7 @@ public class HUD {
         while(y <= height) {
             x = 0;
             while (x <= width) {
-                if (x % 60 != 0 && x % 60 != 1 && x % 60 != 2 && x % 60 != 3 && x <= width * percentage) {
+                if ((x % 8 < 5 || x % 8 > 7) && x <= width * percentage) {
                     if (y > 6)
                         r.setPixel(x + offX, y + offY, color);
                     else

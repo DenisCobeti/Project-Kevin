@@ -28,6 +28,7 @@ public abstract class Player extends GameObject {
     protected double rotationSpeed;
     
     protected boolean[] isActive = new boolean[NUM_ABILITIES];
+    protected double[] energyCost = new double[NUM_ABILITIES];
     protected double[] cdValues = new double[NUM_ABILITIES];
     protected double[] cds = new double[NUM_ABILITIES];
     
@@ -48,6 +49,7 @@ public abstract class Player extends GameObject {
         
         for (int i = 0; i < NUM_ABILITIES; i++){
             isActive[i] = false;
+            energyCost[i] = 1;
             cdValues[i] = 1;
             cds[i] = 0;
         }
@@ -157,13 +159,21 @@ public abstract class Player extends GameObject {
         return cds[index] / cdValues[index];
     }
     
-    public double getForwardAccel(){return fowardsAccel;}
+    public double getForwardsAccel(){return fowardsAccel;}
+    public double getBackwardsAccel() {return backwardsAccel;}
+    public double getLateralAccel() {return lateralAccel;}
+    
     public boolean[] getIsActive() {return isActive;}
+    public double[] getEnergyCost() {return energyCost;}
     public double[] getCds() {return cds;}
+    public double[] getCdValues() {return cdValues;}
+    
     public boolean getDumpers() {return dumpers;}
-
     public int getScore() { return score; }
     
+    public void setForwardsAccel(double value){this.fowardsAccel = value;}
+    public void setBackwardsAccel(double backwardsAccel) {this.backwardsAccel = backwardsAccel;}
+    public void setLateralAccel(double lateralAccel) {this.lateralAccel = lateralAccel;}
     
-    public void setForwardAccel(double value){fowardsAccel = value;}
+    public void setScore(int score) {this.score = score;}
 }
