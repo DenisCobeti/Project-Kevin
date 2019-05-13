@@ -45,7 +45,6 @@ public class Config {
      */
     private Config() {
         setDefaultValues();
-        
     }
     
     public static Config getInstance() {
@@ -56,12 +55,14 @@ public class Config {
      * Establece los valores por defecto para la aplicación
      */
     public void setDefaultValues() {
-        screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        fullScreen = true;
         scale = 1f;
+        screenWidth = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / scale);
+        screenHeight = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / scale);
+        fullScreen = true;
+        
 
         // Controles por teclado
+        
         keyFoward = KeyEvent.VK_W;
         keyBackward = KeyEvent.VK_S;
         keyRight = KeyEvent.VK_D;

@@ -40,6 +40,15 @@ public class MainMenu extends JPanel {
     private final String SCORES_TEXT = "SCORES";
     private final String EXIT_TEXT = "EXIT";
     
+    private final String CONTROL_UP = "Up:   ";
+    private final String CONTROL_DOWN = "Down:   ";
+    private final String CONTROL_RIGHT = "Right:   ";
+    private final String CONTROL_LEFT = "Left:   ";
+    private final String CONTROL_PRIMARY = "1º Fire:   ";
+    private final String CONTROL_SECONDARY = "2º Fire:   ";
+    private final String CONTROL_ABILITY1 = "Ability 1:   ";
+    private final String CONTROL_ABILITY2 = "Ability 2:   ";
+    
     private final String NEXT_SHIP = ">";
     private final String PREVIOUS_SHIP = "<";
     
@@ -50,6 +59,7 @@ public class MainMenu extends JPanel {
     
     private static final int SPACE_BETWEEN_MENUS = SCREEN_HEIGHT/50;
     private static final int MENU_TOP_SPACE = SCREEN_HEIGHT/3;
+    private static final int CONTROLS_TOP_SPACE = SCREEN_HEIGHT/6;
     private static final int STANDARD_FONT_SIZE = 50;
     private static final int STANDARD_SCREEN_SIZE = 1080;
     
@@ -63,7 +73,9 @@ public class MainMenu extends JPanel {
     private SoundClip menuSelect;
     
     private Window window;
-    private JLabel start, options, scores, exit, startSelect, next, previous, ship;
+    private JLabel start, options, scores, exit, startSelect, next, previous;
+    private JLabel controlUp, controlDown, controlRight, controlLeft, 
+     controlPrimaryFire, controlSecondaryFire, controlAbility1, controlAbility2;
     
     private  Image[] shipIcons;
     private int shipsIterator = 0;
@@ -103,6 +115,7 @@ public class MainMenu extends JPanel {
     private void initMenu() {
         
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
+        Dimension buttonControl = new Dimension(SCREEN_WIDTH/4, SCREEN_HEIGHT/20);
         
         start = initMenuButton(START_TEXT, buttonSize);
         startSelect = initMenuButton(START_TEXT, buttonSize);
@@ -110,65 +123,21 @@ public class MainMenu extends JPanel {
         scores = initMenuButton(SCORES_TEXT, buttonSize);
         exit = initMenuButton(EXIT_TEXT, buttonSize);
         
+        controlUp = initMenuButton(CONTROL_UP, buttonControl);
+        controlDown = initMenuButton(CONTROL_DOWN, buttonControl);
+        controlRight = initMenuButton(CONTROL_RIGHT, buttonControl);
+        controlLeft = initMenuButton(CONTROL_LEFT, buttonControl);
+        controlPrimaryFire = initMenuButton(CONTROL_PRIMARY, buttonControl);
+        controlSecondaryFire = initMenuButton(CONTROL_SECONDARY, buttonControl);
+        controlAbility1 = initMenuButton(CONTROL_ABILITY1, buttonControl);
+        controlAbility2 = initMenuButton(CONTROL_ABILITY2, buttonControl);
+        
         Dimension selectSize = new Dimension(SCREEN_WIDTH/20, SCREEN_HEIGHT/20);
         
         next = initMenuButton(NEXT_SHIP, selectSize);
         previous = initMenuButton(PREVIOUS_SHIP, selectSize);
         
-        //Mouse Listeners de cada elemento mdel menu al hacer click
-        start.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
-                startLabelMouseClicked(evt);
-            }
-        });
-        
-        startSelect.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
-                startSelectLabelMouseClicked(evt);
-            }
-        });
-        
-        options.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
-                optionsLabelMouseClicked(evt);
-            }
-        });
-        
-        scores.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
-                scoresLabelMouseClicked(evt);
-            }
-        });
-        
-        exit.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                menuSelect.play();
-                exitLabelMouseClicked(evt);
-            }
-        });
-        
-        next.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                //menuSelect.play();
-                nextLabelMouseClicked(evt);
-            }
-        });
-        
-        previous.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                //menuSelect.play();
-                previousLabelMouseClicked(evt);
-            }
-        });
-        
+        initActionLIsteners();
         
         Box box = Box.createVerticalBox();
         
@@ -243,22 +212,31 @@ public class MainMenu extends JPanel {
     private void optionsLabelMouseClicked(MouseEvent evt) {                                        
         setVisibleMenu(false);
         Dimension size = new Dimension(SCREEN_HEIGHT, SCREEN_WIDTH/3);
-        Dimension sizeItem = new Dimension(SCREEN_HEIGHT/10, SCREEN_WIDTH/3);
+        Dimension sizeItem = new Dimension(SCREEN_HEIGHT/10, SCREEN_WIDTH/30);
         
-        JMenu optionsMenu = new JMenu("Controls");
+        Box box = Box.createVerticalBox();
         
-        optionsMenu.setPreferredSize(size);
-        optionsMenu.setMaximumSize(size);
-        optionsMenu.setMinimumSize(size);
+        //elments of the initial menu and spaces between the buttons
+        box.add(Box.createVerticalStrut(CONTROLS_TOP_SPACE));
+        box.add(controlUp);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlDown);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlRight);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlLeft);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlPrimaryFire);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlSecondaryFire);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlAbility1);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        box.add(controlAbility2);
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         
-        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
-        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
-        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
-        optionsMenu.add(initOptionsControlMenu("Up", sizeItem));
-        
-        optionsMenu.setVisible(true);
         this.setLayout(new BorderLayout(100,100));
-        this.add(optionsMenu, BorderLayout.EAST);
+        this.add(box, BorderLayout.EAST);
     } 
     private void scoresLabelMouseClicked(MouseEvent evt) {                                        
         
@@ -331,7 +309,111 @@ public class MainMenu extends JPanel {
         
         return item;
     }
+    private void initActionLIsteners(){
+        //Mouse Listeners de cada elemento mdel menu al hacer click
+        start.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+                startLabelMouseClicked(evt);
+            }
+        });
+        
+        startSelect.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+                startSelectLabelMouseClicked(evt);
+            }
+        });
+        
+        options.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+                optionsLabelMouseClicked(evt);
+            }
+        });
+        
+        scores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+                scoresLabelMouseClicked(evt);
+            }
+        });
+        
+        exit.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                menuSelect.play();
+                exitLabelMouseClicked(evt);
+            }
+        });
+        
+        next.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                //menuSelect.play();
+                nextLabelMouseClicked(evt);
+            }
+        });
+        
+        previous.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                //menuSelect.play();
+                previousLabelMouseClicked(evt);
+            }
+        });
+        
+        //Key Listeners de cada elemento de controles
+        controlUp.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_UP);
+            }
+        });
+        
+        controlDown.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_DOWN);
+            }
+        });
+        controlRight.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_RIGHT);
+            }
+        });
+        controlLeft.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_LEFT);
+            }
+        });
+        controlPrimaryFire.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_PRIMARY);
+            }
+        });
+        controlSecondaryFire.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_SECONDARY);
+            }
+        });
+        controlAbility1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_ABILITY1);
+            }
+        });
+        controlAbility2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                changeControl(evt, CONTROL_ABILITY2);
+            }
+        });
+    }
     
+    private void changeControl(MouseEvent evt, String control){
+        ControlPopup popup = new ControlPopup();
+        
+        popup.setEnabled(true);
+        popup.show(this, SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
+    }
     private void setVisibleMenu(Boolean visible){
         start.setVisible(visible);
         options.setVisible(visible);
