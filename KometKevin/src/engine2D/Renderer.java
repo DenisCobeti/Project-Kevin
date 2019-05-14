@@ -14,8 +14,9 @@ import java.awt.image.DataBufferInt;
  * @author Project Kevin
  */
 public class Renderer {
-    private int screenWidth, screenHeight;
-    private int[] pixels;
+    private final int screenWidth;
+    private final int screenHeight;
+    private final int[] pixels;
     
     private int camX, camY;
     private Image background = null;
@@ -83,7 +84,7 @@ public class Renderer {
      */
     public void drawText(String text, MonoFont font, int offX, int offY, int color) {
         text = text.toUpperCase();
-        int alpha = 0;
+        int alpha;
         int offset = 0;
         
         for (int i = 0; i < text.length(); i++) {

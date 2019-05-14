@@ -64,6 +64,7 @@ public class MainMenu extends JPanel {
     private static final int STANDARD_FONT_SIZE = 50;
     private static final int STANDARD_SCREEN_SIZE = 1080;
     
+    public enum Controls{UP, DOWN, RIGHT, LEFT, ABILITY1, ABILITY2}
     protected static final float FONT_SIZE = (float)((SCREEN_HEIGHT *
                                     STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
     
@@ -153,7 +154,7 @@ public class MainMenu extends JPanel {
         box.add(options);
         box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         box.add(scores);
-        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 4));
         box.add(exit);
         
         this.setLayout(new BorderLayout(100, 100));
@@ -182,7 +183,7 @@ public class MainMenu extends JPanel {
         selectBox.add(startSelect);
         selectBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         selectBox.add(nextPreviousBox);
-        selectBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
+        selectBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 4));
         selectBox.add(backSelect);
         
         selectBox.validate();
@@ -241,7 +242,7 @@ public class MainMenu extends JPanel {
         controlBox.add(controlAbility1);
         controlBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         controlBox.add(controlAbility2);
-        controlBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
+        controlBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 4));
         controlBox.add(backControls);
         this.setLayout(new BorderLayout(100,100));
         this.add(controlBox, BorderLayout.EAST);
@@ -377,33 +378,33 @@ public class MainMenu extends JPanel {
         //Key Listeners de cada elemento de controles
         controlUp.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_UP);
+                changeControl(evt, Controls.UP);
             }
         });
         
         controlDown.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_DOWN);
+                changeControl(evt, Controls.DOWN);
             }
         });
         controlRight.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_RIGHT);
+                changeControl(evt, Controls.RIGHT);
             }
         });
         controlLeft.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_LEFT);
+                changeControl(evt, Controls.LEFT);
             }
         });
         controlAbility1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_ABILITY1);
+                changeControl(evt, Controls.ABILITY1);
             }
         });
         controlAbility2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_ABILITY2);
+                changeControl(evt, Controls.ABILITY2);
             }
         });
         backControls.addMouseListener(new MouseAdapter() {
@@ -418,8 +419,8 @@ public class MainMenu extends JPanel {
         });
     }
     
-    private void changeControl(MouseEvent evt, String control){
-        ControlPopup popup = new ControlPopup();
+    private void changeControl(MouseEvent evt, Controls control){
+        ControlPopup popup = new ControlPopup(control);
         
         popup.setEnabled(true);
         popup.show(this, SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
@@ -447,6 +448,5 @@ public class MainMenu extends JPanel {
         //paint the background image
         super.paintComponent(g);
         g.drawImage(shipIcons[shipsIterator], 0, 0, null);
-        
     }                 
 }

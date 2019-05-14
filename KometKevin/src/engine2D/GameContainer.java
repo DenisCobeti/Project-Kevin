@@ -19,6 +19,7 @@ public class GameContainer implements Runnable {
     private Renderer renderer;
     private Input input;
     private AbstractGame game;
+    public boolean loaded = false;
     
     private boolean running = false;
 
@@ -35,6 +36,7 @@ public class GameContainer implements Runnable {
      * @param game Juego que hace uso del motor gráfico
      */
     public void start(AbstractGame game) {
+        
         this.game = game;
         window.execGame();
         renderer = new Renderer(window);
@@ -42,7 +44,8 @@ public class GameContainer implements Runnable {
         input = new Input(window.getCanvas());
         
         thread = new Thread(this);
-        thread.run();
+        loaded = true;
+        if(loaded) thread.start();
     }
     
     /**
