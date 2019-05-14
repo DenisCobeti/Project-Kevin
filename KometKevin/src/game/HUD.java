@@ -71,13 +71,11 @@ public class HUD {
                     r.drawFillRect(MARGIN_X + CD_OFFSET, MARGIN_Y + CD_OFFSET + i * ICON_SEPARATION, (int)(CD_SIZE * target.getAbilityCdPercentage(i)), CD_SIZE, CD_COLOR);
             }
             
-//            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 15, 0xffff7d00);
-//            r.drawFillRect(sW / 2 - sW/4, sH - 42, sW/2, 6, 0xffffd660);
+            // Dibujao de barras
             drawBar(gc, r, target.getHealthPercentage(), sW / 2 - sW/4, sH - 42, 0xffff7d00, 0xffffd660);
-//            r.drawFillRect(sW / 2 - sW/4, sH - 20, sW/2, 15, 0xff0000ff);
-//            r.drawFillRect(sW / 2 - sW/4, sH - 20, sW/2, 6, 0xff6060ff);
             drawBar(gc, r, target.getEnergyPercentage(), sW / 2 - sW/4, sH - 20, 0xff0000ff, 0xff6060ff);
             
+            // Dibujado de textos
             r.drawText("Speed:" + String.valueOf((int)(target.getVelocity().getLength() * 25)), 
                        MonoFont.STANDARD, 2, sH - 42, 0xffffffff);
 
@@ -85,6 +83,15 @@ public class HUD {
             if (target.getDumpers()) dumpers = "ON";
 
             r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, sH - 20, 0xffff9900);
+            
+            // Dibujado de score
+            String score = "" + target.getScore();
+            int aux = 8 - score.length();
+            for (int i = 0; i < aux; i++) {
+                score = "0" + score;
+            }
+            
+            r.drawText(score, MonoFont.STANDARD, sW - 150, MARGIN_Y, 0xffffffff);
         }
     }
     

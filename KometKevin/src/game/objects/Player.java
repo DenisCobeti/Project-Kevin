@@ -32,7 +32,7 @@ public abstract class Player extends GameObject {
     protected double[] cdValues = new double[NUM_ABILITIES];
     protected double[] cds = new double[NUM_ABILITIES];
     
-    private int score = 0;
+    private double score = 0;
     private boolean dumpers; // Mecanismo automatizado de frenada
     
     public Player(int x, int y) {
@@ -119,6 +119,7 @@ public abstract class Player extends GameObject {
         abilitiesCode(gc, gm, dt); 
         
         // Recarga de energia
+        score += dt;
         energyPoints += energyRegen * dt;
         if (energyPoints > maxEnergyPoints) energyPoints = maxEnergyPoints;
         
@@ -169,7 +170,7 @@ public abstract class Player extends GameObject {
     public double[] getCdValues() {return cdValues;}
     
     public boolean getDumpers() {return dumpers;}
-    public int getScore() { return score; }
+    public int getScore() {return (int)score;}
     
     public void setForwardsAccel(double value){this.fowardsAccel = value;}
     public void setBackwardsAccel(double backwardsAccel) {this.backwardsAccel = backwardsAccel;}
