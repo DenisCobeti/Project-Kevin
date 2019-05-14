@@ -1,12 +1,10 @@
 package engine2D;
 
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Clase que aglutina todos los parametros a personalizar por el usuario.
@@ -15,13 +13,12 @@ import java.io.IOException;
  */
 public class Config {
     private static final Config SINGLETON = new Config();
-    
 
     // Configuraciones de la ventana
-    private int screenWidth;
-    private int screenHeight;
     private boolean fullScreen;
     private float scale;
+    private int screenWidth;
+    private int screenHeight;
     
     // Controles por teclado
     private int keyFoward;
@@ -56,10 +53,10 @@ public class Config {
      * Establece los valores por defecto para la aplicación
      */
     public void setDefaultValues() {
-        screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         fullScreen = true;
         scale = 1f;
+        screenWidth = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / scale);
+        screenHeight = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / scale);
 
         // Controles por teclado
         keyFoward = KeyEvent.VK_W;
@@ -82,10 +79,10 @@ public class Config {
     }
 
     // Getters & Setters
-    public int getScreenWidth() {return screenWidth;}
-    public int getScreenHeight() {return screenHeight;}
     public boolean getFullScreen() {return fullScreen;}
     public float getScale() {return scale;}
+    public int getScreenWidth() {return screenWidth;}
+    public int getScreenHeight() {return screenHeight;}
     public int getKeyFoward() {return keyFoward;}
     public int getKeyBackward() {return keyBackward;}
     public int getKeyRight() { return keyRight;}
@@ -98,10 +95,10 @@ public class Config {
     public int getSecondaryFire() {return secondaryFire;}
     public Font getFont() {return font;}
     
-    public void setScreenWidth(int screenWidth) {this.screenWidth = screenWidth;}
-    public void setScreenHeight(int screenHeight) {this.screenHeight = screenHeight;}
     public void setFullScreen(boolean fullScreen) {this.fullScreen = fullScreen;}
     public void setScale(float scale) {this.scale = scale;}
+    public void setScreenWidth(int screenWidth) {this.screenWidth = screenWidth;}
+    public void setScreenHeight(int screenHeight) {this.screenHeight = screenHeight;}
     public void setKeyFoward(int keyFoward) {this.keyFoward = keyFoward;}
     public void setKeyBackward(int keyBackward) {this.keyBackward = keyBackward;}
     public void setKeyRight(int keyRight) {this.keyRight = keyRight;}

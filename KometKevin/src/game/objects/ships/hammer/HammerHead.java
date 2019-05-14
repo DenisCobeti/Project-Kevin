@@ -1,6 +1,7 @@
 package game.objects.ships.hammer;
 
 import engine2D.GameContainer;
+import engine2D.Renderer;
 import game.GameManager;
 import game.Vector2;
 import game.colliders.BoxCollider;
@@ -126,5 +127,10 @@ public class HammerHead extends Player {
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
             shield.activate();
         }  
+    }
+    
+    @Override
+    public void render(GameContainer gc, Renderer r) {
+        r.drawRotatedImageTile((ImageTile) image, (int)position.x, (int)position.y, (int)animX, (int)animY, aiming.getAngle());
     }
 }
