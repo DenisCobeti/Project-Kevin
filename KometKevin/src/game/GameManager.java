@@ -63,7 +63,7 @@ public class GameManager extends AbstractGame {
         // Se calculan los offsets de la camara
         camera.update(gc, this, dt);
         // Se crean asteroides
-        am.generateAsteriods(dt);
+        //am.generateAsteriods(dt);
 
         // Se calculan las colisiones para la proxima iteración del motor
         for (i = 0; i < objects.size(); i++) {

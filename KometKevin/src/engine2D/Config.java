@@ -42,7 +42,6 @@ public class Config {
      */
     private Config() {
         setDefaultValues();
-        
     }
     
     public static Config getInstance() {
