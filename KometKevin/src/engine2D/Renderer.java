@@ -270,7 +270,7 @@ public class Renderer {
         offY -= camY; offY2 -= camY;
 
         int dx = offX2 - offX;
-        int dy = offY2 - offY;   
+        int dy = offY2 - offY;
         
         for (int x = offX; x < offX2; x++) {
             int y = offY + dy * (x - offX) / dx;

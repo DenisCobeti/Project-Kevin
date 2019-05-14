@@ -23,7 +23,7 @@ import javax.swing.SwingConstants;
  */
 public class ScorePopup extends JPopupMenu {
 
-    private static final String SUBMIT_TEXT = "Submit score";
+    private static final String RESTART_TEXT = "Restart";
     private static final String EXIT_TEXT = "Exit game";
     private static final String EXIT_MENU = "Exit to menu";
     private static final String NAME_TEXT = "Enter your name";
@@ -33,7 +33,7 @@ public class ScorePopup extends JPopupMenu {
     private int SCREEN_HEIGHT = Config.getInstance().getScreenHeight();
     
     public JTextField name;
-    public JLabel submit;
+    public JLabel restart;
     public JLabel exit;
     public JLabel exitMenu;
     
@@ -48,14 +48,21 @@ public class ScorePopup extends JPopupMenu {
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/10, SCREEN_HEIGHT/20);
         
         JLabel scoreText = initMenuButton(YOUR_SCORE + score,  buttonSize, false);
-        submit = initMenuButton(SUBMIT_TEXT,  buttonSize, true);
+        restart = initMenuButton(RESTART_TEXT,  buttonSize, true);
         exit = initMenuButton(EXIT_TEXT,  buttonSize, true);
         exitMenu = initMenuButton(EXIT_MENU,  buttonSize, true);
         
         name = initNameField(NAME_TEXT);
         
+        exit.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                //menuSelect.play();
+                System.exit(0);
+            }
+        });
+        
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_BUTTONS));
-        box.add(submit);
+        box.add(restart);
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_BUTTONS));
         box.add(exit);
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_BUTTONS));

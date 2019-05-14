@@ -64,9 +64,9 @@ public class MainMenu extends JPanel {
     private static final int STANDARD_FONT_SIZE = 50;
     private static final int STANDARD_SCREEN_SIZE = 1080;
     
-    public enum Controls{UP, DOWN, RIGHT, LEFT, ABILITY1, ABILITY2}
     protected static final float FONT_SIZE = (float)((SCREEN_HEIGHT *
                                     STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
+    public enum Controls{UP, DOWN, RIGHT, LEFT, ABILITY1, ABILITY2}
     
     private static final String BG = "resources/menu/backgroundHammer.png";
     private static final String menuSound = "menu/menuHover.ogg";

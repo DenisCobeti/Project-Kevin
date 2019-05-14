@@ -115,12 +115,7 @@ public class Window extends JFrame{
     public void deadPLayer(Player player){
         ScorePopup popup = new ScorePopup("boom", player.getScore());
         
-        popup.exit.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                //menuSelect.play();
-                System.exit(0);
-            }
-        });
+        
         popup.setEnabled(true);
         popup.show(this, screenWidth/3, screenHeight/3);
         getGameClip().stop();
