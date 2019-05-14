@@ -21,10 +21,10 @@ public class Flak extends GameObject{
     private boolean detonated = false;
     
     private ImageTile image; 
-    private int anim;
+    private double anim;
     
     private double timer = 0.4;
-    private double damage = 1;
+    private double damage = 0.2;
     
     public Flak(int x, int y, ImageTile image) {
         this.tag = "projectile";
@@ -53,7 +53,7 @@ public class Flak extends GameObject{
             if (detonated) effect(collisions.pop());
             else collisions.pop();
         }
-        if (healthPoints <= 0 || timer < 0) {
+        if ((healthPoints <= 0 || timer < 0) && !detonated) {
             detonated = true;
             ((CircleCollider)collider).setRadius(width);
         }
@@ -66,7 +66,7 @@ public class Flak extends GameObject{
 
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawRotatedImageTile(image, (int)position.x, (int)position.y, anim, 0, aiming.getAngle());
+        r.drawRotatedImageTile(image, (int)position.x, (int)position.y, (int)anim, 0, aiming.getAngle());
     }
 
     @Override
