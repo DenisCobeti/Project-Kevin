@@ -29,6 +29,8 @@ public class HammerHead extends Player {
     private double flakCounter = 0;
     private double flakAngle = 0;
     
+    private static final double FIRE3_SPEED = 15;
+    
     private Image artillery = new Image("/projectiles/fire.png");
     private ImageTile flak = new ImageTile("/projectiles/flak.png",28,28);
 
@@ -120,6 +122,19 @@ public class HammerHead extends Player {
         
         // Tercera Habilidad
         if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
+            Vector2 aim = new Vector2(gc.getInput().getMouseX(),gc.getInput().getMouseY());
+            
+            Squad squad1 = new Squad((int)center.x, (int)center.y, aim);
+            Squad squad2 = new Squad((int)center.x, (int)center.y, aim);
+            
+            squad1.setVelocity(velocity.getAdded(aiming.getRotatedBy(Math.PI/2).getMultiplied(FIRE3_SPEED)));
+            squad2.setVelocity(velocity.getAdded(aiming.getRotatedBy(-Math.PI/2).getMultiplied(FIRE3_SPEED)));
+            
+            squad1.setAiming(squad1.getVelocity().getNormalized());
+            squad2.setAiming(squad2.getVelocity().getNormalized());
+            
+            gm.getObjects().add(0,squad1);
+            gm.getObjects().add(0,squad2);
             cds[2] = cdValues[2];
         }
         
