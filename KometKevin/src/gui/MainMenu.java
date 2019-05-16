@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -79,6 +80,8 @@ public class MainMenu extends JPanel {
     private JLabel controlUp, controlDown, controlRight, controlLeft, 
                      controlAbility1, controlAbility2, backControls, backSelect;
     private Box controlBox, selectBox;
+    private ControlPopup popup;
+    private ChangeKeyListener changeListener;
     
     private  Image[] shipIcons;
     private int shipsIterator = 0;
@@ -378,33 +381,33 @@ public class MainMenu extends JPanel {
         //Key Listeners de cada elemento de controles
         controlUp.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, Controls.UP);
+                changeControl(evt, Config.KEY_FORWARD);
             }
         });
         
         controlDown.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, Controls.DOWN);
+                changeControl(evt, Config.KEY_BACK);
             }
         });
         controlRight.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, Controls.RIGHT);
+                changeControl(evt, Config.KEY_RIGHT);
             }
         });
         controlLeft.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, Controls.LEFT);
+                changeControl(evt, Config.KEY_LEFT);
             }
         });
         controlAbility1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, Controls.ABILITY1);
+                changeControl(evt, Config.KEY_ABILITY_1);
             }
         });
         controlAbility2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, Controls.ABILITY2);
+                changeControl(evt, Config.KEY_ABILITY_2);
             }
         });
         backControls.addMouseListener(new MouseAdapter() {
@@ -419,13 +422,34 @@ public class MainMenu extends JPanel {
         });
     }
     
-    private void changeControl(MouseEvent evt, Controls control){
-        ControlPopup popup = new ControlPopup(control);
-        
+    private void changeControl(MouseEvent evt, String control){
+        popup = new ControlPopup();
+        changeListener = new ChangeKeyListener(control, this);
+        add(popup);
         popup.setEnabled(true);
         popup.show(this, SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
+        this.requestFocus();
+        this.addKeyListener(changeListener);
+        
     }
     
+    public void changeKey(){
+        this.removeKeyListener(changeListener);
+        controlUp.setText(CONTROL_UP + KeyEvent.getKeyText
+                      (Config.getInstance().getKeyFoward()));
+        controlDown.setText(CONTROL_DOWN + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyBackward()));
+        controlRight.setText(CONTROL_RIGHT+ KeyEvent.getKeyText
+                       (Config.getInstance().getKeyRight()));
+        controlLeft.setText(CONTROL_LEFT + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyLeft()));
+        controlAbility1.setText(CONTROL_ABILITY1 + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyHability1()));
+        controlAbility2.setText(CONTROL_ABILITY2 + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyHability2()));
+        popup.setVisible(false);
+        popup = null;
+    }
     private void backMenuControls(){
         controlBox.setVisible(false);
         controlBox.removeAll();

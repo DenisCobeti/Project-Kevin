@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/gui/MainMenu.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/gui/ControlPopup.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/IO/Score.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/gui/ScorePopup.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/engine2D/GameContainer.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/engine2D/Window.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/game/GameManager.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/IO/ScoreComparator.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/game/objects/Asteroid.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/engine2D/Config.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/game/AsteroidManager.java</file>
-            <file>file:/C:/Users/Neblis/Desktop/kevin/KometKevin/src/IO/ScoreManager.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
