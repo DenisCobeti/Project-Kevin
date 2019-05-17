@@ -6,7 +6,6 @@
 package gui;
 
 import engine2D.Config;
-import gui.MainMenu.Controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

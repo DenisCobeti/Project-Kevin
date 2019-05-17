@@ -11,11 +11,14 @@ import gfx.MonoFont;
 public class GameContainer implements Runnable {
     private final double UPDATE_CAP = 1.0/60.0; // min. 1/25 - max. 1/60
     
+    private static final int SCREEN_WIDTH = Config.getScreenWidth();
+    private static final int SCREEN_HEIGHT = Config.getScreenHeight();
+    
     private double deltaTime = UPDATE_CAP;
-    private Config config;
+    private final Config config;
     
     private Thread thread;
-    private Window window;
+    private final Window window;
     private Renderer renderer;
     private Input input;
     private AbstractGame game;
@@ -109,12 +112,12 @@ public class GameContainer implements Runnable {
                 renderer.clear();
                 game.render(this, renderer);
                 renderer.drawText("ups:" + ups, MonoFont.STANDARD,
-                                                config.getScreenWidth()  - 115, 
-                                                config.getScreenHeight() - 42,
+                                                SCREEN_WIDTH  - 115, 
+                                                SCREEN_HEIGHT - 42,
                                                 0xffffffff);
                 renderer.drawText("fps:" + fps, MonoFont.STANDARD,
-                                                config.getScreenWidth()  - 115, 
-                                                config.getScreenHeight() - 20,
+                                                SCREEN_WIDTH  - 115, 
+                                                SCREEN_HEIGHT - 20,
                                                 0xffff9900);
                 window.update();
                 frames++;

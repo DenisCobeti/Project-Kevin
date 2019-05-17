@@ -4,14 +4,15 @@ import audio.SoundClip;
 import game.GameManager;
 import game.objects.Player;
 import gui.MainMenu;
+import gui.PauseMenu;
 import gui.ScorePopup;
 import java.awt.Canvas;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -28,21 +29,22 @@ public class Window extends JFrame{
     private static final String GAME_NAME = "Kommet Kevin v.0.2.1";
     
     private SoundClip menuClip;
-    private SoundClip gameClip;        
+    private SoundClip gameClip;
+    private boolean paused = false;
     
-    private Config config;
-    private GameContainer gc;
+    private final GameContainer gc;
     
-    private JPanel cards;
-    private MainMenu menu;
-    private Canvas canvas;
+    private final JPanel cards;
+    private final MainMenu menu;
+    private final Canvas canvas;
     
+    private PauseMenu pause;
     private BufferedImage image;
     private BufferStrategy bs;
     private Graphics g;
     
-    private int screenWidth;
-    private int screenHeight;
+    private final int screenWidth;
+    private final int screenHeight;
     
     public Window(GameContainer gc) { 
         super(GAME_NAME);
@@ -70,8 +72,29 @@ public class Window extends JFrame{
         cards.add(canvas);
         add(cards);
         
-        menuClip.loop();
+        pause = new PauseMenu(this);
         
+        menuClip.loop();
+        canvas.addKeyListener(new KeyListener(){
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            
+                if (e.getKeyCode() == Config.getKeyPause()){
+                    if(!paused){
+                        pauseGame();
+                    }else{
+                        unpauseGame();
+                    }
+                }
+            }
+            
+        });
         screenWidth = gc.getConfig().getScreenWidth();
         screenHeight = gc.getConfig().getScreenHeight();
         
@@ -113,7 +136,7 @@ public class Window extends JFrame{
     }
     
     public void deadPLayer(Player player){
-        ScorePopup popup = new ScorePopup("boom", player.getScore());
+        ScorePopup popup = new ScorePopup(player.getScore());
         
         
         popup.setEnabled(true);
@@ -121,6 +144,22 @@ public class Window extends JFrame{
         getGameClip().stop();
     }
     
+    public void pauseGame(){
+        gc.pause();
+        pause.show(this, screenWidth/3, screenHeight/3);
+        paused = true;
+    }
+    
+    public void unpauseGame(){
+        pause.setVisible(false);
+        gc.resume();
+        paused = false;
+    }
+    
+    public void exitGame(){
+        this.dispose();
+        System.exit(0);
+    }
     // Getters
     public GameContainer getGameContainer() {return gc;}
     public BufferedImage getImage() {return image;}

@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * @author Prokect Kevin
  */
 public class GameManager extends AbstractGame {
-    private Camera camera;
-    private AsteroidManager am;
-    private HUD hud;
+    private final Camera camera;
+    private final AsteroidManager am;
+    private final HUD hud;
     private Player player;
     
     /**

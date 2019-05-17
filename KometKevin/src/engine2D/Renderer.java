@@ -26,8 +26,8 @@ public class Renderer {
      * @param win ventana en la que dibujar
      */
     public Renderer(Window win) {
-        screenWidth = Config.getInstance().getScreenWidth();
-        screenHeight = Config.getInstance().getScreenHeight();
+        screenWidth = Config.getScreenWidth();
+        screenHeight = Config.getScreenHeight();
         
         pixels = ((DataBufferInt)win.getImage().getRaster().getDataBuffer()).getData();
     }

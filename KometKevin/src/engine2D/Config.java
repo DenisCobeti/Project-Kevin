@@ -37,13 +37,13 @@ public class Config {
     // Configuraciones de la ventana
     private boolean fullScreen;
     private float scale;
-    private int screenWidth, screenHeight;
+    private static  int screenWidth, screenHeight;
     
     // Controles por teclado
     private static int keyFoward, keyBack, keyRight, keyLeft;
     private static int keyAbility1, keyAbility2;
     
-    private static int keyBrake, keyDumpers;
+    private static int keyBrake, keyDumpers, keyPause;
     
     // Botones del raton
     private int primaryFire, secondaryFire;
@@ -85,6 +85,7 @@ public class Config {
         */
         primaryFire = MouseEvent.BUTTON1;
         secondaryFire = MouseEvent.BUTTON3;
+        keyPause = KeyEvent.VK_P;
         
         /*
         keyHability1 = KeyEvent.VK_Q;
@@ -191,8 +192,8 @@ public class Config {
     // Getters & Setters
     public boolean getFullScreen() {return fullScreen;}
     public float getScale() {return scale;}
-    public int getScreenWidth() {return screenWidth;}
-    public int getScreenHeight() {return screenHeight;}
+    public static int getScreenWidth() {return screenWidth;}
+    public static int getScreenHeight() {return screenHeight;}
     public int getKeyFoward() {return keyFoward;}
     public int getKeyBackward() {return keyBack;}
     public int getKeyRight() { return keyRight;}
@@ -203,6 +204,8 @@ public class Config {
     public int getKeyDumpers() {return keyDumpers;}
     public int getPrimaryFire() {return primaryFire;}
     public int getSecondaryFire() {return secondaryFire;}
+    public static int getKeyPause() {return keyPause;}
+    
     public Font getFont() {return font;}
     
     public void setFullScreen(boolean fullScreen) {this.fullScreen = fullScreen;}

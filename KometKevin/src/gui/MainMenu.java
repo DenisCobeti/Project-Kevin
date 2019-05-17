@@ -15,7 +15,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -254,8 +253,7 @@ public class MainMenu extends JPanel {
         
     }
     private void exitLabelMouseClicked(MouseEvent evt) {
-        window.dispose();
-        System.exit(0);
+        window.exitGame();
     }
    
     private JLabel initMenuButton(String text, Dimension size, boolean hover){
