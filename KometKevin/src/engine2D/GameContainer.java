@@ -10,12 +10,20 @@ import gfx.MonoFont;
  */
 public class GameContainer implements Runnable {
     private final double UPDATE_CAP = 1.0/60.0; // min. 1/25 - max. 1/60
-    
+
+    // Variables de actualización
     private double deltaTime = UPDATE_CAP;
-    private Config config;
+    private double unprocessedTime = 0;
     
+    // Variables de monitorización
+    public double ups = 0;
+    public double fps = 0;
+    
+    private final Config config;
+    
+    // Herramientas del motor
     private Thread thread;
-    private Window window;
+    private final Window window;
     private Renderer renderer;
     private Input input;
     private AbstractGame game;
@@ -42,7 +50,7 @@ public class GameContainer implements Runnable {
         input = new Input(window.getCanvas());
         
         thread = new Thread(this);
-        thread.run();
+        thread.start();
     }
     
     /**
@@ -50,7 +58,6 @@ public class GameContainer implements Runnable {
      */
     public void stop() {
         running = false;
-        if (deltaTime == 0) resume();
     }
     
     @Override
@@ -62,14 +69,12 @@ public class GameContainer implements Runnable {
         double firstTime = 0;
         double lastTime = System.nanoTime() / 1e9d;
         double passedTime = 0;
-        double unprocessedTime = 0;
+        //double unprocessedTime = 0;
         
         // Variables de monitorización
         double frameTime = 0;
         int frames = 0;
         int updates = 0;
-        int fps = 0;
-        int ups = 0;
    
         // Bucle principal del motor gráfico
         while(running) {
@@ -83,7 +88,7 @@ public class GameContainer implements Runnable {
             frameTime += passedTime;
             
             // Se llevan a cabo tantas actualizaciones como sean necesarias
-            while(unprocessedTime >= deltaTime) {
+            while(unprocessedTime >= deltaTime && deltaTime != 0) {
                 unprocessedTime -= deltaTime;
                 render = true;
                 
@@ -105,14 +110,6 @@ public class GameContainer implements Runnable {
             if(render) {
                 renderer.clear();
                 game.render(this, renderer);
-                renderer.drawText("ups:" + ups, MonoFont.STANDARD,
-                                                config.getScreenWidth()  - 115, 
-                                                config.getScreenHeight() - 42,
-                                                0xffffffff);
-                renderer.drawText("fps:" + fps, MonoFont.STANDARD,
-                                                config.getScreenWidth()  - 115, 
-                                                config.getScreenHeight() - 20,
-                                                0xffff9900);
                 window.update();
                 frames++;
             } else {
@@ -138,6 +135,7 @@ public class GameContainer implements Runnable {
      */
     public void resume() {
         deltaTime = UPDATE_CAP;
+        unprocessedTime = 0;
     }
 
     /**

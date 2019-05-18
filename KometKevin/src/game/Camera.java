@@ -1,5 +1,6 @@
 package game;
 
+import engine2D.Config;
 import engine2D.GameContainer;
 import game.objects.GameObject;
 
@@ -12,6 +13,9 @@ import game.objects.GameObject;
 public class Camera {
     private float camX, camY;
     private GameObject target = null;
+    
+    private static final int SCREEN_WIDTH = Config.getScreenWidth();
+    private static final int SCREEN_HEIGHT = Config.getScreenHeight();
     
     /**
      * Constructor de la clase
@@ -31,15 +35,15 @@ public class Camera {
      */
     public void update(GameContainer gc, GameManager gm, float dt) {
         if (target != null) {
-            camX = (float) (target.getCenter().x - gc.getConfig().getScreenWidth() / 2);
-            camY = (float) (target.getCenter().y - gc.getConfig().getScreenHeight() / 2);
+            camX = (float) (target.getCenter().x - SCREEN_WIDTH / 2);
+            camY = (float) (target.getCenter().y - SCREEN_HEIGHT / 2);
 
             if (camX < 0) camX = 0;
             if (camY < 0) camY = 0;
-            if (camX > gm.getBackground().getW() - gc.getConfig().getScreenWidth()) 
-                camX = gm.getBackground().getW() - gc.getConfig().getScreenWidth();
-            if (camY > gm.getBackground().getH() - gc.getConfig().getScreenHeight()) 
-                camY = gm.getBackground().getH() - gc.getConfig().getScreenHeight();
+            if (camX > gm.getBackground().getW() - SCREEN_WIDTH) 
+                camX = gm.getBackground().getW() - SCREEN_WIDTH;
+            if (camY > gm.getBackground().getH() - SCREEN_HEIGHT) 
+                camY = gm.getBackground().getH() - SCREEN_HEIGHT;
 
             gc.getRenderer().setCamX((int) camX);
             gc.getRenderer().setCamY((int) camY);

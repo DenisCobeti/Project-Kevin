@@ -66,6 +66,7 @@ public class MainMenu extends JPanel {
     
     protected static final float FONT_SIZE = (float)((SCREEN_HEIGHT *
                                     STANDARD_FONT_SIZE) / STANDARD_SCREEN_SIZE);
+    public enum Controls{UP, DOWN, RIGHT, LEFT, ABILITY1, ABILITY2}
     
     private static final String BG = "resources/menu/backgroundHammer.png";
     private static final String menuSound = "menu/menuHover.ogg";
@@ -78,6 +79,8 @@ public class MainMenu extends JPanel {
     private JLabel controlUp, controlDown, controlRight, controlLeft, 
                      controlAbility1, controlAbility2, backControls, backSelect;
     private Box controlBox, selectBox;
+    private ControlPopup popup;
+    private ChangeKeyListener changeListener;
     
     private  Image[] shipIcons;
     private int shipsIterator = 0;
@@ -153,7 +156,7 @@ public class MainMenu extends JPanel {
         box.add(options);
         box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         box.add(scores);
-        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
+        box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 4));
         box.add(exit);
         
         this.setLayout(new BorderLayout(100, 100));
@@ -182,7 +185,7 @@ public class MainMenu extends JPanel {
         selectBox.add(startSelect);
         selectBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         selectBox.add(nextPreviousBox);
-        selectBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
+        selectBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 4));
         selectBox.add(backSelect);
         
         selectBox.validate();
@@ -241,7 +244,7 @@ public class MainMenu extends JPanel {
         controlBox.add(controlAbility1);
         controlBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         controlBox.add(controlAbility2);
-        controlBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 3));
+        controlBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 4));
         controlBox.add(backControls);
         this.setLayout(new BorderLayout(100,100));
         this.add(controlBox, BorderLayout.EAST);
@@ -250,8 +253,7 @@ public class MainMenu extends JPanel {
         
     }
     private void exitLabelMouseClicked(MouseEvent evt) {
-        window.dispose();
-        System.exit(0);
+        window.exitGame();
     }
    
     private JLabel initMenuButton(String text, Dimension size, boolean hover){
@@ -377,33 +379,33 @@ public class MainMenu extends JPanel {
         //Key Listeners de cada elemento de controles
         controlUp.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_UP);
+                changeControl(evt, Config.KEY_FORWARD);
             }
         });
         
         controlDown.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_DOWN);
+                changeControl(evt, Config.KEY_BACK);
             }
         });
         controlRight.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_RIGHT);
+                changeControl(evt, Config.KEY_RIGHT);
             }
         });
         controlLeft.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_LEFT);
+                changeControl(evt, Config.KEY_LEFT);
             }
         });
         controlAbility1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_ABILITY1);
+                changeControl(evt, Config.KEY_ABILITY_1);
             }
         });
         controlAbility2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                changeControl(evt, CONTROL_ABILITY2);
+                changeControl(evt, Config.KEY_ABILITY_2);
             }
         });
         backControls.addMouseListener(new MouseAdapter() {
@@ -419,12 +421,33 @@ public class MainMenu extends JPanel {
     }
     
     private void changeControl(MouseEvent evt, String control){
-        ControlPopup popup = new ControlPopup();
-        
+        popup = new ControlPopup();
+        changeListener = new ChangeKeyListener(control, this);
+        add(popup);
         popup.setEnabled(true);
         popup.show(this, SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
+        this.requestFocus();
+        this.addKeyListener(changeListener);
+        
     }
     
+    public void changeKey(){
+        this.removeKeyListener(changeListener);
+        controlUp.setText(CONTROL_UP + KeyEvent.getKeyText
+                      (Config.getInstance().getKeyFoward()));
+        controlDown.setText(CONTROL_DOWN + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyBackward()));
+        controlRight.setText(CONTROL_RIGHT+ KeyEvent.getKeyText
+                       (Config.getInstance().getKeyRight()));
+        controlLeft.setText(CONTROL_LEFT + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyLeft()));
+        controlAbility1.setText(CONTROL_ABILITY1 + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyHability1()));
+        controlAbility2.setText(CONTROL_ABILITY2 + KeyEvent.getKeyText
+                       (Config.getInstance().getKeyHability2()));
+        popup.setVisible(false);
+        popup = null;
+    }
     private void backMenuControls(){
         controlBox.setVisible(false);
         controlBox.removeAll();
@@ -447,6 +470,5 @@ public class MainMenu extends JPanel {
         //paint the background image
         super.paintComponent(g);
         g.drawImage(shipIcons[shipsIterator], 0, 0, null);
-        
     }                 
 }

@@ -74,7 +74,7 @@ public class Squad extends GameObject{
     
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawRotatedImageTile(image, (int)position.x, (int)position.y, (int)anim, 0, aiming.getAngle());
+        r.drawRotatedImageTile(image, (int)position.x, (int)position.y, 0, (int)anim, aiming.getAngle());
     }
 
     @Override

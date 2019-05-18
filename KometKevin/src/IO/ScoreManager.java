@@ -41,11 +41,11 @@ public class ScoreManager {
             scores = (ArrayList<Score>) inputStream.readObject();
             
         } catch (FileNotFoundException e) {
-            System.out.println("[Laad] FNF Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         } catch (IOException e) {
-            System.out.println("[Laad] IO Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println("[Laad] CNF Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (outputStream != null) {
@@ -53,7 +53,7 @@ public class ScoreManager {
                     outputStream.close();
                 }
             } catch (IOException e) {
-                System.out.println("[Laad] IO Error: " + e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -65,7 +65,7 @@ public class ScoreManager {
             outputStream.writeObject(scores);
             
         } catch (FileNotFoundException e) {
-            System.out.println("[Update] FNF Error: " + e.getMessage() + ",the program will try and make a new file");
+            System.out.println( e.getMessage() + ",the program will try and make a new file");
         } catch (IOException e) {
             System.out.println("[Update] IO Error: " + e.getMessage());
         } finally {

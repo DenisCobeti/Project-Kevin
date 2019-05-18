@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * @author Prokect Kevin
  */
 public class GameManager extends AbstractGame {
-    private Camera camera;
-    private AsteroidManager am;
-    private HUD hud;
+    private final Camera camera;
+    private final AsteroidManager am;
+    private final HUD hud;
     private Player player;
     
     /**
@@ -63,7 +63,7 @@ public class GameManager extends AbstractGame {
         // Se calculan los offsets de la camara
         camera.update(gc, this, dt);
         // Se crean asteroides
-        //am.generateAsteriods(dt);
+        am.generateAsteriods(dt);
 
         // Se calculan las colisiones para la proxima iteración del motor
         for (i = 0; i < objects.size(); i++) {

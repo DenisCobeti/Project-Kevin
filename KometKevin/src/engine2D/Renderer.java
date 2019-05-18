@@ -14,8 +14,9 @@ import java.awt.image.DataBufferInt;
  * @author Project Kevin
  */
 public class Renderer {
-    private int screenWidth, screenHeight;
-    private int[] pixels;
+    private final int screenWidth;
+    private final int screenHeight;
+    private final int[] pixels;
     
     private int camX, camY;
     private Image background = null;
@@ -25,8 +26,8 @@ public class Renderer {
      * @param win ventana en la que dibujar
      */
     public Renderer(Window win) {
-        screenWidth = Config.getInstance().getScreenWidth();
-        screenHeight = Config.getInstance().getScreenHeight();
+        screenWidth = Config.getScreenWidth();
+        screenHeight = Config.getScreenHeight();
         
         pixels = ((DataBufferInt)win.getImage().getRaster().getDataBuffer()).getData();
     }
@@ -83,7 +84,7 @@ public class Renderer {
      */
     public void drawText(String text, MonoFont font, int offX, int offY, int color) {
         text = text.toUpperCase();
-        int alpha = 0;
+        int alpha;
         int offset = 0;
         
         for (int i = 0; i < text.length(); i++) {
@@ -269,7 +270,7 @@ public class Renderer {
         offY -= camY; offY2 -= camY;
 
         int dx = offX2 - offX;
-        int dy = offY2 - offY;   
+        int dy = offY2 - offY;
         
         for (int x = offX; x < offX2; x++) {
             int y = offY + dy * (x - offX) / dx;

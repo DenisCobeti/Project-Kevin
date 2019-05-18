@@ -34,11 +34,13 @@ public class HammerHead extends Player {
     private Image artillery = new Image("/projectiles/fire.png");
     private ImageTile flak = new ImageTile("/projectiles/flak.png",28,28);
 
-
     private Shield shield;
        
     public HammerHead(int x, int y, GameManager gm) {
         super(x, y);
+        tag = "HammerHead";
+        color = 0xffff9b00;
+        
         image = new ImageTile(Ships.Hammer.getSprite(),Ships.Hammer.getSizeX(),
                                                        Ships.Hammer.getSizeY());
         width = ((ImageTile) image).getTileW();

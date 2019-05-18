@@ -38,14 +38,15 @@ public class HUD {
     }
     
     public HUD() {}
-
     
     /**
      * Metodo para gestionar la toma de datos de la nave
      * @param dt deltaTime, referencia al tiempo de simulación 
      */
     public void update(float dt) {
-
+        // 53c0f9 denis
+        // ffffff bartleby
+        // 5cff52 ramiro
     }
     
     /**
@@ -71,8 +72,8 @@ public class HUD {
                     r.drawFillRect(MARGIN_X + CD_OFFSET, MARGIN_Y + CD_OFFSET + i * ICON_SEPARATION, (int)(CD_SIZE * target.getAbilityCdPercentage(i)), CD_SIZE, CD_COLOR);
             }
             
-            // Dibujao de barras
-            drawBar(gc, r, target.getHealthPercentage(), sW / 2 - sW/4, sH - 42, 0xffff7d00, 0xffffd660);
+            // Dibujao de barras 0xffffd660
+            drawBar(gc, r, target.getHealthPercentage(), sW / 2 - sW/4, sH - 42, target.getColor(), 0xffffffff);
             drawBar(gc, r, target.getEnergyPercentage(), sW / 2 - sW/4, sH - 20, 0xff0000ff, 0xff6060ff);
             
             // Dibujado de textos
@@ -82,7 +83,11 @@ public class HUD {
             String dumpers = "OFF";
             if (target.getDumpers()) dumpers = "ON";
 
-            r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, sH - 20, 0xffff9900);
+            r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, sH - 20, target.getColor());
+            
+            // Dibujado fps y ups
+            r.drawText("ups:" + gc.ups, MonoFont.STANDARD, sW  - 115, sH - 42, 0xffffffff);
+            r.drawText("fps:" + gc.fps, MonoFont.STANDARD, sW  - 115, sH - 20, target.getColor());
             
             // Dibujado de score
             String score = "" + target.getScore();
