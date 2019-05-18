@@ -23,7 +23,7 @@ public class Squad extends GameObject{
     
     private double anim = 0;
     
-    protected double rotationTolerance = 0.01;
+    protected double rotationTolerance = 0.02;//0.01;
     protected double rotationSpeed = 0.07;
     
     public Squad(int x, int y, Vector2 aim) {
@@ -59,6 +59,7 @@ public class Squad extends GameObject{
                 aimed = true;
             }
         }
+        velocity.multiply(1.01);
         
         position.add(Vector2.toCartesian(velocity.getLength(), aiming.getAngle()));
         center.set(position.x + width/2, position.y + height/2);
