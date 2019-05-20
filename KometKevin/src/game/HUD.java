@@ -55,7 +55,7 @@ public class HUD {
      * @param r Renderer, contiene todos los metodos de dibujado del motor
      */
     public void render(GameContainer gc, Renderer r) {
-        if (target != null) { 
+        if (target != null) {
             int sH = gc.getConfig().getScreenHeight();
             int sW = gc.getConfig().getScreenWidth();
             
@@ -86,8 +86,8 @@ public class HUD {
             r.drawText("Dumps:" + dumpers, MonoFont.STANDARD, 2, sH - 20, target.getColor());
             
             // Dibujado fps y ups
-            r.drawText("ups:" + gc.ups, MonoFont.STANDARD, sW  - 115, sH - 42, 0xffffffff);
-            r.drawText("fps:" + gc.fps, MonoFont.STANDARD, sW  - 115, sH - 20, target.getColor());
+            r.drawText("ups:" + gc.ups, MonoFont.STANDARD, sW - 115, sH - 42, 0xffffffff);
+            r.drawText("fps:" + gc.fps, MonoFont.STANDARD, sW - 115, sH - 20, target.getColor());
             
             // Dibujado de score
             String score = "" + target.getScore();
