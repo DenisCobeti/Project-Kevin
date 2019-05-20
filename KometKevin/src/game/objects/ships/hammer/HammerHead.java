@@ -63,12 +63,12 @@ public class HammerHead extends Player {
         
         energyCost[0] = 0.2;
         energyCost[1] = 0.4;
-        energyCost[2] = 0.1;
-        energyCost[3] = 0.1;
+        energyCost[2] = 0.5;
+        energyCost[3] = 1.2;
         
         cdValues[0] = 0.17;
         cdValues[1] = 3;
-        cdValues[2] = 0.25;
+        cdValues[2] = 1.75;
         cdValues[3] = 5;
     }
 
@@ -124,7 +124,7 @@ public class HammerHead extends Player {
         }
         
         // Tercera Habilidad
-        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
+        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 && energyPoints - energyCost[2] >= 0) {
             Vector2 aim = new Vector2(gc.getInput().getMouseX(),gc.getInput().getMouseY());
             
             Squad squad1 = new Squad((int)center.x, (int)center.y, aim);
@@ -138,6 +138,7 @@ public class HammerHead extends Player {
             
             gm.getObjects().add(0,squad1);
             gm.getObjects().add(0,squad2);
+            energyPoints -= energyCost[2];
             cds[2] = cdValues[2];
         }
         
