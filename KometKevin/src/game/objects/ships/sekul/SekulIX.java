@@ -25,10 +25,13 @@ public class SekulIX extends Player {
 	
     public SekulIX(int x, int y, GameManager gm) {
         super(x, y);
+        tag = "sekul";
+        id = 3;
+        color = 0xff5cff52;
 		
         collider = new BoxCollider(this, 100, 48);
-	image = new ImageTile(Ships.Hammer.getSprite(),Ships.Hammer.getSizeX(),
-                                                       Ships.Hammer.getSizeY());
+	image = new ImageTile(Ships.Sekul.getSprite(),Ships.Sekul.getSizeX(),
+                                                       Ships.Sekul.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
 		

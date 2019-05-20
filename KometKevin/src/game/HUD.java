@@ -46,7 +46,6 @@ public class HUD {
     public void update(float dt) {
         // 53c0f9 denis
         // ffffff bartleby
-        // 5cff52 ramiro
     }
     
     /**
@@ -67,7 +66,7 @@ public class HUD {
             for (int i = 0; i < Player.NUM_ABILITIES; i++) {
                 if (target.getIsActive()[i]) 
                     r.drawFillRect(MARGIN_X + CD_OFFSET, MARGIN_Y + CD_OFFSET + i * ICON_SEPARATION, CD_SIZE, CD_SIZE, 0xffffffff);
-                r.drawImageTile(image, MARGIN_X, MARGIN_Y + i * ICON_SEPARATION, i, 0);
+                r.drawImageTile(image, MARGIN_X, MARGIN_Y + i * ICON_SEPARATION, i, target.getId());
                 if (target.getCds()[i] > 0) 
                     r.drawFillRect(MARGIN_X + CD_OFFSET, MARGIN_Y + CD_OFFSET + i * ICON_SEPARATION, (int)(CD_SIZE * target.getAbilityCdPercentage(i)), CD_SIZE, CD_COLOR);
             }

@@ -38,7 +38,8 @@ public class HammerHead extends Player {
        
     public HammerHead(int x, int y, GameManager gm) {
         super(x, y);
-        tag = "HammerHead";
+        tag = "hammer";
+        id = 0;
         color = 0xffff9b00;
         
         image = new ImageTile(Ships.Hammer.getSprite(),Ships.Hammer.getSizeX(),

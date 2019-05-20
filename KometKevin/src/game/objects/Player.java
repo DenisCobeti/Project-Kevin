@@ -14,6 +14,7 @@ public abstract class Player extends GameObject {
     
     public static final int NUM_ABILITIES = 4;
     
+    protected int id = 0;
     protected int color = 0xffffffff;
     
     protected double maxHealthPoints = 1;
@@ -161,7 +162,8 @@ public abstract class Player extends GameObject {
     public double getAbilityCdPercentage(int index) {
         return cds[index] / cdValues[index];
     }
-    
+
+    public int getId() {return id;}
     public int getColor() {return color;}
     
     public double getForwardsAccel(){return fowardsAccel;}
