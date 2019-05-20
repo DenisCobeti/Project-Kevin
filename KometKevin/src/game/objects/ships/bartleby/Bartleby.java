@@ -85,7 +85,7 @@ public class Bartleby extends Player {
             energyPoints -= energyCost[1];    
             cds[1] = cdValues[1];
         }
-        //Habilidad 1 Q
+        //Habilidad 1 Q Disparo
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability1()) && cds[2] <=0 && energyPoints - energyCost[2] >= 0) {
             isActive[2]=!isActive[2];
             
