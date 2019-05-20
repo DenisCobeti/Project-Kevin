@@ -44,7 +44,6 @@ public class HUD {
      * @param dt deltaTime, referencia al tiempo de simulación 
      */
     public void update(float dt) {
-        // ffffff bartleby
     }
     
     /**
