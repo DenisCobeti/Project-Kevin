@@ -6,8 +6,6 @@ import game.GameManager;
 import game.colliders.CircleCollider;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
-import game.objects.Player;
-import game.objects.ships.AdvancedAbility;
 import gfx.ImageTile;
 
 /**
@@ -17,8 +15,10 @@ import gfx.ImageTile;
  
 //Fallos al cambiar el tamaño de la imagen
 
-public class DetonationWave extends AdvancedAbility {
+public class DetonationWave extends GameObject {
 
+    private boolean active = false;
+    
     private int range = 250;		//Units
     private int velocity = 1;           //Units per frame
     private int cost = 20;
@@ -58,7 +58,6 @@ public class DetonationWave extends AdvancedAbility {
         actualRangeEffect = 0;
     }
     
-    @Override
     public double activate(double cd) {
         //active = !active;
         if (active) {

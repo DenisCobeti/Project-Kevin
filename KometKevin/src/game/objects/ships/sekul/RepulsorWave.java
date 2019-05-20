@@ -8,13 +8,10 @@ package game.objects.ships.sekul;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
-import game.Vector2;
 import game.colliders.CircleCollider;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
-import game.objects.ships.AdvancedAbility;
-import game.objects.ships.Projectile;
 import gfx.ImageTile;
 import java.util.LinkedList;
 
@@ -26,7 +23,9 @@ import java.util.LinkedList;
 //Si disparas de seguido, la lista de asteroides affectados se renueva antes de que acabe acabe el efecto de la habilidad...
 //... y le afecta directamente con el 2º disparo nada mas disparar
  
-public class RepulsorWave extends AdvancedAbility {
+public class RepulsorWave extends GameObject {
+    
+    private boolean active = false;
     
     private int speed;
     private GameObject owner;
@@ -75,7 +74,6 @@ public class RepulsorWave extends AdvancedAbility {
         }
     }
     
-    @Override
     public double activate(double cd){
         if(!active){
             center = owner.getCenter().clone();

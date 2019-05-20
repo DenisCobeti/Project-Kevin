@@ -3,18 +3,17 @@ package game.objects.ships.sekul;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
-import game.colliders.CircleCollider;
 import game.objects.GameObject;
 import game.objects.Player;
-import game.objects.ships.AdvancedAbility;
-import gfx.ImageTile;
 import java.util.LinkedList;
 
 /**
  *
  * @author alumno
  */
-public class Mining extends AdvancedAbility{
+public class Mining extends GameObject{
+    
+    private boolean active = false;
     
     private final int MINES_EXPLOSION_RANGE = 200;
     
@@ -32,7 +31,6 @@ public class Mining extends AdvancedAbility{
         //gm.getObjects().add(this);
     }
 
-    @Override
     public double activate(double cd) {
         if (active){
             return 0;

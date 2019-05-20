@@ -13,14 +13,22 @@ import gfx.ImageTile;
  */
 public class Aphelion extends Player {
     
+    private Laser laser;
+    
     public Aphelion(int x, int y, GameManager gm) {
         super(x, y);
+        tag = "aphelion";
+        id = 1;
+        color = 0xff53c0f9;
+        
         image = new ImageTile(Ships.Aphelion.getSprite(),Ships.Aphelion.getSizeX(),
                                 Ships.Aphelion.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         
         collider = new BoxCollider(this, 72, 46);
+        laser = new Laser(this, 3);
+        gm.getObjects().add(laser);
         
         fowardsAccel = 4;
         backwardsAccel = 4;
@@ -48,7 +56,7 @@ public class Aphelion extends Player {
             cds[2] = 0;
         }
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
-            cds[3] = 0;
+            laser.activate();
         }  
     }
 }
