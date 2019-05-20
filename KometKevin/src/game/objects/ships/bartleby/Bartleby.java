@@ -8,8 +8,6 @@ import game.objects.CollisionCodes;
 import game.objects.Player;
 import game.objects.ships.Projectile;
 import game.objects.ships.Ships;
-import game.objects.ships.hammer.Flak;
-import game.objects.ships.hammer.Shield;
 import gfx.Image;
 import gfx.ImageTile;
 
@@ -30,11 +28,13 @@ public class Bartleby extends Player {
     
     private Image artillery = new Image("/projectiles/fire.png");
     private ImageTile littleBoy = new ImageTile("/projectiles/nuke.png",170,170);
-
-
  
     public Bartleby(int x, int y, GameManager gm) {
         super(x, y);
+        tag = "bartleby";
+        id = 2;
+        color = 0xffffffff;
+        
         image = new ImageTile(Ships.Bartleby.getSprite(),Ships.Bartleby.getSizeX(),
                                 Ships.Bartleby.getSizeY());
         width = ((ImageTile) image).getTileW();
@@ -42,10 +42,12 @@ public class Bartleby extends Player {
         
         collider = new BoxCollider(this, 48, 30);
         
-        
         fowardsAccel = 2.9;
         backwardsAccel = 1.9;
         lateralAccel = 1.1;
+        
+        healthPoints = 5;
+        maxHealthPoints = 5;
         
         rotationSpeed = 0.055;
         rotationTolerance = 0.01;
@@ -90,20 +92,22 @@ public class Bartleby extends Player {
             isActive[2]=!isActive[2];
             
             if(isActive[2]){
+                animX = 1;
                 collides=0; 
-            }else{            
-                    collides= CollisionCodes.TEAM1_COL.getValue();;
-                    cds[2] = cdValues[2];
+            }else{
+                animX = 0;
+                collides= CollisionCodes.TEAM1_COL.getValue();;
+                cds[2] = cdValues[2];
             }
         }
         if (isActive[2]) {
-            energyPoints-= energyCost[2]*dt;
+            energyPoints -= energyCost[2]*dt;
             if(energyPoints <= 0){
+                animX = 0;
                 isActive[2]=false;
                 collides= CollisionCodes.TEAM1_COL.getValue();;
                 cds[2] = cdValues[2];
             }
-
          }
         //Habilidad 2 E
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 && energyPoints - energyCost[3] >= 0 ) {

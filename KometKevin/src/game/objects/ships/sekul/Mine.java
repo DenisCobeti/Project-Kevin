@@ -3,13 +3,9 @@ package game.objects.ships.sekul;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
-import game.Vector2;
 import game.colliders.CircleCollider;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
-import game.objects.Player;
-import game.objects.ships.AdvancedAbility;
-import gfx.Image;
 import gfx.ImageTile;
 
 /**
@@ -18,6 +14,8 @@ import gfx.ImageTile;
  */
  
 public class Mine extends GameObject {
+    
+    private boolean active = false;
     
     private DetonationWave wave;
     private int explosionRange;

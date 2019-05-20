@@ -1,7 +1,5 @@
 package engine2D;
 
-import gfx.MonoFont;
-
 /**
  * Clase que contiene el hilo del motor sobre el que se ejecuta el juego.
  * Cuenta con todos los parametros de las clases del paquete.
@@ -12,7 +10,7 @@ public class GameContainer implements Runnable {
     private final double UPDATE_CAP = 1.0/60.0; // min. 1/25 - max. 1/60
 
     // Variables de actualización
-    private double deltaTime = UPDATE_CAP;
+    private double deltaTime = 0;
     private double unprocessedTime = 0;
     
     // Variables de monitorización

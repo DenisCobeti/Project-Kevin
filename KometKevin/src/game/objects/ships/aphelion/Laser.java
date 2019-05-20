@@ -8,18 +8,17 @@ import game.Vector2;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
-import game.objects.ships.AdvancedAbility;
 
 /**
  * Esta clase necesita mucho amor, pq este codigo es un asco
  * @author ProjectKevin
  */
-public class Laser extends AdvancedAbility {
+public class Laser extends GameObject {
     private Vector2 hitPoint = new Vector2(0,0);
     private GameObject closer = null;
     private double damage = 1;
     
-    public Laser(Player support) {
+    public Laser(Player support, int num) {
         this.tag = "Laserrrrr";
         
         // Ojo con estos vectores que son punteros a los de la nave
@@ -33,8 +32,7 @@ public class Laser extends AdvancedAbility {
         this.collider = new RayCollider(this);
     }
     
-    @Override
-    public double activate(double cd) {
+    public double activate() {
         return 0.0;
     }
     
