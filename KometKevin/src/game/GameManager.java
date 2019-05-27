@@ -1,5 +1,6 @@
 package game;
 
+import game.objects.Asteroid;
 import engine2D.AbstractGame;
 import engine2D.GameContainer;
 import engine2D.Renderer;
@@ -9,6 +10,7 @@ import game.objects.*;
 import gfx.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Clase que contiene los objetos del videojuego.
@@ -21,18 +23,25 @@ public class GameManager extends AbstractGame {
     private final AsteroidManager am;
     private final HUD hud;
     private Player player;
+    private Stack<Asteroid> delayedAsteroids;
     
     /**
      * Constructor de la clase
      */
     public GameManager() {
         background = new Image("/space/background.png");
-
+        
+        
         objects = new ArrayList<>();
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
         camera = new Camera();
         hud = new HUD(player);
         am = new AsteroidManager(camera,this);
+        
+        //objects.add(new Asteroid(250,250,2,am));
+        
+        delayedAsteroids = new Stack<>();
+        
     }
 
     @Override
@@ -63,7 +72,7 @@ public class GameManager extends AbstractGame {
         // Se calculan los offsets de la camara
         camera.update(gc, this, dt);
         // Se crean asteroides
-        am.generateAsteriods(dt);
+        am.update(dt);
 
         // Se calculan las colisiones para la proxima iteración del motor
         for (i = 0; i < objects.size(); i++) {
@@ -74,7 +83,7 @@ public class GameManager extends AbstractGame {
                 }
             }
         }
-        
+  
         if (gc.getInput().isKeyDown(KeyEvent.VK_P)) {
             //TODO: Parar el motor y mostrar el menu de juego
             gc.pause(); // BOOM
@@ -83,6 +92,12 @@ public class GameManager extends AbstractGame {
             //TODO: Parar el motor y mostrar el menu de juego
             System.exit(0); // BOOM
         }
+        
+        while(!delayedAsteroids.isEmpty()){
+            objects.add(delayedAsteroids.pop());
+            System.out.println("poping");
+        }
+        
     }
 
     @Override
@@ -99,4 +114,7 @@ public class GameManager extends AbstractGame {
         camera.setTarget(player);
         hud.setTarget(player);
     }
+    
+    public Stack<Asteroid> getStack(){return delayedAsteroids;}
+    
 }
