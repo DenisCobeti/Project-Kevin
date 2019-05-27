@@ -17,7 +17,6 @@ public class Mine extends GameObject {
     
     private boolean active = false;
     
-    private DetonationWave wave;
     private int explosionRange;
     private Mining mineManager;
     private boolean exploding;
@@ -27,7 +26,7 @@ public class Mine extends GameObject {
     public Mine(Mining mineManager, int explosionRange){
         this.mineManager = mineManager;
         this.explosionRange = explosionRange;
-        wave = new DetonationWave(this, explosionRange,10,0,1);
+        
         damage = 1;
         exploding = false;
         anim = 0;
@@ -42,33 +41,44 @@ public class Mine extends GameObject {
         
         //Se puede verificar el angulo del jugador y posicionar la mina detras de la nave
         //position.subtract(new Vector2(0,0));
-        this.collider = new CircleCollider(this,68);
+        this.collider = new CircleCollider(this,38);
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
+        
+        healthPoints = 10;
+        
     }
     
     @Override 
     public void update(GameContainer gc, GameManager gm, float dt){
         while(!collisions.empty() && !exploding) {
-            effect(collisions.pop());
             exploding = true;
-            System.out.println("Pum");
+            //System.out.println("Pum");
         }
+        while(!collisions.empty() && exploding && anim>=1.8) {
+            effect(collisions.pop());
+            //System.out.println("exploding");
+        }
+        
         if(exploding){
             anim = (anim + dt * 4) % 6;
-            System.out.println(anim);
             if (anim>5){
                 exploding = false;
+                mineManager.destroyMine(this);
                 this.setHealthPoints(0);
             }
         }
     }
     
+    public void activate(){
+        exploding = true;
+    }
+    
     @Override
     public void effect(GameObject go){
         go.setHealthPoints(go.getHealthPoints() - damage);
-        mineManager.destroyMine(this);
-        this.dispose = true;
+        //mineManager.destroyMine(this);
+        //this.dispose = true;
     }
 
     @Override

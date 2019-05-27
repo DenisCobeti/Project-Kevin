@@ -59,7 +59,7 @@ public class RepulsorWave extends GameObject {
     @Override 
     public void update(GameContainer gc, GameManager gm, float dt){
         if(active){
-            //super.update(gc, gm, dt);   //para que solo afecte al 1º
+            //super.update(gc, gm, dt);   //para que solo afecte al 1º aster
             while(!collisions.empty()) {
                effect(collisions.pop());
             }
@@ -74,7 +74,7 @@ public class RepulsorWave extends GameObject {
         }
     }
     
-    public double activate(double cd){
+    public double activate(){
         if(!active){
             center = owner.getCenter().clone();
             position = owner.getPosition().clone();
@@ -97,7 +97,6 @@ public class RepulsorWave extends GameObject {
             go.setVelocity(go.getVelocity().getMultiplied(-1));
             affected.add(go);
         }
-        //go.setHealthPoints(go.getHealthPoints() - 1);
     }
 
     @Override

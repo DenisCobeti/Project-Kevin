@@ -58,14 +58,13 @@ public class DetonationWave extends GameObject {
         actualRangeEffect = 0;
     }
     
-    public double activate(double cd) {
+    public void activate() {
         //active = !active;
         if (active) {
-            return 0;
+
         } else {
             active = true;
             support.setEnergyPoints(support.getEnergyPoints() - cost);
-            return cd;
         }
     }
 	

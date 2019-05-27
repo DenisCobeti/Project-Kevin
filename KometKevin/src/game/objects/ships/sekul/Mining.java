@@ -15,7 +15,7 @@ public class Mining extends GameObject{
     
     private boolean active = false;
     
-    private final int MINES_EXPLOSION_RANGE = 200;
+    private final int MINES_EXPLOSION_RANGE = 100;
     
     private LinkedList<Mine> mines;
     private int minesLimit;
@@ -31,40 +31,29 @@ public class Mining extends GameObject{
         //gm.getObjects().add(this);
     }
 
-    public double activate(double cd) {
-        if (active){
-            return 0;
-        }
-        else if (mines.size()<minesLimit){
-            active = true;
-            this.cd = cd;
+    public double activate() {
+        if (mines.size()<minesLimit){
+            //active = true;
+            //this.cd = cd;
             mines.add(new Mine(this, MINES_EXPLOSION_RANGE));
             gm.getObjects().add(mines.getLast());
-            System.out.println("Creando Mina");
-        }else{
-            active = true;
-            this.cd = cd;
-            mines.getFirst().effect(this);
+            //System.out.println("Creando Mina");
+        }else {
+            //active = true;
+            //this.cd = cd;
+            mines.getFirst().activate();
             mines.add(new Mine(this, MINES_EXPLOSION_RANGE));
             gm.getObjects().add(mines.getLast());
-            System.out.println("Creando Mina y Eliminando 1a");
+            //System.out.println("Creando Mina y Eliminando 1a");
         }
         return 0.0;
     }
     
-    @Override
-    public void update(GameContainer gc, GameManager gm, float dt){  
-        cd -= dt;
-        System.out.println(cd);
-        if(cd <= 0){
-            active = false;
-        }
-                
-    }
 
     public void destroyMine(Mine mine){
         if (mines.contains(mine)){
             mines.remove(mines.get(mines.indexOf(mine)));
+            gm.getObjects().remove(mine);
         }
     }
     
