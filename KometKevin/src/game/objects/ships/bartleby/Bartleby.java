@@ -26,7 +26,7 @@ public class Bartleby extends Player {
     private static final double FLAK_RATE = MAX_FLAK_ANGLE / 6;
     private static Vector2 otherVelocity;
     
-    private Image artillery = new Image("/projectiles/fire.png");
+    private Image artillery = new Image("/projectiles/ball.png");
     private ImageTile littleBoy = new ImageTile("/projectiles/nuke.png",172,170);
  
     public Bartleby(int x, int y, GameManager gm) {
@@ -113,10 +113,7 @@ public class Bartleby extends Player {
             energyPoints -= energyCost[1];    
             cds[2] = cdValues[2];
         }
-        
-        
-        
-        
+
         //Habilidad 2 E Inmortal
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 && energyPoints - energyCost[3]*dt >= 0 ) {
             isActive[3]=!isActive[3];    
