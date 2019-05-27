@@ -10,9 +10,9 @@ import gfx.Image;
 
 public abstract class AsteroidFactory {
     
-    private static Image[] siliceImage = {new Image("/space/asteroid.png"),new Image("/space/AsteroidM.png")};
-    private static Image[] carbonImage = {new Image("/space/AsteroidM.png")};
-    private static Image[] defaultImage = {new Image("/space/asteroid.png")};
+    private static Image[] siliceImage = {new Image("/space/asteroidL.png"),new Image("/space/asteroidB.png")};
+    private static Image[] carbonImage = {new Image("/space/AsteroidB.png")};
+    private static Image[] defaultImage = {new Image("/space/asteroidL.png")};
     
     private static int[] siliceHealthPoints = {1,4};
     private static int[] carbonHealthPoints = {1,3,5};

@@ -6,8 +6,6 @@ import game.AsteroidManager;
 import game.GameManager;
 import game.Vector2;
 import game.colliders.CircleCollider;
-import game.objects.CollisionCodes;
-import game.objects.GameObject;
 import gfx.Image;
 import java.util.Random;
 
