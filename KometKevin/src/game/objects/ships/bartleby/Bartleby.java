@@ -19,14 +19,15 @@ public class Bartleby extends Player {
     private static final int FIRE1_SPEED = 14;
     private static final int FIRE1_LONG = 37;
     
-    private static final int FIRE2_SPEED = 14;
-    private static final int FIRE2_LONG = 28;
-    private static final double FIRE2_ANGLE = 2.4;
-    private static final double MAX_FLAK_ANGLE = Math.PI / 4;
-    private static final double FLAK_RATE = MAX_FLAK_ANGLE / 6;
-    private static Vector2 otherVelocity;
+    private static final int FIRE1_RADIUS = 4;
+    private static final double FIRE1_DAMAGE = 0.4;
     
-    private Image artillery = new Image("/projectiles/ball.png");
+    private static final double FIRE2_DIVIDE = 5.0;
+    private static final double FIRE2_MULTLI = 2.5;
+    
+    private Vector2 otherVelocity;
+    
+    private Image ball = new Image("/projectiles/ball.png");
     private ImageTile littleBoy = new ImageTile("/projectiles/nuke.png",172,170);
  
     public Bartleby(int x, int y, GameManager gm) {
@@ -57,7 +58,7 @@ public class Bartleby extends Player {
         energyCost[2] = 0.8;
         energyCost[3] = 1.2;
         
-        cdValues[0] = 0.17;
+        cdValues[0] = 0.09;//0.17;
         cdValues[1] = 2.2;
         cdValues[2] = 0.5;
         cdValues[3] = 5.0;
@@ -68,8 +69,8 @@ public class Bartleby extends Player {
         //Arma principal
         if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 && energyPoints - energyCost[0] >= 0) {
             Vector2 spawn = Vector2.toCartesian(FIRE1_LONG, aiming.getAngle());
-            spawn.add(center);
-            Projectile fire = new Projectile((int)spawn.x, (int)spawn.y, artillery);
+            spawn.add(center);            
+            Projectile fire = new Projectile((int)spawn.x, (int)spawn.y, ball, FIRE1_RADIUS, FIRE1_DAMAGE);
             fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
             fire.setAiming(aiming.clone());
             gm.getObjects().add(0,fire);
@@ -82,21 +83,20 @@ public class Bartleby extends Player {
                 isActive[1]=!isActive[1];
                 if(isActive[1]){
                     otherVelocity=this.getVelocity();
-                    this.velocity.divide(5.0);
+                    this.velocity.divide(FIRE2_DIVIDE);
                 }else if(!isActive[1]){
                     isActive[1]=false;
-                    velocity=otherVelocity.getMultiplied(2.5);
+                    velocity=otherVelocity.getMultiplied(FIRE2_MULTLI);
                     cds[1] = cdValues[1];
                 }
             }
         }
-        
         if (isActive[1]) {
             energyPoints-= energyCost[1]*dt;
             healthPoints+=dt*energyCost[1]/2;
             if(energyPoints <= 0  || healthPoints>=maxHealthPoints){
                 isActive[1]=false;
-                velocity=otherVelocity.getMultiplied(2.5);
+                velocity=otherVelocity.getMultiplied(FIRE2_MULTLI);
                 cds[1] = cdValues[1];
             }
         }
@@ -126,7 +126,6 @@ public class Bartleby extends Player {
                 cds[3] = cdValues[3];
             }
         } 
-        
         if (isActive[3]) {
             energyPoints -= energyCost[3]*dt;
             if(energyPoints <= 0){
@@ -135,8 +134,6 @@ public class Bartleby extends Player {
                 collides= CollisionCodes.TEAM1_COL.getValue();
                 cds[3] = cdValues[3];
             }
-         }
-
+        }
     }
-    
 }

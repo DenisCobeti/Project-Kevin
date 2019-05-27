@@ -14,10 +14,10 @@ import gfx.Image;
  * @author Project Kevin
  */
 public class Projectile extends GameObject {
-    private int radius = 4;
     private Image image; 
     private double damage = 1;
     
+    // Esto habra que borrarlo
     public Projectile(int x, int y, Image image) {
         this.tag = "projectile";
         this.image = image;
@@ -32,7 +32,26 @@ public class Projectile extends GameObject {
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
+        this.collider = new CircleCollider(this, 4);
+    }
+    
+    public Projectile(int x, int y, Image image, int radius, double damage) {
+        this.tag = "projectile";
+        this.image = image;
+        
+        this.width = image.getW();
+        this.height = image.getH();
+
+        this.position = new Vector2(x - width/2, y - height/2);
+        this.center = new Vector2(x, y);
+        this.velocity = new Vector2(0,0);
+        this.aiming = new Vector2(1,0); // Todas las naves apuntan hacia la der
+        
+        collCode = CollisionCodes.FIRE1.getValue();
+        collides = CollisionCodes.FIRE1_COL.getValue();
         this.collider = new CircleCollider(this, radius);
+        
+        this.damage = damage;
     }
 
     @Override
