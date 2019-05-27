@@ -53,14 +53,14 @@ public class Bartleby extends Player {
         rotationTolerance = 0.01;
         
         energyCost[0] = 0.2;
-        energyCost[1] = 0.4;
-        energyCost[2] = 2;
-        energyCost[3] = 2;
+        energyCost[1] = 1.2;
+        energyCost[2] = 0.8;
+        energyCost[3] = 1.2;
         
         cdValues[0] = 0.17;
-        cdValues[1] = 0.2;
-        cdValues[2] = 10.00;
-        cdValues[3] = 5;
+        cdValues[1] = 2.2;
+        cdValues[2] = 0.5;
+        cdValues[3] = 5.0;
     }
 
     @Override
@@ -76,8 +76,34 @@ public class Bartleby extends Player {
             energyPoints -= energyCost[0];
             cds[0] = cdValues[0];
         }
-        //Arma secundaria
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1] >= 0 ) {  
+        //Arma secundaria regenar vida
+        if(gc.getInput().isButtonDown(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1]*dt > 0 ) {  
+            if(healthPoints<maxHealthPoints){
+                isActive[1]=!isActive[1];
+                if(isActive[1]){
+                    otherVelocity=this.getVelocity();
+                    this.velocity.divide(5.0);
+                }else if(!isActive[1]){
+                    isActive[1]=false;
+                    velocity=otherVelocity.getMultiplied(2.5);
+                    cds[1] = cdValues[1];
+                }
+            }
+        }
+        
+        if (isActive[1]) {
+            energyPoints-= energyCost[1]*dt;
+            healthPoints+=dt*energyCost[1]/2;
+            if(energyPoints <= 0  || healthPoints>=maxHealthPoints){
+                isActive[1]=false;
+                velocity=otherVelocity.getMultiplied(2.5);
+                cds[1] = cdValues[1];
+            }
+        }
+        
+        
+        //Habilidad 1 Q Disparo
+        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability1()) && cds[2] <=0 && energyPoints - energyCost[2] >= 0) {
             Vector2 spawn = Vector2.toCartesian(FIRE1_LONG, aiming.getAngle());
             spawn.add(center);
             Nuke fatMan = new Nuke((int)spawn.x, (int)spawn.y,littleBoy);
@@ -85,47 +111,35 @@ public class Bartleby extends Player {
             fatMan.setAiming(aiming.clone());
             gm.getObjects().add(0,fatMan);
             energyPoints -= energyCost[1];    
-            cds[1] = cdValues[1];
+            cds[2] = cdValues[2];
         }
-        //Habilidad 1 Q
-        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability1()) && cds[2] <=0 && energyPoints - energyCost[2] >= 0) {
-            isActive[2]=!isActive[2];
-            
-            if(isActive[2]){
+        
+        
+        
+        
+        //Habilidad 2 E Inmortal
+        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 && energyPoints - energyCost[3]*dt >= 0 ) {
+            isActive[3]=!isActive[3];    
+            if(isActive[3]){
                 animX = 1;
                 collides=0; 
             }else{
                 animX = 0;
-                collides= CollisionCodes.TEAM1_COL.getValue();;
-                cds[2] = cdValues[2];
-            }
-        }
-        if (isActive[2]) {
-            energyPoints -= energyCost[2]*dt;
-            if(energyPoints <= 0){
-                animX = 0;
-                isActive[2]=false;
-                collides= CollisionCodes.TEAM1_COL.getValue();;
-                cds[2] = cdValues[2];
-            }
-         }
-        //Habilidad 2 E
-        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 && energyPoints - energyCost[3] >= 0 ) {
-            isActive[3]=!isActive[3];
-            otherVelocity=this.getVelocity();
-            this.velocity.divide(5.0);
-        } 
-        if (isActive[3]) {
-            energyPoints-= energyCost[3]*dt;
-            healthPoints+=dt*energyCost[3]/2;
-            if(energyPoints <= 0){
-                isActive[3]=false;
                 collides= CollisionCodes.TEAM1_COL.getValue();
-                velocity=otherVelocity.getMultiplied(2.0);
                 cds[3] = cdValues[3];
             }
-
+        } 
+        
+        if (isActive[3]) {
+            energyPoints -= energyCost[3]*dt;
+            if(energyPoints <= 0){
+                animX = 0;
+                isActive[3]=false;
+                collides= CollisionCodes.TEAM1_COL.getValue();
+                cds[3] = cdValues[3];
+            }
          }
+
     }
     
 }
