@@ -28,7 +28,7 @@ public class Asteroid extends GameObject {
     private AsteroidManager am;
     
     
-    public Asteroid(double x, double y, int size, int damage, int baseVelocity, 
+    public Asteroid(double x, double y, int size, int damage, int baseVelocity, int healthPoints, 
                     AsteroidType type, Image image, AsteroidManager am) {
         this.tag = "asteroid";
         this.image = image;
@@ -43,21 +43,23 @@ public class Asteroid extends GameObject {
         
         collCode = CollisionCodes.ASTEROID.getValue();
         collides = CollisionCodes.ASTEROID_COL.getValue();
-        this.collider = new CircleCollider(this, 26);
+        this.collider = new CircleCollider(this, image.getW());
         
         this.size = size;
         this.damage = damage;
         this.baseVelocity = baseVelocity;
+        this.healthPoints = healthPoints;
         this.divided = true;
         
         this.am = am;
         
     }
     
-    public Asteroid(Asteroid father, Image image, AsteroidManager am) {
+    public Asteroid(Asteroid father, int healthPoints, Image image, AsteroidManager am) {
         this.tag = "asteroid";
-        this.image = new Image("/space/asteroid.png");
-        this.type = father.type;
+        //this.image = father.image;
+        this.image = image;
+        this.type = father.getType();
 
         this.width = image.getW();
         this.height = image.getH();
@@ -79,9 +81,10 @@ public class Asteroid extends GameObject {
         
         collCode = CollisionCodes.ASTEROID.getValue();
         collides = CollisionCodes.ASTEROID_COL.getValue();
-        this.collider = new CircleCollider(this, 26);
+        this.collider = new CircleCollider(this, image.getW());
         
         this.size = father.size-1;
+        this.healthPoints = healthPoints;
         
         divided = true;
         
@@ -97,12 +100,9 @@ public class Asteroid extends GameObject {
         center.set(position.x + width/2, position.y + height/2);
         
         if(this.healthPoints <= 0 && !divided && size>1){
-            System.out.println("pum");
             divided = true;
-            gm.getStack().push(AsteroidFactory.getChildAsteroid(this, image, am));
-            gm.getStack().push(AsteroidFactory.getChildAsteroid(this, image, am));
-            //gm.getStack().push(new Asteroid(this,image,am));
-            //gm.getStack().push(new Asteroid(this,image,am));
+            gm.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
+            gm.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
         }
     }
 
@@ -120,5 +120,12 @@ public class Asteroid extends GameObject {
         am.subAsteroid(type);
     }  
     
+    public AsteroidType getType(){
+        return type;
+    }
+    
+    public int getSize(){
+        return size;
+    }
     
 }

@@ -7,6 +7,7 @@ import engine2D.Renderer;
 
 import game.objects.GameObject;
 import game.objects.*;
+import game.objects.ships.hammer.HammerHead;
 import gfx.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class GameManager extends AbstractGame {
         camera = new Camera();
         hud = new HUD(player);
         am = new AsteroidManager(camera,this);
+        
+        //Modo dual
+        //objects.add(new HammerHead(100,100,this));
         
         //objects.add(new Asteroid(250,250,2,am));
         
@@ -95,7 +99,6 @@ public class GameManager extends AbstractGame {
         
         while(!delayedAsteroids.isEmpty()){
             objects.add(delayedAsteroids.pop());
-            System.out.println("poping");
         }
         
     }
