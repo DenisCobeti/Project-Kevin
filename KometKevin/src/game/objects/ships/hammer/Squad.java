@@ -22,6 +22,7 @@ public class Squad extends GameObject{
     private Vector2 aim;
     
     private double anim = 0;
+    private double damage = 0.05;
     
     protected double rotationTolerance = 0.02;//0.01;
     protected double rotationSpeed = 0.07;
@@ -59,7 +60,8 @@ public class Squad extends GameObject{
                 aimed = true;
             }
         }
-        velocity.multiply(1.01);
+        if (aimed) velocity.multiply(1.01);
+        else velocity.multiply(0.99);
         
         position.add(Vector2.toCartesian(velocity.getLength(), aiming.getAngle()));
         center.set(position.x + width/2, position.y + height/2);
@@ -69,6 +71,9 @@ public class Squad extends GameObject{
         if (healthPoints <= 0) {
             dispose = true;
         }
+        
+        anim += dt;
+        if (anim > 5) anim = 0;
     }
 
     
@@ -79,6 +84,7 @@ public class Squad extends GameObject{
 
     @Override
     public void effect(GameObject go) {
+        go.setHealthPoints(go.getHealthPoints() - (damage * velocity.getLength()));
     }
     
 }

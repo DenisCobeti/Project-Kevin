@@ -67,7 +67,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
     }
     
     public boolean isButtonDown(int Button) {
-        return !buttons[Button] && !buttonsLast[Button];
+        return buttons[Button] && !buttonsLast[Button];
     }
 
 

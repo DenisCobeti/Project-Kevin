@@ -14,12 +14,17 @@ import game.objects.Player;
  * @author ProjectKevin
  */
 public class Laser extends GameObject {
+    public Player support;
+    public int num;
+    
     private Vector2 hitPoint = new Vector2(0,0);
     private GameObject closer = null;
-    private double damage = 1;
+    private double damage = 0.04;
     
     public Laser(Player support, int num) {
-        this.tag = "Laserrrrr";
+        this.tag = "Laser";
+        this.support = support;
+        this.num = num;
         
         // Ojo con estos vectores que son punteros a los de la nave
         this.position = support.getPosition();
@@ -31,24 +36,26 @@ public class Laser extends GameObject {
         collides &= ~CollisionCodes.GRAVPOOL.getValue(); // Se desactiva la colision con el pozo gravitatorio
         this.collider = new RayCollider(this);
     }
-    
-    public double activate() {
-        return 0.0;
-    }
-    
+
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
-        hitPoint = Vector2.toCartesian(9999, aiming.getAngle()).getAdded(center);
+        hitPoint = Vector2.toCartesian(9999, aiming.getAngle()).getAdded(center); // ese 9999 es mejorable :I
         closer = null;
         // El laser no puede ser destruido, no se llama a super.update
-        while(!collisions.empty()) {
-            effect(collisions.pop());
+        if (support.getIsActive()[num]) {
+            support.setEnergyPoints(support.getEnergyPoints() - support.getEnergyCost()[num] * dt);
+            while(!collisions.empty()) {
+                effect(collisions.pop());
             }
+        } else {
+            collisions.clear();
         }
+    }
 
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawLine((int)center.x, (int)center.y,(int)hitPoint.x, (int)hitPoint.y, 0xffff0000);
+        if (support.getIsActive()[num])
+            r.drawLine((int)center.x, (int)center.y,(int)hitPoint.x, (int)hitPoint.y, 0xff1f1fff);
     }
     
     @Override

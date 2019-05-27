@@ -4,6 +4,7 @@ import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
 import game.colliders.CircleCollider;
+import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
 import gfx.ImageTile;
@@ -39,7 +40,10 @@ public class Shield extends GameObject {
     public void activate() {
         support.getIsActive()[num] = !support.getIsActive()[num];
         if (!support.getIsActive()[num]) {
+            support.setCollides(CollisionCodes.TEAM1_COL.getValue());
             support.getCds()[num] = support.getCdValues()[num];
+        } else {
+            support.setCollides(0b11000000000);
         }
     }
     
@@ -51,7 +55,7 @@ public class Shield extends GameObject {
             }
             anim = (anim + dt * 10) % 6;
             if (support.getEnergyPoints() > 0) {
-                support.setEnergyPoints(support.getEnergyPoints() - 1.2 * dt);
+                support.setEnergyPoints(support.getEnergyPoints() - support.getEnergyCost()[num] * dt);
             } else {
                 activate();
             }
@@ -69,8 +73,8 @@ public class Shield extends GameObject {
 
     @Override
     public void effect(GameObject go) {
-        double aux = go.getHealthPoints() - support.getEnergyPoints();
-        go.setHealthPoints(go.getHealthPoints() - aux);
+        go.setHealthPoints(go.getHealthPoints() - support.getEnergyPoints());
+        support.setEnergyPoints(support.getEnergyPoints() - 0.1);
     }
     
 }

@@ -27,8 +27,8 @@ public class Aphelion extends Player {
         height = ((ImageTile) image).getTileH();
         
         collider = new BoxCollider(this, 72, 46);
-        laser = new Laser(this, 3);
-        gm.getObjects().add(laser);
+        laser = new Laser(this, 0);
+        gm.getObjects().add(0, laser);
         
         fowardsAccel = 4;
         backwardsAccel = 4;
@@ -38,6 +38,11 @@ public class Aphelion extends Player {
         rotationSpeed = 0.06;
         rotationTolerance = 0.027;
         
+        energyCost[0] = 1.25;
+        energyCost[1] = 0.3;
+        energyCost[2] = 0.3;
+        energyCost[3] = 0.3;
+        
         cdValues[0] = 0.17;
         cdValues[1] = 5;
         cdValues[2] = 0.25;
@@ -46,9 +51,13 @@ public class Aphelion extends Player {
 
     @Override
     protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {
-        if(gc.getInput().isButtonDown(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
-            cds[0] = 0;
+        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
+            isActive[0] = true;
+        } else {
+            if (isActive[0]) cds[0] = cdValues[0];
+            isActive[0] = false;
         }
+        
         if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
             cds[1] = 0;
         }
@@ -56,7 +65,7 @@ public class Aphelion extends Player {
             cds[2] = 0;
         }
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
-            laser.activate();
+            cds[3] = 0;
         }  
     }
 }

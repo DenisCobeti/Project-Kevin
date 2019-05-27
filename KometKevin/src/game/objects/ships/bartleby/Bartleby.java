@@ -77,26 +77,26 @@ public class Bartleby extends Player {
             cds[0] = cdValues[0];
         }
         //Arma secundaria regenar vida
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1]*dt > 0 ) {  
-            isActive[1]=!isActive[1];
-             if(isActive[1]){
-                otherVelocity=this.getVelocity();
-                this.velocity.divide(5.0);
-            }else{
-                isActive[1]=false;
-                velocity=otherVelocity.getMultiplied(2.0);
-                cds[1] = cdValues[1];
+        if(gc.getInput().isButtonDown(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1]*dt > 0 ) {  
+            if(healthPoints<maxHealthPoints){
+                isActive[1]=!isActive[1];
+                if(isActive[1]){
+                    otherVelocity=this.getVelocity();
+                    this.velocity.divide(5.0);
+                }else if(!isActive[1]){
+                    isActive[1]=false;
+                    velocity=otherVelocity.getMultiplied(2.5);
+                    cds[1] = cdValues[1];
+                }
             }
-            
         }
         
         if (isActive[1]) {
             energyPoints-= energyCost[1]*dt;
             healthPoints+=dt*energyCost[1]/2;
-            if(energyPoints <= 0){
+            if(energyPoints <= 0  || healthPoints>=maxHealthPoints){
                 isActive[1]=false;
-                collides= CollisionCodes.TEAM1_COL.getValue();
-                velocity=otherVelocity.getMultiplied(2.0);
+                velocity=otherVelocity.getMultiplied(2.5);
                 cds[1] = cdValues[1];
             }
         }
