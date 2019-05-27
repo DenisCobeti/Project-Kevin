@@ -1,13 +1,13 @@
 package game;
 
 import engine2D.Config;
-import engine2D.GameContainer;
 import game.objects.Asteroid;
+import gfx.Image;
 import java.util.Random;
 
 /**
  *
- * @author alumno
+ * @author Project Kevin
  */
 public class AsteroidManager {
     private Camera camera;
@@ -16,6 +16,7 @@ public class AsteroidManager {
     private Random random;
     
     private double counter = 0;
+    private Image image = new Image("/space/asteroid.png");
     
     public AsteroidManager(Camera camera,GameManager gm){  
         this.camera=camera;
@@ -37,7 +38,7 @@ public class AsteroidManager {
                 vertical=-1;
             }  
             if(horizontal!=-1 && vertical!=-1){
-                Asteroid kevin= new Asteroid(horizontal,vertical);
+                Asteroid kevin= new Asteroid(horizontal,vertical,image);
                 if (counter %(3*dt)==0) {
                     Vector2 aux= new Vector2(x,y);
                     aux.subtract(kevin.getCenter());

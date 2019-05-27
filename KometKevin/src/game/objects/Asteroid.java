@@ -16,6 +16,22 @@ public class Asteroid extends GameObject {
     private double angle = 0;
     private double damage = 2;
     
+    public Asteroid(int x, int y, Image image) {
+        this.tag = "asteroid";
+        this.image = image;
+
+        this.width = image.getW();
+        this.height = image.getH();
+        
+        this.position = new Vector2(x, y);
+        this.center = new Vector2(x + width/2, y + + height/2);
+        this.velocity = new Vector2(0,0);
+        
+        collCode = CollisionCodes.ASTEROID.getValue();
+        collides = CollisionCodes.ASTEROID_COL.getValue();
+        this.collider = new CircleCollider(this, 26);
+    }
+    
     public Asteroid(int x, int y) {
         this.tag = "asteroid";
         image = new Image("/space/asteroid.png");

@@ -27,7 +27,7 @@ public class Bartleby extends Player {
     private static Vector2 otherVelocity;
     
     private Image artillery = new Image("/projectiles/fire.png");
-    private ImageTile littleBoy = new ImageTile("/projectiles/nuke.png",170,170);
+    private ImageTile littleBoy = new ImageTile("/projectiles/nuke.png",172,170);
  
     public Bartleby(int x, int y, GameManager gm) {
         super(x, y);
