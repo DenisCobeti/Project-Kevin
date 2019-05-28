@@ -56,10 +56,10 @@ public class Projectile extends GameObject {
 
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
+        super.update(gc, gm, dt);
         position.add(velocity);
         center.set(position.x + width/2, position.y + height/2);
         aiming.set(velocity.getNormalized());
-        super.update(gc, gm, dt);
     }
 
     @Override

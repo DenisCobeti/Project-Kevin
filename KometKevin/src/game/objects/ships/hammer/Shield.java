@@ -66,6 +66,11 @@ public class Shield extends GameObject {
     }
     
     @Override
+    public boolean isDead() {
+        return dispose;
+    }
+    
+    @Override
     public void render(GameContainer gc, Renderer r) {
         if (support.getIsActive()[num])
             r.drawRotatedImageTile((ImageTile)image, (int)position.x - 8, (int)position.y - 36, (int)anim, 0, aiming.getAngle());

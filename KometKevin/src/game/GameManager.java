@@ -1,23 +1,20 @@
 package game;
 
-import game.objects.Asteroid;
 import engine2D.AbstractGame;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 
 import game.objects.GameObject;
 import game.objects.*;
-import game.objects.ships.hammer.HammerHead;
 import gfx.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * Clase que contiene los objetos del videojuego.
  * Colección de todo lo que se ha de computar y mostrar por pantalla.
  * 
- * @author Prokect Kevin
+ * @author Project Kevin
  */
 public class GameManager extends AbstractGame {
     private final Camera camera;
@@ -49,21 +46,23 @@ public class GameManager extends AbstractGame {
 
         // Se actualizan todos los tipos de objetos
         for (i = 0; i < objects.size(); i++) {
-            obj = objects.get(i);
-            obj.update(gc, this, dt);
+            objects.get(i).update(gc, this, dt);
+        }
 
-            // Seguidamente se eliminan aquellos indicados o fuera de la escena
+        // Seguidamente se eliminan aquellos indicados o fuera de la escena
+        for (i = 0; i < objects.size(); i++) {
+            obj = objects.get(i);
             x = (int) obj.getCenter().x;
             y = (int) obj.getCenter().y;
-            if (obj.isDispose() || x < 0 || x > background.getW()
-                    || y < 0 || y > background.getH()) {
-                if(obj instanceof Player){
+            if (obj.isDead() || x < 0 || x > background.getW()
+                             || y < 0 || y > background.getH()) {
+                objects.remove(i);
+                i--;
+                if(obj instanceof Player) {
+                    player = null;
                     gc.pause();
                     gc.getWindow().deadPLayer((Player)obj);
                 }
-                objects.remove(i);
-                
-                i--;
             }
         }
 
@@ -101,6 +100,10 @@ public class GameManager extends AbstractGame {
         hud.render(gc, r);
     }
 
+    /**
+     * Añade un jugador al juego
+     * @param player nave a añadir
+     */
     public void addPlayer(Player player) {
         this.player = player;
         objects.add(0, this.player);

@@ -81,7 +81,7 @@ public class HammerHead extends Player {
             Vector2 spawn = Vector2.toCartesian(FIRE1_LONG, aiming.getAngle() + FIRE1_ANGLE * dual);
             spawn.add(center);
             
-            Projectile fire = new Projectile((int)spawn.x, (int)spawn.y, artillery, 4, 3);
+            Projectile fire = new Projectile((int)spawn.x, (int)spawn.y, artillery, 4, 2);
             fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
             fire.setAiming(aiming.clone());
             gm.getObjects().add(0,fire);

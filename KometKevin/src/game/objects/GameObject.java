@@ -44,9 +44,14 @@ public abstract class GameObject {
         while(!collisions.empty()) {
             effect(collisions.pop());
         }
-        if (healthPoints <= 0) {
-            dispose = true;
-        }
+    }
+    
+    /**
+     * Comprueba si el objecto esta muerto. Por lo general si no tiene vida o ha 
+     * de ser eliminado del GameManager
+     */
+    public boolean isDead() {
+        return healthPoints <= 0 || dispose;
     }
     
     /**
