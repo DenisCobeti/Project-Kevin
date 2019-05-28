@@ -37,6 +37,9 @@ public class GameManager extends AbstractGame {
         camera = new Camera();
         am = new AsteroidManager(camera,this);    
         hud = new HUD(player);
+        
+        PowerUpFactory.getPowerUp(PowerUp.PowerUpType.LIFE, 150, 150, this);
+        
     }
 
     @Override
