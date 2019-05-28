@@ -22,11 +22,7 @@ public class AsteroidManager {
     private int[] maxAsteroidTypes;
     private int[] countAsteroidTypes; 
     
-    
-    
-    
     private Image image = new Image("/space/asteroid.png");
-    
     
     private double counter = 0;
     
@@ -41,10 +37,7 @@ public class AsteroidManager {
         maxAsteroidTypes[0] = 300;
         maxAsteroidTypes[1] = 0;
         
-        
-        
         countAsteroidTypes = new int[AsteroidType.values().length];
-        
     }
     
     public void update(float dt){

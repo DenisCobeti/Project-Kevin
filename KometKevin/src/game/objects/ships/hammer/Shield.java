@@ -74,7 +74,7 @@ public class Shield extends GameObject {
     @Override
     public void effect(GameObject go) {
         go.setHealthPoints(go.getHealthPoints() - support.getEnergyPoints());
-        support.setEnergyPoints(support.getEnergyPoints() - 0.1);
+        //support.setEnergyPoints(support.getEnergyPoints() - 0.1);
     }
     
 }

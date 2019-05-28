@@ -41,7 +41,7 @@ public class Asteroid extends GameObject {
         
         collCode = CollisionCodes.ASTEROID.getValue();
         collides = CollisionCodes.ASTEROID_COL.getValue();
-        this.collider = new CircleCollider(this, image.getW());
+        this.collider = new CircleCollider(this, image.getW()/2 - 2);
         
         this.size = size;
         this.damage = damage;
@@ -79,7 +79,7 @@ public class Asteroid extends GameObject {
         
         collCode = CollisionCodes.ASTEROID.getValue();
         collides = CollisionCodes.ASTEROID_COL.getValue();
-        this.collider = new CircleCollider(this, image.getW());
+        this.collider = new CircleCollider(this, image.getW()/2 - 2);
         
         this.size = father.size-1;
         this.healthPoints = healthPoints;
@@ -106,8 +106,8 @@ public class Asteroid extends GameObject {
 
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
-        
+        r.drawFillCircle((int)center.x, (int)center.y, ((CircleCollider)collider).getRadius(), 0xffff0000);
+        //r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
     }
     
     @Override
