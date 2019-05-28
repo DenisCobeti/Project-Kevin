@@ -41,6 +41,10 @@ public class AsteroidManager {
     }
     
     public void update(float dt){
+        while(!delayedAsteroids.isEmpty()){
+            gm.getObjects().add(delayedAsteroids.pop());
+            System.out.println("poping");
+        }
         
         if(gm.getObjects().size()<490){
             for(int i=0; i<maxAsteroidTypes.length;i++){
@@ -54,10 +58,6 @@ public class AsteroidManager {
         }
         
         counter += dt;
-        while(!delayedAsteroids.isEmpty()){
-            gm.getObjects().add(delayedAsteroids.pop());
-            System.out.println("poping");
-        }
     }
     
     public boolean generateAsteriods(float dt, AsteroidType type){   

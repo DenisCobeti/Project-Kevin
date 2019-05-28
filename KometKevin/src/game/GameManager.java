@@ -32,20 +32,14 @@ public class GameManager extends AbstractGame {
     public GameManager() {
         background = new Image("/space/background.png");
         
-        
         objects = new ArrayList<>();
         objects.add(new GravPool(background.getW()/2, background.getH()/2));
+        
         camera = new Camera();
+        am = new AsteroidManager(camera,this);    
         hud = new HUD(player);
-        am = new AsteroidManager(camera,this);
-        
-        //Modo dual
-        //objects.add(new HammerHead(100,100,this));
-        
-        //objects.add(new Asteroid(250,250,2,am));
-        
-        delayedAsteroids = new Stack<>();
-        
+
+        delayedAsteroids = new Stack<>(); 
     }
 
     @Override
@@ -75,7 +69,7 @@ public class GameManager extends AbstractGame {
 
         // Se calculan los offsets de la camara
         camera.update(gc, this, dt);
-        // Se crean asteroides
+        // Se calcula el posicionamiento de nuevos asteroides
         am.update(dt);
 
         // Se calculan las colisiones para la proxima iteración del motor
@@ -88,18 +82,19 @@ public class GameManager extends AbstractGame {
             }
         }
   
+        // Pause el motor y muestra el menu de juego
         if (gc.getInput().isKeyDown(KeyEvent.VK_P)) {
-            //TODO: Parar el motor y mostrar el menu de juego
-            gc.pause(); // BOOM
+            gc.pause();
         }
+        
+        // Se para todo
         if (gc.getInput().isKeyDown(KeyEvent.VK_ESCAPE)) {
-            //TODO: Parar el motor y mostrar el menu de juego
             System.exit(0); // BOOM
         }
         
-        while(!delayedAsteroids.isEmpty()){
-            objects.add(delayedAsteroids.pop());
-        }
+//        while(!delayedAsteroids.isEmpty()){
+//            objects.add(delayedAsteroids.pop());
+//        }
         
     }
 

@@ -99,8 +99,8 @@ public class Asteroid extends GameObject {
         
         if(this.healthPoints <= 0 && !divided && size>1){
             divided = true;
-            gm.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
-            gm.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
+            am.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
+            am.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
         }
     }
 
