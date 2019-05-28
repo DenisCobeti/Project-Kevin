@@ -41,7 +41,7 @@ public class Laser extends GameObject {
     public void update(GameContainer gc, GameManager gm, float dt) {
         hitPoint = Vector2.toCartesian(9999, aiming.getAngle()).getAdded(center); // ese 9999 es mejorable :I
         closer = null;
-        // El laser no puede ser destruido, no se llama a super.update
+        // El laser no llama a super.update porque tiene un comportamiento especial
         if (support.getIsActive()[num]) {
             support.setEnergyPoints(support.getEnergyPoints() - support.getEnergyCost()[num] * dt);
             while(!collisions.empty()) {
@@ -50,6 +50,12 @@ public class Laser extends GameObject {
         } else {
             collisions.clear();
         }
+    }
+    
+    @Override
+    public boolean isDead() {
+        // No tiene salud asi que no muere si no tiene vida
+        return dispose;
     }
 
     @Override

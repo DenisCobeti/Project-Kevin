@@ -25,13 +25,11 @@ public class GravPool extends GameObject{
         collides = CollisionCodes.GRAVPOOL_COL.getValue();
         this.collider = new CircleCollider(this, Config.getScreenWidth()/2);
     }
-
+    
     @Override
-    public void update(GameContainer gc, GameManager gm, float dt) {
-        // La gravedad no puede ser destruida, no se llama a super update
-        while(!collisions.empty()) {
-            effect(collisions.pop());
-        }
+    public boolean isDead() {
+        // La gravedad no puede ser destruida
+        return false;
     }
     
     @Override

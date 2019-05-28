@@ -54,18 +54,24 @@ public class Nuke extends GameObject{
             if (detonated) effect(collisions.pop());
             else collisions.pop();
         }
-        if (healthPoints <= 0) {
+        if (healthPoints <= 0 && !detonated) {
             detonated = true;
             ((CircleCollider)collider).setRadius(explosionRadius);
         }
         if (detonated) {
-            anim += dt*60;
+            anim += dt*20;
             if (anim >= (image.getW() / width)) dispose = true;
         }
+    }
+    
+    @Override
+    public boolean isDead() {
+        return dispose;
     }
 
     @Override
     public void render(GameContainer gc, Renderer r) {
+        //r.drawFillCircle((int)position.x, (int)position.y, explosionRadius, 0xffff0000);
         r.drawRotatedImageTile(image, (int)position.x, (int)position.y, (int)anim, 0, aiming.getAngle());
     }
 

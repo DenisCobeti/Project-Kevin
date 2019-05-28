@@ -63,6 +63,11 @@ public class Flak extends GameObject{
         }
         timer -= dt;
     }
+    
+    @Override
+    public boolean isDead() {
+        return dispose;
+    }
 
     @Override
     public void render(GameContainer gc, Renderer r) {
