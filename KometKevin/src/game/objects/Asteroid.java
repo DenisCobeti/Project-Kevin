@@ -106,8 +106,8 @@ public class Asteroid extends GameObject {
 
     @Override
     public void render(GameContainer gc, Renderer r) {
-        r.drawFillCircle((int)center.x, (int)center.y, ((CircleCollider)collider).getRadius(), 0xffff0000);
-        //r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
+        //r.drawFillCircle((int)center.x, (int)center.y, ((CircleCollider)collider).getRadius(), 0xffff0000);
+        r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
     }
     
     @Override
