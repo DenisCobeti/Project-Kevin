@@ -24,7 +24,6 @@ public class GameManager extends AbstractGame {
     private final AsteroidManager am;
     private final HUD hud;
     private Player player;
-    private Stack<Asteroid> delayedAsteroids;
     
     /**
      * Constructor de la clase
@@ -38,8 +37,6 @@ public class GameManager extends AbstractGame {
         camera = new Camera();
         am = new AsteroidManager(camera,this);    
         hud = new HUD(player);
-
-        delayedAsteroids = new Stack<>(); 
     }
 
     @Override
@@ -90,12 +87,7 @@ public class GameManager extends AbstractGame {
         // Se para todo
         if (gc.getInput().isKeyDown(KeyEvent.VK_ESCAPE)) {
             System.exit(0); // BOOM
-        }
-        
-//        while(!delayedAsteroids.isEmpty()){
-//            objects.add(delayedAsteroids.pop());
-//        }
-        
+        }        
     }
 
     @Override
@@ -112,7 +104,4 @@ public class GameManager extends AbstractGame {
         camera.setTarget(player);
         hud.setTarget(player);
     }
-    
-    public Stack<Asteroid> getStack(){return delayedAsteroids;}
-    
 }
