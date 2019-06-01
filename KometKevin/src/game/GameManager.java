@@ -35,7 +35,7 @@ public class GameManager extends AbstractGame {
         am = new AsteroidManager(camera,this);    
         hud = new HUD(player);
         
-        PowerUpFactory.getPowerUp(PowerUpType.CD0, 150, 150, this);
+        PowerUpFactory.getPowerUp(150, 150, this);
         
     }
 

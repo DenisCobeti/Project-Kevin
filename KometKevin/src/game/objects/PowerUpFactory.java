@@ -30,7 +30,15 @@ public class PowerUpFactory {
 
     public static PowerUp getPowerUp(PowerUpType type, int x, int y, GameManager gm){
         PowerUp powerUp;
-        type = PowerUpType.getRandom();
+        powerUp = new PowerUp(x,y,type,getValue(type),getImage(type),gm);
+        
+        return powerUp;
+    }
+    
+    
+    public static PowerUp getPowerUp(int x, int y, GameManager gm){
+        PowerUp powerUp;
+        PowerUpType type = PowerUpType.getRandom();
         powerUp = new PowerUp(x,y,type,getValue(type),getImage(type),gm);
         
         return powerUp;

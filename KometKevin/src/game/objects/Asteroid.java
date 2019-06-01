@@ -25,7 +25,7 @@ public class Asteroid extends GameObject {
     private AsteroidType type;
     private AsteroidManager am;
     
-    PowerUpType powerUp;
+    boolean hasPowerUp;
     int powerUpProbability;
     
     public Asteroid(double x, double y, int size, int damage, int baseVelocity, int healthPoints, 
@@ -92,9 +92,8 @@ public class Asteroid extends GameObject {
         int rngValue = (int)(Math.random()*100 + 1);
         
         if (this.size <= 1){
-            System.out.println(rngValue);
             if(rngValue < powerUpProbability){
-                powerUp = PowerUpType.LIFE;
+                hasPowerUp = true;
             }
         }
         
@@ -114,9 +113,8 @@ public class Asteroid extends GameObject {
             am.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
             am.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
         }
-        if (this.healthPoints <= 0 && !divided && size<=1 && powerUp!=null){
-                PowerUpFactory.getPowerUp(powerUp, 
-                                          (int)this.getPosition().clone().x, 
+        if (this.healthPoints <= 0 && !divided && size<=1 && hasPowerUp){
+                PowerUpFactory.getPowerUp((int)this.getPosition().clone().x, 
                                           (int)this.getPosition().clone().y, 
                                           gm);
         }
