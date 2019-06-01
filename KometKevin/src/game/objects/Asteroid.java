@@ -57,7 +57,6 @@ public class Asteroid extends GameObject {
     
     public Asteroid(Asteroid father, int healthPoints, Image image, AsteroidManager am) {
         this.tag = "asteroid";
-        //this.image = father.image;
         this.image = image;
         this.type = father.getType();
 
@@ -74,7 +73,6 @@ public class Asteroid extends GameObject {
         this.center = father.center.clone();
 
         this.velocity = father.velocity.clone();
-        //this.velocity.rotateTo(father.childAngle+(newDir*3.14));
         this.velocity.rotateTo(father.childAngle+(newSent*newDir));
         this.velocity = velocity.getDivided(2);
 
@@ -90,13 +88,12 @@ public class Asteroid extends GameObject {
         
         this.am = am;
         
-        powerUpProbability = 100;
-        Random rng = new Random(100);
-        int rngValue = rng.nextInt() + 1;
+        powerUpProbability = 50;
+        int rngValue = (int)(Math.random()*100 + 1);
         
         if (this.size <= 1){
-            if(rngValue < 100){
-                System.out.println("PowerUp :D");
+            System.out.println(rngValue);
+            if(rngValue < powerUpProbability){
                 powerUp = PowerUp.PowerUpType.LIFE;
             }
         }
@@ -117,14 +114,14 @@ public class Asteroid extends GameObject {
             am.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
             am.getStack().push(AsteroidFactory.getChildAsteroid(this, am));
             //llamar a la fatoria de powerups
-            
-            if (powerUp != null){
+        }
+        if (this.healthPoints <= 0 && !divided && size<=1 && powerUp!=null){
                 PowerUpFactory.getPowerUp(powerUp, 
                                           (int)this.getPosition().clone().x, 
                                           (int)this.getPosition().clone().y, 
                                           gm);
-            }
         }
+        
     }
 
     @Override
@@ -135,7 +132,6 @@ public class Asteroid extends GameObject {
     
     @Override
     public void effect(GameObject go) {
-        //childAngle = go.velocity.clone().getAngle();
         go.setHealthPoints(go.getHealthPoints() - damage);
         divided = false;
         am.subAsteroid(type);
