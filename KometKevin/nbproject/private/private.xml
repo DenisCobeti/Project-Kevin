@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/Asteroid.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/GameManager.java</file>
-            <file>file:/C:/Users/Familia/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/AsteroidFactory.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/AsteroidFactory.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/PowerUpFactory.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/GameManager.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/PowerUp.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/Asteroid.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/AsteroidType.java</file>
+            <file>file:/C:/Users/Ramiro/Documents/NetBeansProjects/kevin/KometKevin/src/game/objects/PowerUpType.java</file>
         </group>
     </open-files>
 </project-private>

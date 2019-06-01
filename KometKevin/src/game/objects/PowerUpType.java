@@ -21,7 +21,8 @@ public enum PowerUpType {
     }
     
     public static PowerUpType getRandom(){
-        return PowerUpType.values()[(int)(Math.random()*PowerUpType.values().length)];
+        return PowerUpType.values()[(int)(Math.random()*
+                                    PowerUpType.values().length)];
     }
 
 }
