@@ -11,15 +11,11 @@ import gfx.Image;
 import javax.swing.text.Position;
 
 /**
- * El codigo de esta clase esta mal revisar a fondo
  * @author
- * El tipo, valor y duracion la calculamos al azar en la propia clase
+ * Cambiar el valor total de los cds (cdValues) puede dar problemas
  */
 
-//https://opengameart.org/content/shiny-orbs-64x64
-
 public class PowerUp extends GameObject {
-    public enum PowerUpType { SCORE, CD0, CD1, CD2, CD3, VELOCITY, LIFE };
     
     private PowerUpType type;
     private double value;
@@ -104,7 +100,7 @@ public class PowerUp extends GameObject {
         }
         
         if(temporal && picked){
-            System.out.println(time);
+            //System.out.println(time);
             time += dt;
             if(time >= duration){
                 value = value*(-1);
@@ -116,7 +112,7 @@ public class PowerUp extends GameObject {
     
     @Override
     public void effect(GameObject go) {     
-        if (temporal && go instanceof Player && !picked){
+        if (go instanceof Player && !picked){
             player = ((Player)go);
             switch (type) {
                 case SCORE:
@@ -125,27 +121,27 @@ public class PowerUp extends GameObject {
                     break;
                 
                 case CD0:
-                    player.getCds()[0]-=value;
+                    player.getCdValues()[0]-=player.getCdValues()[0]*(1+value);
                     picked = true;
                     break;
                 
                 case CD1:
-                    player.getCds()[1]-=value;
+                    player.getCds()[1]-=player.getCds()[1]*(value);
                     picked = true;
                     break;
                 
                 case CD2:
-                    player.getCds()[2]-=value;
+                    player.getCds()[2]-=player.getCds()[2]*(value);
                     picked = true;
                     break;
                 
                 case CD3:
-                    player.getCds()[3]-=value;
+                    player.getCds()[3]-=player.getCds()[3]*(value);
                     picked = true;
                     break;
 
                 case VELOCITY:
-                    player.setForwardsAccel(player.getForwardsAccel()+value);
+                    player.setForwardsAccel(player.getForwardsAccel()*(1+value));
                     picked = true;
                     break;
 
@@ -156,49 +152,6 @@ public class PowerUp extends GameObject {
 
                 default:
                     picked = true;
-                    break;
-            }
-        }
-        else if (!temporal && go instanceof Player){
-            player = ((Player)go);
-            switch (type) {
-                case SCORE:
-                    player.setScore(player.getScore()+(int)value);
-                    picked = true;
-                    break;
-                
-                case CD0:
-                    player.getCds()[0]-=value;
-                    this.dispose = true;
-                    break;
-                
-                case CD1:
-                    player.getCds()[1]-=value;
-                    this.dispose = true;
-                    break;
-                
-                case CD2:
-                    player.getCds()[2]-=value;
-                    this.dispose = true;
-                    break;
-                
-                case CD3:
-                    player.getCds()[3]-=value;
-                    this.dispose = true;
-                    break;
-                        
-
-                case VELOCITY:
-                    player.setForwardsAccel(player.getForwardsAccel()+value);
-                    this.dispose = true;
-                    break;
-
-                case LIFE:
-                    go.setHealthPoints(go.getHealthPoints()+value);
-                    this.dispose = true;
-                    break;
-
-                default:
                     break;
             }
         }
