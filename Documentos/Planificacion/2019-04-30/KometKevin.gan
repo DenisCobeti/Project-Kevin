@@ -104,12 +104,12 @@
         <task id="49" name="Documento de diseño del juego" color="#8cb6ce" meeting="false" start="2019-03-25" duration="8" complete="100" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
             <depend id="301" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="218" name="Juego" color="#ff9900" meeting="false" start="2019-04-09" duration="33" complete="22" thirdDate="2019-04-04" thirdDate-constraint="0" expand="true">
-            <task id="282" name="Prototipo 3: Juego jugable" color="#ff9900" meeting="false" start="2019-04-09" duration="17" complete="48" thirdDate="2019-04-04" thirdDate-constraint="0" expand="true">
+        <task id="218" name="Juego" color="#ff9900" meeting="false" start="2019-04-09" duration="34" complete="38" thirdDate="2019-04-04" thirdDate-constraint="0" expand="true">
+            <task id="282" name="Prototipo 3: Juego jugable" color="#ff9900" meeting="false" start="2019-04-09" duration="18" complete="77" thirdDate="2019-04-04" thirdDate-constraint="0" expand="true">
                 <task id="300" name="Class: ColisionCodes" color="#ff9900" meeting="false" start="2019-04-09" duration="2" complete="100" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
                     <depend id="298" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="298" name="Class: PowerUp" color="#ff9900" meeting="false" start="2019-04-11" duration="5" complete="25" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
+                <task id="298" name="Class: PowerUp" color="#ff9900" meeting="false" start="2019-04-11" duration="5" complete="40" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
                     <depend id="345" type="2" difference="0" hardness="Strong"/>
                 </task>
                 <task id="301" name="Class: GravPool" color="#ff9900" meeting="false" start="2019-04-09" duration="6" complete="100" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
@@ -119,47 +119,48 @@
                 <task id="294" name="Class: GameManager(completo)" color="#ff9900" meeting="false" start="2019-04-17" duration="1" complete="100" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
                     <depend id="345" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="303" name="Class: MainMenu" color="#ff9900" meeting="false" start="2019-04-09" duration="7" complete="80" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
+                <task id="303" name="Class: MainMenu" color="#ff9900" meeting="false" start="2019-04-09" duration="7" complete="100" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
                     <depend id="405" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="405" name="Class: GamePopup" color="#ff9900" meeting="false" start="2019-04-18" duration="1" complete="0" thirdDate="2019-04-17" thirdDate-constraint="0" expand="true">
+                <task id="405" name="Class: GamePopup" color="#ff9900" meeting="false" start="2019-04-18" duration="1" complete="100" thirdDate="2019-04-17" thirdDate-constraint="0" expand="true">
                     <depend id="407" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="407" name="Class: ControlPopup/ChangeKeyListener" color="#ff9900" meeting="false" start="2019-04-19" duration="4" complete="0" thirdDate="2019-04-18" thirdDate-constraint="0" expand="true">
+                <task id="407" name="Class: ControlPopup/ChangeKeyListener" color="#ff9900" meeting="false" start="2019-04-19" duration="4" complete="80" thirdDate="2019-04-18" thirdDate-constraint="0" expand="true">
                     <depend id="408" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="408" name="Class: ScorePopup" color="#ff9900" meeting="false" start="2019-04-25" duration="3" complete="0" thirdDate="2019-04-22" thirdDate-constraint="0" expand="true">
+                <task id="408" name="Class: ScorePopup" color="#ff9900" meeting="false" start="2019-04-25" duration="3" complete="73" thirdDate="2019-04-22" thirdDate-constraint="0" expand="true">
                     <depend id="415" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="415" name="Class: PauseMenu" color="#ff9900" meeting="false" start="2019-04-30" duration="2" complete="0" thirdDate="2019-04-26" thirdDate-constraint="0" expand="true">
+                <task id="415" name="Class: PauseMenu" color="#ff9900" meeting="false" start="2019-04-30" duration="3" complete="0" thirdDate="2019-04-26" thirdDate-constraint="0" expand="true">
                     <depend id="66" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="345" name="Class: MetoriteManager" color="#ff9900" meeting="false" start="2019-04-18" duration="8" complete="0" thirdDate="2019-04-16" thirdDate-constraint="0" expand="true">
+                <task id="345" name="Class: MetoriteManager" color="#ff9900" meeting="false" start="2019-04-18" duration="11" complete="70" thirdDate="2019-04-16" thirdDate-constraint="0" expand="true">
                     <depend id="172" type="2" difference="0" hardness="Strong"/>
                     <depend id="176" type="2" difference="0" hardness="Strong"/>
+                    <depend id="177" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="283" name="Prototipo 4: Juego completo" color="#ff9900" meeting="false" start="2019-04-30" duration="10" complete="0" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
-                <task id="66" name="1º nave Class: Aphelion" color="#ff9900" meeting="false" start="2019-05-02" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
+            <task id="283" name="Prototipo 4: Juego completo" color="#ff9900" meeting="false" start="2019-05-03" duration="8" complete="0" thirdDate="2019-03-04" thirdDate-constraint="0" expand="true">
+                <task id="66" name="1º nave Class: Aphelion" color="#ff9900" meeting="false" start="2019-05-03" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
                     <depend id="472" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="172" name="2º nave Class: Hammerhead" color="#ff9900" meeting="false" start="2019-04-30" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
+                <task id="172" name="2º nave Class: Hammerhead" color="#ff9900" meeting="false" start="2019-05-03" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
                     <depend id="472" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="176" name="3º nave Class: Bartleby" color="#ff9900" meeting="false" start="2019-04-30" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
+                <task id="176" name="3º nave Class: Bartleby" color="#ff9900" meeting="false" start="2019-05-03" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
                     <depend id="472" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="177" name="4º nave Class: Sekul" color="#ff9900" meeting="false" start="2019-04-30" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
+                <task id="177" name="4º nave Class: Sekul" color="#ff9900" meeting="false" start="2019-05-03" duration="8" complete="0" thirdDate="2019-02-27" thirdDate-constraint="0" expand="true">
                     <depend id="472" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="472" name="FInalizacion todas las naves" color="#ff9900" meeting="true" start="2019-05-14" duration="0" complete="0" thirdDate="2019-02-18" thirdDate-constraint="0" expand="true">
+            <task id="472" name="FInalizacion todas las naves" color="#ff9900" meeting="true" start="2019-05-15" duration="0" complete="0" thirdDate="2019-02-18" thirdDate-constraint="0" expand="true">
                 <depend id="202" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="202" name="Arreglo de bugs/deployment" color="#ff9900" meeting="false" start="2019-05-14" duration="8" complete="0" thirdDate="2019-03-18" thirdDate-constraint="0" expand="true">
+            <task id="202" name="Arreglo de bugs/deployment" color="#ff9900" meeting="false" start="2019-05-15" duration="8" complete="0" thirdDate="2019-03-18" thirdDate-constraint="0" expand="true">
                 <depend id="211" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="211" name="FInalizacion del juego" color="#ff9900" meeting="true" start="2019-05-24" duration="0" complete="0" thirdDate="2019-02-26" thirdDate-constraint="0" expand="true"/>
+            <task id="211" name="FInalizacion del juego" color="#ff9900" meeting="true" start="2019-05-27" duration="0" complete="0" thirdDate="2019-02-26" thirdDate-constraint="0" expand="true"/>
         </task>
     </tasks>
     <resources>
