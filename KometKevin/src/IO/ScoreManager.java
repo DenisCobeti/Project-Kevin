@@ -5,6 +5,7 @@
  */
 package IO;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -39,9 +40,13 @@ public class ScoreManager {
             
             inputStream = new ObjectInputStream(new FileInputStream(SCORE_FILE));
             scores = (ArrayList<Score>) inputStream.readObject();
-            
+            System.out.println(scores.get(0).getName());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
+            File file = new File(SCORE_FILE);
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {}
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -65,9 +70,9 @@ public class ScoreManager {
             outputStream.writeObject(scores);
             
         } catch (FileNotFoundException e) {
-            System.out.println( e.getMessage() + ",the program will try and make a new file");
+            System.out.println(e.getMessage() + ",the program will make a new file");
         } catch (IOException e) {
-            System.out.println("[Update] IO Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (outputStream != null) {
@@ -75,7 +80,7 @@ public class ScoreManager {
                     outputStream.close();
                 }
             } catch (IOException e) {
-                System.out.println("[Update] Error: " + e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -91,9 +96,25 @@ public class ScoreManager {
         Collections.sort(scores, comparator);
     }
     
-    public void addScore(String name, int score) {
+    public void addScore(String name, int scoreNum) {
         loadScore();
-        scores.add(new Score(name, score));
+        Score newScore = new Score(name, scoreNum);
+        
+        for(Score score: scores){
+            //si el score es mejor que el anterior, se reemplaza
+            if(score.getName().equals(name) ){
+                if (score.getScore() < scoreNum){
+                    scores.remove(score);
+                    scores.add(newScore);
+                    writeScore();
+                    return;
+                }else {
+                    return;
+                }
+            }
+        }
+        scores.add(newScore);
         writeScore();
+        
     }
 }

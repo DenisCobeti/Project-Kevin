@@ -136,8 +136,7 @@ public class Window extends JFrame{
     }
     
     public void deadPLayer(Player player){
-        ScorePopup popup = new ScorePopup(player.getScore());
-        
+        ScorePopup popup = new ScorePopup(player.getScore(), this.menu.getScoreManager());
         
         popup.setEnabled(true);
         popup.show(this, screenWidth/3, screenHeight/3);

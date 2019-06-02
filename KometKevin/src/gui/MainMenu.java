@@ -1,5 +1,6 @@
 package gui;
 
+import IO.ScoreManager;
 import audio.SoundClip;
 import engine2D.Window;
 import engine2D.Config;
@@ -84,6 +85,8 @@ public class MainMenu extends JPanel {
     
     private  Image[] shipIcons;
     private int shipsIterator = 0;
+    
+    private ScoreManager score;
 
     /**
      * Creates new form MainMenu
@@ -93,7 +96,8 @@ public class MainMenu extends JPanel {
         this.window = window;
         
         shipIcons = new Image[Ships.values().length];
-        
+        score = new ScoreManager();
+        score.loadScore();
         //Estos valoren deberan cambian en getScaledInstance, ya que no son genericos,
         for (int i = 0; i < shipIcons.length; i++){
             try {
@@ -470,5 +474,8 @@ public class MainMenu extends JPanel {
         //paint the background image
         super.paintComponent(g);
         g.drawImage(shipIcons[shipsIterator], 0, 0, null);
-    }                 
+    }
+    public ScoreManager getScoreManager(){
+        return score;
+    }
 }
