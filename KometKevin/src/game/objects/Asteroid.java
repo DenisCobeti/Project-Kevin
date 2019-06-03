@@ -52,7 +52,7 @@ public class Asteroid extends GameObject {
         this.divided = true;
         
         this.am = am;
-        
+    
     }
     
     public Asteroid(Asteroid father, int healthPoints, Image image, AsteroidManager am) {

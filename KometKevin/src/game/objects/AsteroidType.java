@@ -1,27 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package game.objects;
 
+import gfx.Image;
+
 /**
- *
- * @author alumno
+ * Enumerado que establece los tipos de asteroides
+ * @author Neblis
  */
 public enum AsteroidType {
-    Silice, Carbon, Metal, Vestoid, Organic;
+    
+    Silice  (0,  1, 80, new Image("/space/asteroidL.png")), 
+    Carbon  (1,  4, 20, new Image("/space/asteroidB.png")),  
+    Metal   (2, 20,  2, new Image("/space/asteroidK.png")),
+    Vestoid (0,0,0,null),
+    Organic (0,0,0,null);
+    
+    private final int num;
+    private final int health;
+    private final int max;
+    private final Image img;
+    
+    AsteroidType(int num, int health, int max, Image img){
+        this.num = num;
+        this.health = health;
+        this.max = max;
+        this.img = img;
+    }
     
     public int getNum(AsteroidType type){
-        switch(type){
-            case Silice: return 0;
-            case Carbon: return 1;
-            case Metal: return 2;
-            case Vestoid: return 3;
-            case Organic: return 4;
-        
-        }
-        return 0;
+        return num;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public Image getImg() {
+        return img;
     }
     
 }
