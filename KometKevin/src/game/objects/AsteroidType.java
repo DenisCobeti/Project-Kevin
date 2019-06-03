@@ -9,8 +9,8 @@ import gfx.Image;
 public enum AsteroidType {
     
     Little (0,  1, 80, 0, new Image("/space/asteroidL.png")), 
-    Big    (1,  4, 20, 3, new Image("/space/asteroidB.png")),  
-    Kevin  (2, 20,  2, 2, new Image("/space/asteroidK.png"));
+    Big    (1,  4, 20, 2, new Image("/space/asteroidB.png")),  
+    Kevin  (2, 20,  2, 3, new Image("/space/asteroidK.png"));
     
     private final int size;     // identificador
     private final int health;   // salud maxima

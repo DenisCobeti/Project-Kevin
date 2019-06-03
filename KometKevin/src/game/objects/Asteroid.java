@@ -98,8 +98,9 @@ public class Asteroid extends GameObject {
         if(this.healthPoints <= 0 && !divided) {
             if (type.getSize() >= 1) {
                 divided = true;
-                am.getStack().push(new Asteroid(this, am));
-                am.getStack().push(new Asteroid(this, am));
+                for (int i = 0; i < type.getDivides(); i++) {
+                    am.getStack().push(new Asteroid(this, am));
+                }
             } else if (type.equals(AsteroidType.Little) && hasPowerUp) {
                 PowerUpFactory.getPowerUp((int)this.getPosition().clone().x, 
                                           (int)this.getPosition().clone().y, gm);
