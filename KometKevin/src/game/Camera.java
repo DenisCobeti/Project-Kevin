@@ -12,6 +12,7 @@ import game.objects.GameObject;
  */
 public class Camera {
     private float camX, camY;
+    private final static int BORDER = 100; 
     private GameObject target = null;
     
     private static final int SCREEN_WIDTH = Config.getScreenWidth();
@@ -38,12 +39,12 @@ public class Camera {
             camX = (float) (target.getCenter().x - SCREEN_WIDTH / 2);
             camY = (float) (target.getCenter().y - SCREEN_HEIGHT / 2);
 
-            if (camX < 0) camX = 0;
-            if (camY < 0) camY = 0;
-            if (camX > gm.getBackground().getW() - SCREEN_WIDTH) 
-                camX = gm.getBackground().getW() - SCREEN_WIDTH;
-            if (camY > gm.getBackground().getH() - SCREEN_HEIGHT) 
-                camY = gm.getBackground().getH() - SCREEN_HEIGHT;
+            if (camX < BORDER ) camX = BORDER ;
+            if (camY < BORDER ) camY = BORDER ;
+            if (camX > gm.getBackground().getW() - SCREEN_WIDTH - BORDER ) 
+                camX = gm.getBackground().getW() - SCREEN_WIDTH - BORDER ;
+            if (camY > gm.getBackground().getH() - SCREEN_HEIGHT - BORDER ) 
+                camY = gm.getBackground().getH() - SCREEN_HEIGHT- BORDER ;
 
             gc.getRenderer().setCamX((int) camX);
             gc.getRenderer().setCamY((int) camY);

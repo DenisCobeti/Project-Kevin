@@ -6,18 +6,19 @@ import game.objects.AsteroidType;
 import gfx.Image;
 import java.util.Random;
 import java.util.Stack;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
  * @author alumno
  */
 public class AsteroidManager {
-    private static final int MAX_ASTEROIDS_IN_GAME = 490;
+    private static final int MAX_ASTEROIDS_IN_GAME = 80;
     
     private Camera camera;
     private GameManager gm;
     private Config config;
-    private Random random;
+    private ThreadLocalRandom random;
     private Stack<Asteroid> delayedAsteroids;
     private static int[] countAsteroidTypes; 
     
@@ -27,7 +28,7 @@ public class AsteroidManager {
         this.camera=camera;
         this.gm=gm;
         this.config=Config.getInstance();
-        this.random=new Random();
+        this.random= ThreadLocalRandom.current();
         delayedAsteroids = new Stack<>();
         
         countAsteroidTypes = new int[AsteroidType.values().length];
@@ -72,16 +73,22 @@ public class AsteroidManager {
             //aux = kevin.getCenter().getSubtracted(aux)
             kevin.setVelocity(Vector2.toCartesian(9, aux.getAngle()));
         } else {
-            double velx=2+random.nextDouble();
-            double vely=2+random.nextDouble();
+            double velx=3+random.nextDouble();
+            double vely=3+random.nextDouble();
             int direction=random.nextInt(4);
-            if(direction==0){
-                velx=-velx;
-                vely=-vely;
-            }else if(direction==1){
-                velx=-velx;
-            }else if(direction==2){
-                vely=-vely;
+            switch (direction) {
+                case 0:
+                    velx=-velx;
+                    vely=-vely;
+                    break;
+                case 1:
+                    velx=-velx;
+                    break;
+                case 2:
+                    vely=-vely;
+                    break;
+                default:
+                    break;
             }
             kevin.setVelocity(new Vector2(velx, vely));
             //gm.getObjects().add(kevin);
