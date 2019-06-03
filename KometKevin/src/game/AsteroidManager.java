@@ -2,7 +2,6 @@ package game;
 
 import engine2D.Config;
 import game.objects.Asteroid;
-import game.objects.AsteroidFactory;
 import game.objects.AsteroidType;
 import gfx.Image;
 import java.util.Random;
@@ -20,7 +19,6 @@ public class AsteroidManager {
     private Config config;
     private Random random;
     private Stack<Asteroid> delayedAsteroids;
-    private int[] maxAsteroidTypes;
     private int[] countAsteroidTypes; 
     
     private double counter = 0;
@@ -31,10 +29,6 @@ public class AsteroidManager {
         this.config=Config.getInstance();
         this.random=new Random();
         delayedAsteroids = new Stack<>();
-                
-        maxAsteroidTypes = new int[AsteroidType.values().length];
-        maxAsteroidTypes[0] = 300;
-        maxAsteroidTypes[1] = 0;
         
         countAsteroidTypes = new int[AsteroidType.values().length];
     }
@@ -42,20 +36,17 @@ public class AsteroidManager {
     public void update(float dt){
         while(!delayedAsteroids.isEmpty()){
             gm.getObjects().add(delayedAsteroids.pop());
-            System.out.println("poping");
         }
         
-        if(gm.getObjects().size()<MAX_ASTEROIDS_IN_GAME){
-            for(int i=0; i<maxAsteroidTypes.length;i++){
-                if(countAsteroidTypes[i] < maxAsteroidTypes[i]){
-                    //generateAsteriods(dt, AsteroidFactory.getAsteroid(AsteroidType.values()[i], 0, 0, image, this));
+        if(gm.getObjects().size() < MAX_ASTEROIDS_IN_GAME) {
+            for(int i = 0; i < countAsteroidTypes.length; i++){
+                if(countAsteroidTypes[i] < AsteroidType.values()[i].getMax()){
                     if(generateAsteriods(dt, AsteroidType.values()[i])){
                         countAsteroidTypes[i]++;
                     }
                 }
             }
         }
-        
         counter += dt;
     }
     
@@ -73,7 +64,8 @@ public class AsteroidManager {
         if(vertical > y - 50 && vertical < y + config.getScreenHeight() + 50) {
             return false;
         } 
-        Asteroid kevin = AsteroidFactory.getAsteroid(type, horizontal, vertical, this);
+        Asteroid kevin = new Asteroid(horizontal, vertical, type, this);
+        
         if (counter %(3*dt)==0) {
             Vector2 aux= new Vector2(x,y);
             aux.subtract(kevin.getCenter());
@@ -105,7 +97,7 @@ public class AsteroidManager {
     public Image getImage(){return null;}
     
     public void subAsteroid(AsteroidType type){
-        countAsteroidTypes[type.getNum(type)]--;
+        countAsteroidTypes[type.getSize()]--;
     }
 }
     

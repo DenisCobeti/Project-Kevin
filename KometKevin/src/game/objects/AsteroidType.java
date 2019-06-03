@@ -4,30 +4,38 @@ import gfx.Image;
 
 /**
  * Enumerado que establece los tipos de asteroides
- * @author Neblis
+ * @author Komet Kevin
  */
 public enum AsteroidType {
     
-    Silice  (0,  1, 80, new Image("/space/asteroidL.png")), 
-    Carbon  (1,  4, 20, new Image("/space/asteroidB.png")),  
-    Metal   (2, 20,  2, new Image("/space/asteroidK.png")),
-    Vestoid (0,0,0,null),
-    Organic (0,0,0,null);
+    Little (0,  1, 80, 0, new Image("/space/asteroidL.png")), 
+    Big    (1,  4, 20, 3, new Image("/space/asteroidB.png")),  
+    Kevin  (2, 20,  2, 2, new Image("/space/asteroidK.png"));
     
-    private final int num;
-    private final int health;
-    private final int max;
-    private final Image img;
+    private final int size;     // identificador
+    private final int health;   // salud maxima
+    private final int max;      // maximo de asteroides en partida
+    private final int divides;  // fragmentos del subtipo en los que se divide
+    private final Image img;    // imagen precargada en memoria
     
-    AsteroidType(int num, int health, int max, Image img){
-        this.num = num;
+    AsteroidType(int num, int health, int max, int divides, Image img){
+        this.size = num;
         this.health = health;
         this.max = max;
+        this.divides = divides;
         this.img = img;
     }
     
-    public int getNum(AsteroidType type){
-        return num;
+    public AsteroidType getSubtype() {
+        if (size < 1) {
+            return this;
+        }
+        return AsteroidType.values()[size - 1];
+    }
+    
+    // Getters
+    public int getSize(){
+        return size;
     }
 
     public int getHealth() {
@@ -36,6 +44,10 @@ public enum AsteroidType {
 
     public int getMax() {
         return max;
+    }
+
+    public int getDivides() {
+        return divides;
     }
 
     public Image getImg() {
