@@ -1,5 +1,6 @@
 package gui;
 
+import IO.Score;
 import IO.ScoreManager;
 import audio.SoundClip;
 import engine2D.Window;
@@ -50,6 +51,8 @@ public class MainMenu extends JPanel {
     
     private final String CONTROL_BACK = "Back";
     
+    private final String SCORES_TOP = "Top scores: ";
+    
     private final String START_TEXT = "START"; 
     private final String NEXT_SHIP = ">";
     private final String PREVIOUS_SHIP = "<";
@@ -62,6 +65,7 @@ public class MainMenu extends JPanel {
     private static final int SPACE_BETWEEN_MENUS = SCREEN_HEIGHT/50;
     private static final int MENU_TOP_SPACE = SCREEN_HEIGHT/3;
     private static final int CONTROLS_TOP_SPACE = SCREEN_HEIGHT/5;
+    private static final int SCORES_TOP_SPACE = SCREEN_HEIGHT/6;
     private static final int STANDARD_FONT_SIZE = 50;
     private static final int STANDARD_SCREEN_SIZE = 1080;
     
@@ -77,9 +81,10 @@ public class MainMenu extends JPanel {
     
     private Window window;
     private JLabel start, options, scores, exit, startSelect, next, previous, ship;
-    private JLabel controlUp, controlDown, controlRight, controlLeft, 
-                     controlAbility1, controlAbility2, backControls, backSelect;
-    private Box controlBox, selectBox;
+    private JLabel topScores, controlUp, controlDown, controlRight, controlLeft, 
+                    controlAbility1, controlAbility2, backControls, backSelect, 
+                    backScores;
+    private Box controlBox, selectBox, scoresBox;
     private ControlPopup popup;
     private ChangeKeyListener changeListener;
     
@@ -121,6 +126,7 @@ public class MainMenu extends JPanel {
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/4, SCREEN_HEIGHT/20);
         Dimension buttonControl = new Dimension(SCREEN_WIDTH/4, SCREEN_HEIGHT/20);
         Dimension shipNameSize = new Dimension(SCREEN_WIDTH/7, SCREEN_HEIGHT/20);
+        Dimension selectSize = new Dimension(SCREEN_WIDTH/20, SCREEN_HEIGHT/20);
         
         start = initMenuButton(NEW_GAME_TEXT, buttonSize, true);
         startSelect = initMenuButton(START_TEXT, buttonSize, true);
@@ -141,10 +147,13 @@ public class MainMenu extends JPanel {
         controlAbility2 = initMenuButton(CONTROL_ABILITY2 + KeyEvent.getKeyText
                        (Config.getInstance().getKeyHability2()), buttonControl, true);
         
+        topScores = initMenuButton(SCORES_TOP, buttonControl, false);
+        
         backControls = initMenuButton(CONTROL_BACK, buttonControl, true);
         backSelect = initMenuButton(CONTROL_BACK, buttonControl, true);
+        backScores = initMenuButton(CONTROL_BACK, buttonControl, true);
+        
         ship = initMenuButton(Ships.values()[shipsIterator].getName(), shipNameSize, false);
-        Dimension selectSize = new Dimension(SCREEN_WIDTH/20, SCREEN_HEIGHT/20);
         
         next = initMenuButton(NEXT_SHIP, selectSize, true);
         previous = initMenuButton(PREVIOUS_SHIP, selectSize, true);
@@ -230,8 +239,6 @@ public class MainMenu extends JPanel {
     
     private void optionsLabelMouseClicked(MouseEvent evt) {                                        
         setVisibleMenu(false);
-        Dimension size = new Dimension(SCREEN_HEIGHT, SCREEN_WIDTH/3);
-        Dimension sizeItem = new Dimension(SCREEN_HEIGHT/10, SCREEN_WIDTH/30);
         
         controlBox = Box.createVerticalBox();
         
@@ -254,7 +261,25 @@ public class MainMenu extends JPanel {
         this.add(controlBox, BorderLayout.EAST);
     } 
     private void scoresLabelMouseClicked(MouseEvent evt) {                                        
+        setVisibleMenu(false);
+        Dimension scoreSize = new Dimension(SCREEN_WIDTH/4, SCREEN_HEIGHT/20);
         
+        scoresBox = Box.createVerticalBox();
+        
+        //elments of the initial menu and spaces between the buttons
+        scoresBox.add(Box.createVerticalStrut(SCORES_TOP_SPACE));
+        scoresBox.add(topScores);
+        scoresBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+        
+        for(Score score: score.getScores()){
+            scoresBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
+            scoresBox.add(initMenuButton(score.toString(), scoreSize, false));
+        }
+        
+        scoresBox.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS * 2));
+        scoresBox.add(backScores);
+        this.setLayout(new BorderLayout(100,100));
+        this.add(scoresBox, BorderLayout.EAST);
     }
     private void exitLabelMouseClicked(MouseEvent evt) {
         window.exitGame();
@@ -422,6 +447,11 @@ public class MainMenu extends JPanel {
                 backMenuSelect();
             }
         });
+        backScores.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                backMenuScores();
+            }
+        });
     }
     
     private void changeControl(MouseEvent evt, String control){
@@ -460,6 +490,11 @@ public class MainMenu extends JPanel {
     private void backMenuSelect(){
         selectBox.setVisible(false);
         selectBox.removeAll();
+        setVisibleMenu(true);
+    }
+    private void backMenuScores(){
+        scoresBox.setVisible(false);
+        scoresBox.removeAll();
         setVisibleMenu(true);
     }
     private void setVisibleMenu(Boolean visible){

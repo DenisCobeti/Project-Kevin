@@ -4,24 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/AbstractGame.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/AsteroidManager.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/hammer/Squad.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/sekul/Mine.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/audio/SoundClip.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/sekul/RepulsorWave.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/sekul/SekulIX.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/GameContainer.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/bartleby/Nuke.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/ControlPopup.java</file>
             <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/IO/Score.java</file>
             <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/IO/ScoreManager.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/HUD.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/sekul/Mining.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/GameManager.java</file>
             <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/IO/ScoreComparator.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/aphelion/Laser.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/hammer/HammerHead.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/MainMenu.java</file>
             <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/Window.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/hammer/Shield.java</file>
-            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/hammer/Flak.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/ScorePopup.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/GameContainer.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/PauseMenu.java</file>
         </group>
     </open-files>
 </project-private>

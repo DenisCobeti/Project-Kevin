@@ -5,7 +5,6 @@
  */
 package gui;
 
-import IO.Score;
 import IO.ScoreManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -26,7 +25,7 @@ public class ScorePopup extends GamePopup {
     private static final String RESTART_TEXT = "Restart";
     private static final String EXIT_TEXT = "Exit game";
     private static final String EXIT_MENU = "Exit to menu";
-    private static final String NAME_TEXT = "Enter your name";
+    private static final String NAME_TEXT = "Enter name";
     private static final String YOUR_SCORE= "Final score: ";
     
     public JTextField name;

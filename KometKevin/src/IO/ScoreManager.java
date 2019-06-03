@@ -25,6 +25,8 @@ public class ScoreManager {
 
     // The name of the file where the highscores will be saved
     private static final String SCORE_FILE = "scores.dat";
+    
+    private static final int MAX_SCORES = 10;
 
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
@@ -40,16 +42,13 @@ public class ScoreManager {
             
             inputStream = new ObjectInputStream(new FileInputStream(SCORE_FILE));
             scores = (ArrayList<Score>) inputStream.readObject();
-            System.out.println(scores.get(0).getName());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
             File file = new File(SCORE_FILE);
             try {
                 file.createNewFile();
             } catch (IOException ex) {}
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
@@ -114,6 +113,10 @@ public class ScoreManager {
             }
         }
         scores.add(newScore);
+        //limitamos en numero de scores
+        if(scores.size() > MAX_SCORES){
+            scores.remove(MAX_SCORES);
+        }
         writeScore();
         
     }
