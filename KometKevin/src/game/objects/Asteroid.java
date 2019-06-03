@@ -81,7 +81,7 @@ public class Asteroid extends GameObject {
         this.am = am;
         
         if (this.type.getSize() < 1){
-            if((int)(Math.random() * 100 + 1) < POWERUP_PROBABILITY) {
+           if((int)(Math.random() * 100 + 1) < POWERUP_PROBABILITY) {
                 hasPowerUp = true;
             }
         }
@@ -100,10 +100,10 @@ public class Asteroid extends GameObject {
                 divided = true;
                 am.getStack().push(new Asteroid(this, am));
                 am.getStack().push(new Asteroid(this, am));
+            } else if (type.equals(AsteroidType.Little) && hasPowerUp) {
+                PowerUpFactory.getPowerUp((int)this.getPosition().clone().x, 
+                                          (int)this.getPosition().clone().y, gm);
             }
-        } else if (type.equals(AsteroidType.Big) && hasPowerUp) {
-            PowerUpFactory.getPowerUp((int)this.getPosition().clone().x, 
-                                      (int)this.getPosition().clone().y, gm);
         }
     }
 

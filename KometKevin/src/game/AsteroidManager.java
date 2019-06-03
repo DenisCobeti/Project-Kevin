@@ -19,7 +19,7 @@ public class AsteroidManager {
     private Config config;
     private Random random;
     private Stack<Asteroid> delayedAsteroids;
-    private int[] countAsteroidTypes; 
+    private static int[] countAsteroidTypes; 
     
     private double counter = 0;
     
