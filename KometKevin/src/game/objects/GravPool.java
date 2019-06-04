@@ -3,7 +3,6 @@ package game.objects;
 import engine2D.Config;
 import engine2D.GameContainer;
 import engine2D.Renderer;
-import game.GameManager;
 import game.colliders.CircleCollider;
 import game.Vector2;
 

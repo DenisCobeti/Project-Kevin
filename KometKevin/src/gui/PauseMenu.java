@@ -7,7 +7,6 @@ package gui;
 
 import engine2D.Window;
 import static gui.MainMenu.FONT_SIZE;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -18,7 +17,7 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * @author Neblis
+ * @author Denis Florin Cobeti
  */
 public class PauseMenu extends GamePopup{
     

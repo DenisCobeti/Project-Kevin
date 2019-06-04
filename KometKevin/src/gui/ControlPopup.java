@@ -6,16 +6,12 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 /**
  *
- * @author Neblis
+ * @author Denis Florin Cobeti
  */
 public class ControlPopup extends GamePopup{
     private static final String CHANGE_TEXT = "Press a key...";

@@ -2,6 +2,7 @@ package game.objects.ships.aphelion;
 
 import engine2D.GameContainer;
 import game.GameManager;
+import game.Vector2;
 import game.colliders.BoxCollider;
 import game.objects.Player;
 import game.objects.ships.Ships;
@@ -9,10 +10,19 @@ import gfx.ImageTile;
 
 /**
  *
- * @author ProjectKevin
+ * @author Denis Florin Cobeti
  */
 public class Aphelion extends Player {
+    public static final int FIRES_LONG = 28;
+    public static final double FIRES_ANGLE = 2.4;
     
+    private static final int FIRE2_SPEED = 14;
+    
+    private static final int ABIL2_JUMP = 210;
+    
+    private ImageTile bomb = new ImageTile("/projectiles/load.png",60,60);
+    
+    private Load load;
     private Laser laser;
     
     public Aphelion(int x, int y, GameManager gm) {
@@ -44,28 +54,54 @@ public class Aphelion extends Player {
         energyCost[3] = 0.3;
         
         cdValues[0] = 0.17;
-        cdValues[1] = 5;
-        cdValues[2] = 0.25;
-        cdValues[3] = 0;
+        cdValues[1] = 3;
+        cdValues[2] = 6;
+        cdValues[3] = 5;
     }
 
     @Override
     protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {
+        // Primera Habilidad
         if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 ) {
             isActive[0] = true;
         } else {
             if (isActive[0]) cds[0] = cdValues[0];
             isActive[0] = false;
         }
+        // Segunda Habilidad
+        if(gc.getInput().isButtonDown(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && !isActive[1]) {
+            Vector2 spawn = Vector2.toCartesian(FIRES_LONG, aiming.getAngle() + FIRES_ANGLE);
+            spawn.add(center);
+
+            load = new Load((int)spawn.x, (int)spawn.y, bomb);
+
+            load.setVelocity(velocity.getAdded(Vector2.toCartesian(FIRE2_SPEED, aiming.getAngle())));            
+            load.setAiming(load.getVelocity().getNormalized());    
+            gm.getObjects().add(0,load);
+            
+            isActive[1] = true;
+        }
+        if(gc.getInput().isButtonUp(gc.getConfig().getSecondaryFire())) {
+            if (isActive[1]){
+                load.setDetonated(true);
+                load = null;
+                isActive[1] = false;
+                cds[1] = cdValues[1];
+            }
+        }
         
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 ) {
-            cds[1] = 0;
-        }
+        // Tercera Habilidad
         if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 ) {
-            cds[2] = 0;
-        }
-        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
+            cds[1] = 0;
             cds[3] = 0;
+            energyPoints = 1;
+            cds[2] = cdValues[2];
+        }
+        // Cuarta Habilidad
+        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
+            position.add(aiming.getMultiplied(ABIL2_JUMP));
+            center.set(position.x + width/2, position.y + height/2);
+            cds[3] = cdValues[3];
         }  
     }
 }

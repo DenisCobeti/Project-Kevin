@@ -11,7 +11,7 @@ import game.objects.Player;
 
 /**
  * Esta clase necesita mucho amor, pq este codigo es un asco
- * @author ProjectKevin
+ * @author Denis Florin Cobeti
  */
 public class Laser extends GameObject {
     public Player support;

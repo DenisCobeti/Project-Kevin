@@ -3,12 +3,9 @@ package game.objects;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
-import game.colliders.BoxCollider;
-import gfx.ImageTile;
 import game.Vector2;
 import game.colliders.CircleCollider;
 import gfx.Image;
-import javax.swing.text.Position;
 
 /**
  * @author

@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * @author Neblis
+ * @author Denis Florin Cobeti
  */
 public abstract class GamePopup extends JPopupMenu{
     
