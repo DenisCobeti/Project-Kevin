@@ -1,6 +1,7 @@
 package game;
 
 import engine2D.Config;
+import game.objects.Asteroid;
 import game.objects.AsteroidBckup;
 import gfx.Image;
 import java.util.Random;

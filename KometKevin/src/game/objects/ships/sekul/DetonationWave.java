@@ -19,28 +19,26 @@ public class DetonationWave extends GameObject {
 
     private boolean active = false;
     
+    private int range = 250;		//Units
     private int velocity = 1;           //Units per frame
-    private int cost = 0;
+    private int cost = 20;
     private int damage = 1;
     private int actualRangeEffect;
-    private GameObject support;
-    private float anim = 0;
-    private int waveCount = 0;
-    private int imgSize = 256;          //Units
-    private int imgNum = 4;
+    public GameObject support;
     
-    private int baseW;
-    private int baseH;
-    private int baseR;
+    public int baseW;
+    public int baseH;
+    public int baseR;
     
-    public DetonationWave(GameObject support, int velocity, int cost, int damage){
+    public DetonationWave(GameObject support, int range, int velocity, int cost, int damage){
         
+        this.range = range;
         this.velocity = velocity;
         this.cost = cost;
         this.damage = damage;
         
     	this.tag = "Wave";
-        image = new ImageTile("/projectiles/shockwave.png",imgSize,imgSize);
+        image = new ImageTile("/projectiles/shield.png",136,136);
         width = ((ImageTile) image).getTileW();
         baseW = width;
         height = ((ImageTile) image).getTileH();
@@ -54,12 +52,10 @@ public class DetonationWave extends GameObject {
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
-        this.collider = new CircleCollider(this,imgSize/imgNum);
+        this.collider = new CircleCollider(this,68);
         baseR = 0;
         
         actualRangeEffect = 0;
-        
-        this.healthPoints = 1000;
     }
     
     public void activate() {
@@ -74,29 +70,32 @@ public class DetonationWave extends GameObject {
 	
     public void resetValues(){
         ((CircleCollider)collider).setRadius(baseR);
+        //image.setH(baseH);
+        //image.setW(baseW);
+        width = baseW;
+        height = baseH;
         actualRangeEffect = 0;
-        anim = 0;
-        waveCount = 0;
-        healthPoints = 1000;
     }
     
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
+        //System.out.println(active);
         if (active) {
             while(!collisions.empty()) {
                 effect(collisions.pop());
             }
+            //anim = (anim + dt * 10) % 6;
             actualRangeEffect += velocity;
-            if (actualRangeEffect>=imgSize/imgNum-25){
-                ((CircleCollider)collider).setRadius(actualRangeEffect*(waveCount+1));
-                actualRangeEffect = 0;
-                anim = (anim + 1) % 6;
-                waveCount++;
-                if(waveCount >= imgNum){
+            if (actualRangeEffect < range) {
+                ((CircleCollider)collider).setRadius(actualRangeEffect+velocity);
+                //image = new ImageTile("/projectiles/shield.png",136,136);
+                width += velocity;
+                height += velocity;
+                                
+            } else {
                     active = false;
                     resetValues();
-                }
-            }                           
+            }
         } else {
             collisions.removeAllElements();
         }
@@ -106,10 +105,7 @@ public class DetonationWave extends GameObject {
     @Override
     public void render(GameContainer gc, Renderer r) {
         if (active){
-            r.drawRotatedImageTile((ImageTile)image, 
-                    (int)position.x-(2*imgSize/6)-6, 
-                    (int)position.y-(2*imgSize/5)+6, 
-                    (int)anim, 0, aiming.getAngle());
+            r.drawRotatedImageTile((ImageTile)image, (int)position.x - 8, (int)position.y - 36, (int)0, 0, aiming.getAngle());
         }
     }
     

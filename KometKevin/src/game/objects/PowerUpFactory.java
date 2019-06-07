@@ -1,5 +1,6 @@
 package game.objects;
 
+import game.AsteroidManager;
 import game.GameManager;
 import gfx.Image;
 
@@ -12,14 +13,16 @@ public class PowerUpFactory {
     private static Image scoreImage = new Image("/powerup/Orb of Venom.png");
     private static Image lifeImage = new Image("/powerup/Airless.png");
     private static Image velocityImage = new Image("/powerup/Flameless.png");
-    private static Image cd1Image = new Image("/powerup/Bloodless.png");
-    private static Image cd2Image = new Image("/powerup/Empty Orb.png");
+    private static Image cd0Image = new Image("/powerup/Blless.png");
+    private static Image cd1Image = new Image("/powerup/Blless.png");
+    private static Image cd2Image = new Image("/powerup/Blless.png");
     private static Image cd3Image = new Image("/powerup/Blless.png");
     private static Image defaultImage = new Image("/powerup/Airless.png");
     
     private static double scoreValue = 10;
     private static double lifeValue = 5;
     private static double velocityValue = 0.2;
+    private static double cd0Value = 0.05;
     private static double cd1Value = 1;
     private static double cd2Value = 1;
     private static double cd3Value = 1;
@@ -49,6 +52,8 @@ public class PowerUpFactory {
                 return lifeImage;
             case VELOCITY:
                 return velocityImage;
+            case CD0:
+                return cd0Image;
             case CD1:
                 return cd1Image;
             case CD2:
@@ -68,6 +73,8 @@ public class PowerUpFactory {
                 return lifeValue;
             case VELOCITY:
                 return velocityValue;
+            case CD0:
+                return cd0Value;
             case CD1:
                 return cd1Value;
             case CD2:

@@ -10,7 +10,7 @@ import gfx.ImageTile;
 
 /**
  *
- * @author Denis Florin Cobeti
+ * @author ProjectKevin
  */
 public class Aphelion extends Player {
     public static final int FIRES_LONG = 28;

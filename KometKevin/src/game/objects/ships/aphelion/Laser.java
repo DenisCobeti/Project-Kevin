@@ -8,12 +8,14 @@ import game.Vector2;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
+import static game.objects.ships.aphelion.Aphelion.FIRES_ANGLE;
+import static game.objects.ships.aphelion.Aphelion.FIRES_LONG;
 
 /**
  * Esta clase necesita mucho amor, pq este codigo es un asco
- * @author Denis Florin Cobeti
+ * @author ProjectKevin
  */
-public class Laser extends GameObject {
+public class Laser extends GameObject {   
     public Player support;
     public int num;
     
@@ -39,6 +41,9 @@ public class Laser extends GameObject {
 
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
+        Vector2 spawn = Vector2.toCartesian(FIRES_LONG, aiming.getAngle() - FIRES_ANGLE);
+        center = support.getCenter().getAdded(spawn);
+        
         hitPoint = Vector2.toCartesian(9999, aiming.getAngle()).getAdded(center); // ese 9999 es mejorable :I
         closer = null;
         // El laser no llama a super.update porque tiene un comportamiento especial

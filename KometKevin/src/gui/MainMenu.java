@@ -33,7 +33,7 @@ import javax.swing.JMenuItem;
 
 /**
  *
- * @author Denis Florin Cobeti
+ * @author Project Kevin
  */
 public class MainMenu extends JPanel {
 

@@ -10,7 +10,9 @@ import game.objects.GameObject;
 import gfx.ImageTile;
 
 /**
- * @author Denis Florin Cobeti
+ * Proyectil de la segunda habilidad de la HammerHead.
+ * Provoca una explosión al chocar o tras un tiempo.
+ * @author Project Kevin
  */
 public class Load extends GameObject{ 
     private boolean detonated = false;

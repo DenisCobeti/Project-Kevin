@@ -15,7 +15,6 @@ import gfx.ImageTile;
  
 public class Mine extends GameObject {
     
-    
     private boolean active = false;
     
     private int explosionRange;
@@ -28,7 +27,7 @@ public class Mine extends GameObject {
         this.mineManager = mineManager;
         this.explosionRange = explosionRange;
         
-        damage = 10;
+        damage = 1;
         exploding = false;
         anim = 0;
         
@@ -46,7 +45,7 @@ public class Mine extends GameObject {
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
         
-        healthPoints = 1000;
+        healthPoints = 10;
         
     }
     
@@ -54,9 +53,11 @@ public class Mine extends GameObject {
     public void update(GameContainer gc, GameManager gm, float dt){
         while(!collisions.empty() && !exploding) {
             exploding = true;
+            //System.out.println("Pum");
         }
-        while(!collisions.empty() && exploding && anim>=1.2) {
+        while(!collisions.empty() && exploding && anim>=1.8) {
             effect(collisions.pop());
+            //System.out.println("exploding");
         }
         
         if(exploding){
@@ -75,7 +76,6 @@ public class Mine extends GameObject {
     
     @Override
     public void effect(GameObject go){
-        System.out.println("Daño o algo pls");
         go.setHealthPoints(go.getHealthPoints() - damage);
         //mineManager.destroyMine(this);
         //this.dispose = true;

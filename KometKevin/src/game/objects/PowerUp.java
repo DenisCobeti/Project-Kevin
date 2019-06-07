@@ -3,9 +3,12 @@ package game.objects;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
+import game.colliders.BoxCollider;
+import gfx.ImageTile;
 import game.Vector2;
 import game.colliders.CircleCollider;
 import gfx.Image;
+import javax.swing.text.Position;
 
 /**
  * @author
@@ -114,6 +117,11 @@ public class PowerUp extends GameObject {
             switch (type) {
                 case SCORE:
                     player.setScore(player.getScore()+(int)value);
+                    picked = true;
+                    break;
+                
+                case CD0:
+                    player.getCdValues()[0]-=player.getCdValues()[0]*(1+value);
                     picked = true;
                     break;
                 

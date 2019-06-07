@@ -8,7 +8,6 @@ package game.objects.ships.sekul;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
-import game.colliders.BoxCollider;
 import game.colliders.CircleCollider;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
@@ -41,15 +40,14 @@ public class RepulsorWave extends GameObject {
         affected = new LinkedList<>();
             
         this.tag = "RepulsorWave";
-        image = new ImageTile("/projectiles/wave2.png",31,167);
+        image = new ImageTile("/projectiles/shield.png",136,136);
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         center = owner.getCenter().clone();
         position = owner.getPosition().clone();
         aiming = owner.getAiming().clone();
 
-        //this.collider = new CircleCollider(this,68);
-        this.collider = new BoxCollider(this, width, height);
+        this.collider = new CircleCollider(this,68);
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
