@@ -79,7 +79,7 @@ public class SekulIX extends Player {
             cds[0] = cdValues[0];
         }
         if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1] >= -55550 ) {
-            wave = new DetonationWave(this,250,1,20,1);
+            wave = new DetonationWave(this,8,20,1);
             gm.getObjects().add(wave);
             cds[1] = cdValues[1];
             wave.activate();
