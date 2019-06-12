@@ -13,7 +13,7 @@ public class ControlPopup extends GamePopup{
     
     public ControlPopup() {
         super();
-        this.setPopupSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
+        this.setSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
         this.setLayout(new BorderLayout(100, 100));
         
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/10, SCREEN_HEIGHT/20);

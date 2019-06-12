@@ -7,13 +7,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
+import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
 /**
  *
  * @author Denis
  */
-public abstract class GamePopup extends JPopupMenu{
+public abstract class GamePopup extends JWindow{
     
     protected int SCREEN_WIDTH = Config.getInstance().getScreenWidth();
     protected int SCREEN_HEIGHT = Config.getInstance().getScreenHeight();

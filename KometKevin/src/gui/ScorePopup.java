@@ -35,7 +35,7 @@ public class ScorePopup extends GamePopup {
     
     public ScorePopup(int score, ScoreManager scoreManager, Window window) {
         super();
-        this.setPopupSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
+        this.setSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
         this.setLayout(new BorderLayout(100, 100));
         this.scoreManager = scoreManager;
         Box box = Box.createHorizontalBox();
@@ -78,6 +78,7 @@ public class ScorePopup extends GamePopup {
         this.add(box, BorderLayout.SOUTH);
         this.add(scoreText, BorderLayout.NORTH);
         this.add(name, BorderLayout.CENTER);
+        this.setLocationRelativeTo(window);
     }
     
     private JTextField initNameField(String text){

@@ -141,13 +141,13 @@ public class Window extends JFrame{
         popup = new ScorePopup(player.getScore(), this.menu.getScoreManager(), this);
         
         popup.setEnabled(true);
-        popup.show(this, screenWidth/3, screenHeight/3);
+        popup.setVisible(true);
         gameClip.stop();
     }
     
     public void pauseGame(){
         gc.pause();
-        pause.show(this, screenWidth/3, screenHeight/3);
+        pause.setVisible(true);
         paused = true;
     }
     

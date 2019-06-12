@@ -459,16 +459,17 @@ public class MainMenu extends JPanel {
     private void changeControl(MouseEvent evt, String control){
         popup = new ControlPopup();
         changeListener = new ChangeKeyListener(control, this);
-        add(popup);
+        popup.setLocationRelativeTo(this);
         popup.setEnabled(true);
-        popup.show(this, SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
+        popup.setVisible(true);
         this.requestFocus();
+        disableControlMenu(false);
         this.addKeyListener(changeListener);
-        
     }
     
     public void changeKey(){
         this.removeKeyListener(changeListener);
+        disableControlMenu(true);
         controlUp.setText(CONTROL_UP + KeyEvent.getKeyText
                       (Config.getInstance().getKeyFoward()));
         controlDown.setText(CONTROL_DOWN + KeyEvent.getKeyText
@@ -505,7 +506,15 @@ public class MainMenu extends JPanel {
         scores.setVisible(visible);
         exit.setVisible(visible);
     }
-    
+    private void disableControlMenu(Boolean enabled){
+        backControls.setEnabled(enabled);
+        controlUp.setEnabled(enabled);
+        controlDown.setEnabled(enabled);
+        controlRight.setEnabled(enabled);
+        controlLeft.setEnabled(enabled);
+        controlAbility1.setEnabled(enabled);
+        controlAbility2.setEnabled(enabled);
+    }
     @Override
     protected void paintComponent(Graphics g) {
         //paint the background image

@@ -29,7 +29,7 @@ public class PauseMenu extends GamePopup{
 
     public PauseMenu(Window window) {
         super();
-        this.setPopupSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/5);
+        this.setSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/5);
         
         Box box = Box.createVerticalBox();
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/3, SCREEN_HEIGHT/20);
@@ -58,7 +58,7 @@ public class PauseMenu extends GamePopup{
         box.add(exitMenu);
         box.add(Box.createVerticalStrut(SPACE_BETWEEN_MENUS));
         box.add(exit);
-        
+        this.setLocationRelativeTo(window);
         this.add(box);
     }
     private JLabel initMenuButton(String text, Dimension size){
