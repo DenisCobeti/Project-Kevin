@@ -175,7 +175,7 @@ public class Config {
                 keyAbility1 = key;
                 break;
             case KEY_ABILITY_2:
-                keyAbility1 = key;
+                keyAbility2 = key;
                 break;
             case KEY_BRAKE:
                 keyBrake = key;
