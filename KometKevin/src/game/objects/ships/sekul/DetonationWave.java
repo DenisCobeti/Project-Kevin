@@ -64,11 +64,8 @@ public class DetonationWave extends GameObject {
     
     public void activate() {
         //active = !active;
-        if (active) {
-
-        } else {
+        if (!active) {
             active = true;
-            support.setEnergyPoints(support.getEnergyPoints() - cost);
         }
     }
 	

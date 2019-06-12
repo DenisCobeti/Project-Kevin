@@ -34,15 +34,9 @@ public class SekulIX extends Player {
                                                        Ships.Sekul.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
-		
-        //wave = new DetonationWave(this,250,1,20,1);
-        //gm.getObjects().add(wave);
-        
+
         mining = new Mining(this,4,gm);
-        
-        //repulsor = new RepulsorWave(this, 1);
-        //gm.getObjects().add(repulsor);
-        
+  
         fowardsAccel = 2.9;
         backwardsAccel = 1.9;
         lateralAccel = 1.9;
@@ -53,46 +47,43 @@ public class SekulIX extends Player {
         cdValues[2] = 2.8;
         cdValues[3] = 1.25;
         
-        /*
         energyCost[0] = 0.2;
-        energyCost[1] = 0.5;
-        energyCost[2] = 0.1;
-        energyCost[3] = 0.3;
-        */
-        
-        energyCost[0] = 0;
-        energyCost[1] = 0;
-        energyCost[2] = 0;
-        energyCost[3] = 0;
-        
+        energyCost[1] = 0.6;
+        energyCost[2] = 0.3;
+        energyCost[3] = 0.8;
+
         healthPoints = 10;
         maxHealthPoints = 10;
     }
     
     @Override
     protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {  
-        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 && energyPoints - energyCost[0] >= -55550) {
+        if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 && energyPoints - energyCost[0] >= 0) {
             Projectile fire = new Projectile((int)center.x, (int)center.y, artillery);
             fire.setVelocity(velocity.getAdded(aiming.getMultiplied(FIRE1_SPEED)));
             fire.setAiming(aiming.clone());
             gm.getObjects().add(0,fire);
             cds[0] = cdValues[0];
+            energyPoints -= energyCost[0];
         }
-        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1] >= -55550 ) {
+        if(gc.getInput().isButton(gc.getConfig().getSecondaryFire()) && cds[1] <=0 && energyPoints - energyCost[1] >= 0 ) {
             wave = new DetonationWave(this,8,20,1);
             gm.getObjects().add(wave);
             cds[1] = cdValues[1];
             wave.activate();
+            energyPoints -= energyCost[1];
         }
-        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 && energyPoints - energyCost[2] >= -55550 ) {
+        if(gc.getInput().isKey(gc.getConfig().getKeyHability1()) && cds[2] <=0 && energyPoints - energyCost[2] >= 0 ) {
             mining.activate();
             cds[2] = cdValues[2];
+            energyPoints -= energyCost[2];
         }
-        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 && energyPoints - energyCost[3] >= -55550 ) {
+        if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 && energyPoints - energyCost[3] >= 0 ) {
             repulsor = new RepulsorWave(this, 1);
             gm.getObjects().add(repulsor);
             cds[3] = cdValues[3];
             repulsor.activate();
+            energyPoints -= energyCost[3];
         }  
     }
     
