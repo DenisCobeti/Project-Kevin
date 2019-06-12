@@ -102,7 +102,7 @@ public class Asteroid extends GameObject {
                     am.getStack().push(new Asteroid(this, am));
                 }
             } else if (type.equals(AsteroidType.Little) && hasPowerUp) {
-                PowerUpFactory.getPowerUp((int)this.getPosition().clone().x, 
+                PowerUpType.getPowerUp((int)this.getPosition().clone().x, 
                                           (int)this.getPosition().clone().y, gm);
             }
         }

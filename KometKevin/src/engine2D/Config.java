@@ -148,6 +148,7 @@ public class Config {
         keyBrake = KeyEvent.VK_SPACE;
         keyDumpers = KeyEvent.VK_X;
     }
+    
     public static void save(){
         try {
             FileOutputStream out = new FileOutputStream(CONFIG_FILE);
@@ -156,8 +157,8 @@ public class Config {
         } catch (FileNotFoundException ex) { /*Nunca pasara, dado que ya controlamos esto al principio*/
         } catch (IOException ex) {}
     }
+    
     public static void changeKey(String id, int key){
-        
         switch(id){
             case KEY_FORWARD:
                 keyFoward = key;

@@ -118,11 +118,6 @@ public class PowerUp extends GameObject {
                     picked = true;
                     break;
                 
-                case CD0:
-                    player.getCdValues()[0]-=player.getCdValues()[0]*(1+value);
-                    picked = true;
-                    break;
-                
                 case CD1:
                     player.getCds()[1]-=player.getCds()[1]*(value);
                     picked = true;

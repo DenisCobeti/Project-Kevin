@@ -40,8 +40,6 @@ public class Mine extends GameObject {
         center = mineManager.getOwner().getCenter().clone();
         aiming = mineManager.getOwner().getAiming().clone();
         
-        //Se puede verificar el angulo del jugador y posicionar la mina detras de la nave
-        //position.subtract(new Vector2(0,0));
         this.collider = new CircleCollider(this,38);
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
@@ -75,10 +73,7 @@ public class Mine extends GameObject {
     
     @Override
     public void effect(GameObject go){
-        System.out.println("Daño o algo pls");
         go.setHealthPoints(go.getHealthPoints() - damage);
-        //mineManager.destroyMine(this);
-        //this.dispose = true;
     }
 
     @Override
