@@ -4,6 +4,7 @@ import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
 import game.Vector2;
+import game.objects.ships.Ships;
 import gfx.ImageTile;
 
 /**
@@ -170,6 +171,9 @@ public abstract class Player extends GameObject {
     public double getForwardsAccel(){return fowardsAccel;}
     public double getBackwardsAccel() {return backwardsAccel;}
     public double getLateralAccel() {return lateralAccel;}
+    public double getMaxEnergyPoints() {return maxEnergyPoints;}
+    public double getMaxHealthPoints() {return maxHealthPoints;}
+    
     
     public boolean[] getIsActive() {return isActive;}
     public double[] getEnergyCost() {return energyCost;}
@@ -184,4 +188,6 @@ public abstract class Player extends GameObject {
     public void setLateralAccel(double lateralAccel) {this.lateralAccel = lateralAccel;}
     
     public void setScore(int score) {this.score = score;}
+
+    
 }

@@ -44,7 +44,8 @@ public class Aphelion extends Player {
         fowardsAccel = 4;
         backwardsAccel = 4;
         lateralAccel = 4;
-        
+        maxHealthPoints = Ships.Aphelion.getHealth();
+        healthPoints = maxHealthPoints;
         //hay que pulir
         rotationSpeed = 0.06;
         rotationTolerance = 0.027;

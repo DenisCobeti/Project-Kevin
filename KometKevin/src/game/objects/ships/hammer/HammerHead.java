@@ -56,8 +56,8 @@ public class HammerHead extends Player {
         backwardsAccel = 1.9;
         lateralAccel = 1.1;
         
-        healthPoints = 10;
-        maxHealthPoints = 10;
+        maxHealthPoints = Ships.Hammer.getHealth();
+        healthPoints = maxHealthPoints;
         
         rotationSpeed = 0.015;
         rotationTolerance = 0.01;

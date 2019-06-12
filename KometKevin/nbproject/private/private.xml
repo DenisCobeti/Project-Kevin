@@ -2,6 +2,27 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/AbstractGame.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/Ships.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/Player.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/GameObject.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/ScorePopup.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/GameContainer.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/aphelion/Load.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/PauseMenu.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/ControlPopup.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/IO/Score.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/Config.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/IO/ScoreManager.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/GameManager.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/IO/ScoreComparator.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/aphelion/Laser.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/ShipFactory.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/hammer/HammerHead.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/gui/MainMenu.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/engine2D/Window.java</file>
+            <file>file:/C:/Users/IOAN/Desktop/kevin/KometKevin/src/game/objects/ships/aphelion/Aphelion.java</file>
+        </group>
     </open-files>
 </project-private>

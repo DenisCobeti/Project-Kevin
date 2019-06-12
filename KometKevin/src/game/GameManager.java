@@ -113,9 +113,14 @@ public class GameManager extends AbstractGame {
      * @param ship si la nueva nave es del mismo tipo o no
      */
     public void restart(boolean ship) {
+      
         for (GameObject obj : objects) {
             obj.setDispose(true);
-            if (ship && obj instanceof Player) obj.setDispose(false);
+            if (ship && obj instanceof Player){
+                obj.setDispose(false);
+                obj.setHealthPoints(player.getMaxHealthPoints());
+                
+            }
         }
         if(ship){
             player.setScore(0);
