@@ -2,7 +2,6 @@ package gui;
 
 import IO.ScoreManager;
 import engine2D.Window;
-import game.objects.Player;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,13 +30,11 @@ public class ScorePopup extends GamePopup {
     public JLabel exitMenu;
     
     private static final int SPACE_BETWEEN_BUTTONS = 10;
-    private ScoreManager scoreManager;
     
     public ScorePopup(int score, ScoreManager scoreManager, Window window) {
         super();
         this.setSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
         this.setLayout(new BorderLayout(100, 100));
-        this.scoreManager = scoreManager;
         Box box = Box.createHorizontalBox();
         Dimension buttonSize = new Dimension(SCREEN_WIDTH/10, SCREEN_HEIGHT/20);
         

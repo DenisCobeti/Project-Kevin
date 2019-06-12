@@ -31,6 +31,7 @@ public class Window extends JFrame{
     private SoundClip menuClip;
     private SoundClip gameClip;
     private boolean paused = false;
+    private boolean scorePopup = false;
     
     private final GameContainer gc;
     
@@ -137,6 +138,7 @@ public class Window extends JFrame{
     }
     
     public void deadPLayer(Player player) {
+        scorePopup = true;
         gc.pause();
         popup = new ScorePopup(player.getScore(), this.menu.getScoreManager(), this);
         
@@ -146,6 +148,7 @@ public class Window extends JFrame{
     }
     
     public void pauseGame(){
+        if(scorePopup) return;
         gc.pause();
         pause.setVisible(true);
         paused = true;
@@ -159,8 +162,10 @@ public class Window extends JFrame{
     
     public void restartGame(){
         popup.setVisible(false);
+        popup.setEnabled(false);
         popup = null;
         ((GameManager)gc.getGame()).clear(true);
+        scorePopup = false;
         gameClip.loop();
         gc.resume();
     }
