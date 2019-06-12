@@ -83,7 +83,7 @@ public class Config {
         */
         primaryFire = MouseEvent.BUTTON1;
         secondaryFire = MouseEvent.BUTTON3;
-        keyPause = KeyEvent.VK_P;
+        keyPause = KeyEvent.VK_ESCAPE;
         
         /*
         keyHability1 = KeyEvent.VK_Q;

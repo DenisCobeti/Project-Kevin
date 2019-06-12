@@ -136,12 +136,13 @@ public class Window extends JFrame{
         gc.start(new GameManager());
     }
     
-    public void deadPLayer(Player player){
+    public void deadPLayer(Player player) {
+        gc.pause();
         popup = new ScorePopup(player.getScore(), this.menu.getScoreManager(), this);
         
         popup.setEnabled(true);
         popup.show(this, screenWidth/3, screenHeight/3);
-        getGameClip().stop();
+        gameClip.stop();
     }
     
     public void pauseGame(){
@@ -159,14 +160,15 @@ public class Window extends JFrame{
     public void restartGame(){
         popup.setVisible(false);
         popup = null;
-        gc.restart(true);
+        ((GameManager)gc.getGame()).clear(true);
+        gameClip.loop();
         gc.resume();
     }
     
     public void returnMenu(PauseMenu menu){
         menu.setVisible(false);
         menu = null;
-        gc.restart(false);
+        ((GameManager)gc.getGame()).clear(false);
         gameClip.stop();
         menuClip.loop();
         getCardLayout().next(cards);
@@ -175,19 +177,22 @@ public class Window extends JFrame{
     public void returnMenuPopup(){
         popup.setVisible(false);
         popup = null;
-        gc.restart(false);
+        ((GameManager)gc.getGame()).clear(false);
         gameClip.stop();
         menuClip.loop();
         getCardLayout().next(cards);
     }
     
     public void killPlayer(){
-        gc.killPlayer();
+        ((GameManager)gc.getGame()).killPlayer();
     }
+    
     public void exitGame(){
         this.dispose();
+        Config.save();
         System.exit(0);
     }
+    
     // Getters
     public GameContainer getGameContainer() {return gc;}
     public BufferedImage getImage() {return image;}

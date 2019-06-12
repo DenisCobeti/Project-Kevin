@@ -2,6 +2,7 @@ package gui;
 
 import IO.ScoreManager;
 import engine2D.Window;
+import game.objects.Player;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

@@ -14,7 +14,7 @@ import game.objects.ships.hammer.HammerHead;
  */
 public class ShipFactory {
     
-    private final static int START_POSITION = 500; 
+    public final static int START_POSITION = 500; 
     public static Player getPlayer(Ships ship, GameManager game){
         Player player;
         

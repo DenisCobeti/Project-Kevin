@@ -40,6 +40,11 @@ public abstract class Player extends GameObject {
     private double score = 0;
     private boolean dumpers; // Mecanismo automatizado de frenada
     
+    /**
+     * Constructor de la clases
+     * @param x posición x
+     * @param y posición y
+     */
     public Player(int x, int y) {
         this.tag = "";
         

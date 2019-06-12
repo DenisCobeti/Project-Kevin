@@ -6,9 +6,13 @@ import engine2D.Renderer;
 
 import game.objects.GameObject;
 import game.objects.*;
+import game.objects.ships.ShipFactory;
 import gfx.Image;
-import java.awt.event.KeyEvent;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase que contiene los objetos del videojuego.
@@ -20,6 +24,8 @@ public class GameManager extends AbstractGame {
     private final Camera camera;
     private final AsteroidManager am;
     private final HUD hud;
+    
+    private GravPool gravity;
     private Player player;
     
     /**
@@ -27,15 +33,14 @@ public class GameManager extends AbstractGame {
      */
     public GameManager() {
         background = new Image("/space/background.png");
+        gravity = new GravPool(background.getW()/2, background.getH()/2);
         
         objects = new ArrayList<>();
-        objects.add(new GravPool(background.getW()/2, background.getH()/2));
+        objects.add(gravity);
         
         camera = new Camera();
         am = new AsteroidManager(camera,this);
         hud = new HUD(player);
-        
-        PowerUpFactory.getPowerUp(PowerUpType.LIFE, 150, 150, this);
     }
 
     @Override
@@ -58,7 +63,6 @@ public class GameManager extends AbstractGame {
                 objects.remove(i);
                 i--;
                 if(obj instanceof Player) {
-                    gc.pause();
                     gc.getWindow().deadPLayer((Player)obj);
                 }
             }
@@ -78,16 +82,6 @@ public class GameManager extends AbstractGame {
                 }
             }
         }
-  
-        // Pause el motor y muestra el menu de juego
-        if (gc.getInput().isKeyDown(KeyEvent.VK_P)) {
-            gc.pause();
-        }
-        
-        // Se para todo
-        if (gc.getInput().isKeyDown(KeyEvent.VK_ESCAPE)) {
-            System.exit(0); // BOOM
-        }        
     }
 
     @Override
@@ -109,26 +103,28 @@ public class GameManager extends AbstractGame {
         hud.setTarget(player);
     }
     /**
-     * Reinicia la partida, borrando el jugador acual o no
-     * @param ship si la nueva nave es del mismo tipo o no
+     * Elimina los objectos de la escena
+     * @param restart si se reinicia o no
      */
-    public void restart(boolean ship) {
-      
-        for (GameObject obj : objects) {
-            obj.setDispose(true);
-            if (ship && obj instanceof Player){
-                obj.setDispose(false);
-                obj.setHealthPoints(player.getMaxHealthPoints());
-                
+    public void clear(boolean restart) {      
+        objects.clear();
+        objects.add(gravity);
+
+        if(restart){
+            try {
+                // Tomamos el constructor y volvemos a crear la clase
+                Constructor<?> ctor = player.getClass().getConstructor(
+                    new Class[] {int.class, int.class, GameManager.class});
+                addPlayer((Player) ctor.newInstance(
+                    new Object[] {new Integer(ShipFactory.START_POSITION), 
+                                  new Integer(ShipFactory.START_POSITION), 
+                                                                      this}));
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
-        if(ship){
-            player.setScore(0);
-            objects.add(0, player);
-        }
-        objects.add(new GravPool(background.getW()/2, background.getH()/2));
-        
     }
+
     public void killPlayer() {
         for (GameObject obj : objects) {
             if(obj instanceof Player) {
