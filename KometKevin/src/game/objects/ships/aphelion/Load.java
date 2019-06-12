@@ -39,14 +39,14 @@ public class Load extends GameObject{
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
-        this.collider = new CircleCollider(this, width/2);
+        this.collider = new CircleCollider(this, width);
     }
 
     @Override
     public void update(GameContainer gc, GameManager gm, float dt) {
         if(!detonated) {
             position.add(velocity);
-            center.set(position.x + width/2, position.y + height/2);
+            center.set(position.x + width, position.y + height/2);
             aiming.set(velocity.getNormalized());
         }
         while(!collisions.empty()) {

@@ -1,5 +1,6 @@
 package game.objects.ships.aphelion;
 
+import audio.SoundClip;
 import engine2D.GameContainer;
 import game.GameManager;
 import game.Vector2;
@@ -7,6 +8,9 @@ import game.colliders.BoxCollider;
 import game.objects.Player;
 import game.objects.ships.Ships;
 import gfx.ImageTile;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Segunda nave del juego. Agilidad.
@@ -22,6 +26,10 @@ public class Aphelion extends Player {
     private static final int ABIL2_JUMP = 210;
     
     private ImageTile bomb = new ImageTile("/projectiles/load.png",60,60);
+    private SoundClip laserSound;
+    private SoundClip bombSound;
+    private SoundClip tpSound;
+    private SoundClip demonSound;
     
     private Load load;
     private Laser laser;
@@ -36,6 +44,10 @@ public class Aphelion extends Player {
                                 Ships.Aphelion.getSizeY());
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
+        try {
+            tpSound = new SoundClip("./sfx/aphelion/tp.ogg");
+            laserSound = new SoundClip("./sfx/aphelion/laser.ogg");
+        } catch (IOException ex) {}
         
         collider = new BoxCollider(this, 72, 46);
         laser = new Laser(this, 0);
@@ -46,19 +58,20 @@ public class Aphelion extends Player {
         lateralAccel = 4;
         maxHealthPoints = Ships.Aphelion.getHealth();
         healthPoints = maxHealthPoints;
+        
         //hay que pulir
         rotationSpeed = 0.06;
-        rotationTolerance = 0.027;
+        rotationTolerance = 0.026;
         
         energyCost[0] = 1.25;
         energyCost[1] = 0.3;
         energyCost[2] = 0.3;
         energyCost[3] = 0.3;
         
-        cdValues[0] = 0.17;
+        cdValues[0] = 0.5;
         cdValues[1] = 3;
         cdValues[2] = 6;
-        cdValues[3] = 5;
+        cdValues[3] = 2;
     }
 
     @Override
@@ -101,6 +114,7 @@ public class Aphelion extends Player {
         }
         // Cuarta Habilidad
         if(gc.getInput().isKeyDown(gc.getConfig().getKeyHability2()) && cds[3] <=0 ) {
+            tpSound.play();
             position.add(aiming.getMultiplied(ABIL2_JUMP));
             center.set(position.x + width/2, position.y + height/2);
             cds[3] = cdValues[3];
