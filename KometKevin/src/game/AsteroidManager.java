@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Controla la entrada de asteroides al juego.
  * 
- * @author Sergio y Arturo
+ * @author Sergio, Arturo y Denis
  */
 public class AsteroidManager {    
     private Camera camera;

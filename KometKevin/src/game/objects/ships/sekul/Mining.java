@@ -37,14 +37,12 @@ public class Mining extends GameObject{
             //this.cd = cd;
             mines.add(new Mine(this, MINES_EXPLOSION_RANGE));
             gm.getObjects().add(mines.getLast());
-            //System.out.println("Creando Mina");
         }else {
             //active = true;
             //this.cd = cd;
             mines.getFirst().activate();
             mines.add(new Mine(this, MINES_EXPLOSION_RANGE));
             gm.getObjects().add(mines.getLast());
-            //System.out.println("Creando Mina y Eliminando 1a");
         }
         return 0.0;
     }

@@ -53,8 +53,6 @@ public class Asteroid extends GameObject {
         this.type = father.type.getSubtype();
         this.image = type.getImg();
         
-        System.out.println(type.getSize());
-
         this.width = image.getW();
         this.height = image.getH();
         
