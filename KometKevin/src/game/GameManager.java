@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class GameManager extends AbstractGame {
     private final Camera camera;
     private final AsteroidManager am;
-    private final AsteroidManagerbckup am2;
     private final HUD hud;
     private Player player;
     
@@ -34,7 +33,6 @@ public class GameManager extends AbstractGame {
         
         camera = new Camera();
         am = new AsteroidManager(camera,this);
-        am2 = new AsteroidManagerbckup(camera, this);
         hud = new HUD(player);
         
         PowerUpFactory.getPowerUp(PowerUpType.LIFE, 150, 150, this);

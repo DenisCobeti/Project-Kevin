@@ -10,11 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Controla la entrada de asteroides al juego.
  * 
- * @author Sergio
+ * @author Sergio y Arturo
  */
-public class AsteroidManager {
-    private static final int MAX_ASTEROIDS_IN_GAME = 120;
-    
+public class AsteroidManager {    
     private Camera camera;
     private GameManager gm;
     private Config config;
@@ -25,13 +23,16 @@ public class AsteroidManager {
     private double counter = 0;
     
     public AsteroidManager(Camera camera,GameManager gm){  
-        this.camera=camera;
-        this.gm=gm;
-        this.config=Config.getInstance();
-        this.random= ThreadLocalRandom.current();
+        this.camera = camera;
+        this.gm = gm;
+        this.config = Config.getInstance();
+        this.random = ThreadLocalRandom.current();
         delayedAsteroids = new Stack<>();
         
         countAsteroidTypes = new int[AsteroidType.values().length];
+        for (int i = 0; i < countAsteroidTypes.length; i++) {
+            countAsteroidTypes[i] = 0; 
+        }
     }
     
     public void update(float dt){
@@ -39,12 +40,10 @@ public class AsteroidManager {
             gm.getObjects().add(delayedAsteroids.pop());
         }
         
-        if(gm.getObjects().size() < MAX_ASTEROIDS_IN_GAME) {
-            for(int i = 0; i < countAsteroidTypes.length; i++){
-                if(countAsteroidTypes[i] < AsteroidType.values()[i].getMax()){
-                    if(generateAsteriods(dt, AsteroidType.values()[i])){
-                        countAsteroidTypes[i]++;
-                    }
+        for (int i = 0; i < countAsteroidTypes.length; i++) {
+            if (countAsteroidTypes[i] < AsteroidType.values()[i].getMax()) {
+                if (generateAsteriods(dt, AsteroidType.values()[i])) {
+                    countAsteroidTypes[i]++;
                 }
             }
         }
