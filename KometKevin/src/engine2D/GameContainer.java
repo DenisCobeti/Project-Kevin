@@ -90,9 +90,9 @@ public class GameContainer implements Runnable {
                 render = true;
                 
                 game.update(this, (float)deltaTime);
-                
                 input.update();
                 
+                // Para cada segundo
                 if (frameTime >= 1.0) {
                     frameTime = 0;
                     fps = frames;

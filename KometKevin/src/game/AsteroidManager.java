@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Sergio
  */
 public class AsteroidManager {
-    private static final int MAX_ASTEROIDS_IN_GAME = 80;
+    private static final int MAX_ASTEROIDS_IN_GAME = 120;
     
     private Camera camera;
     private GameManager gm;

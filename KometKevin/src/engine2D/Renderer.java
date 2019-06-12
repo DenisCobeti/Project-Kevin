@@ -145,6 +145,15 @@ public class Renderer {
      * @param angle angulo en radianes de rotación 
      */
     public void drawRotatedImage(Image image, int offX, int offY, double angle) {             
+        offX -= camX;
+        offY -= camY;
+        
+        // Se comprueba que parte de la imagen quede dentro de la ventana
+        if (offX < -image.getD()) return;
+        if (offY < -image.getD()) return;
+        if (offX >= screenWidth)  return;
+        if (offY >= screenHeight) return;
+        
         double cos = Math.cos(-angle);
         double sin = Math.sin(-angle);
         int pWidth = image.getW()/2;
@@ -157,9 +166,6 @@ public class Renderer {
         int x, y;
         int transX, transY;
         int newX, newY;
-        
-        offX -= camX;
-        offY -= camY;
 
         for (y = -offH; y < image.getH() + offH; y++) {
             for (x = -offW; x < image.getW() + offW; x++) {
@@ -224,6 +230,15 @@ public class Renderer {
      * @param angle angulo en radianes de rotación 
      */
     public void drawRotatedImageTile(ImageTile image, int offX, int offY, int tileX, int tileY, double angle) {
+        offX -= camX;
+        offY -= camY;
+        
+        // Se comprueba que la imagen quede dentro de la ventana
+        if (offX < -image.getTileD()) {return;}
+        if (offY < -image.getTileD()) {return;}
+        if (offX >= screenWidth) {return;}
+        if (offY >= screenHeight) {return;}
+        
         double cos = Math.cos(-angle);
         double sin = Math.sin(-angle);
         int pWidth = image.getTileW()/2 + tileX * image.getTileW();
@@ -236,9 +251,6 @@ public class Renderer {
         int x, y;
         int transX, transY;
         int newX, newY;
-        
-        offX -= camX;
-        offY -= camY;
         
         for (y = -offH; y < image.getTileH() + offH; y++) {
             for (x = -offW; x < image.getTileW() + offW; x++) {

@@ -11,8 +11,8 @@ import javax.imageio.ImageIO;
  * @author Arturo
  */
 public class Image {
-    private int w, h;
-    private int[] p;
+    private int w, h, d;    // Ancho, Alto y Diagonal
+    private int[] p;        // Matriz de pixeles
     
     /**
      * Constructor
@@ -27,6 +27,7 @@ public class Image {
         }
         w = image.getWidth();
         h = image.getHeight();
+        d = (int) Math.sqrt(w * w + h * h);
         p = image.getRGB(0, 0, w, h, null, 0, w);
         
         image.flush();
@@ -34,9 +35,11 @@ public class Image {
 
     public int getW() {return w;}
     public int getH() {return h;}
+    public int getD() {return d;}    
     public int[] getP() {return p;}
 
     public void setW(int w) {this.w = w;}
     public void setH(int h) {this.h = h;}
+    public void setD(int d) {this.d = d;}
     public void setP(int[] p) {this.p = p;}
 }
