@@ -10,9 +10,10 @@ import game.objects.GameObject;
 import gfx.ImageTile;
 
 /**
- * Proyectil de la segunda habilidad de la HammerHead.
- * Provoca una explosión al chocar o tras un tiempo.
- * @author Project Kevin
+ * Bomba de la segunda habilidad de la Aphelion.
+ * Provoca una explosión al soltar el raton.
+ * 
+ * @author Denis
  */
 public class Load extends GameObject{ 
     private boolean detonated = false;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package game.objects.ships.sekul;
 
 import engine2D.GameContainer;
@@ -18,7 +13,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author 
+ * @author Ramiro
  */
 
 //Si disparas de seguido, la lista de asteroides affectados se renueva antes de que acabe acabe el efecto de la habilidad...

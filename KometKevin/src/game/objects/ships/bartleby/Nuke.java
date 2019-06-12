@@ -10,9 +10,8 @@ import game.objects.GameObject;
 import gfx.ImageTile;
 
 /**
- * Proyectil de la segunda habilidad de la HammerHead.
- * Provoca una explosión al chocar o tras un tiempo.
- * @author Project Kevin
+ * 
+ * @author Sergio
  */
 public class Nuke extends GameObject{ 
     private int radius = 4;

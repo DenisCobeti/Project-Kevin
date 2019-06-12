@@ -3,16 +3,14 @@ package game.objects;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
-import game.colliders.BoxCollider;
-import gfx.ImageTile;
 import game.Vector2;
 import game.colliders.CircleCollider;
 import gfx.Image;
-import javax.swing.text.Position;
 
 /**
- * @author
  * Cambiar el valor total de los cds (cdValues) puede dar problemas
+ * 
+ * @author Ramiro
  */
 
 public class PowerUp extends GameObject {

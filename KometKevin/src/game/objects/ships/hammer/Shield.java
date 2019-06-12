@@ -11,7 +11,8 @@ import gfx.ImageTile;
 
 /**
  * Cuarta habilidad de la HammerHead
- * @author ProjectKevin
+ * 
+ * @author Arturo
  */
 public class Shield extends GameObject {
     public Player support;

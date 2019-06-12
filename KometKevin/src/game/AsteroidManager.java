@@ -4,13 +4,13 @@ import engine2D.Config;
 import game.objects.Asteroid;
 import game.objects.AsteroidType;
 import gfx.Image;
-import java.util.Random;
 import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- *
- * @author alumno
+ * Controla la entrada de asteroides al juego.
+ * 
+ * @author Sergio
  */
 public class AsteroidManager {
     private static final int MAX_ASTEROIDS_IN_GAME = 80;

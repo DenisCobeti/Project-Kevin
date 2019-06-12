@@ -7,7 +7,7 @@ import game.objects.GameObject;
  * Colisionador abstracto.
  * Tiene tantos metodos como colisionadores implementados
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public abstract class AbstractCollider {    
     protected GameObject object;

@@ -9,8 +9,9 @@ import game.objects.ships.Ships;
 import gfx.ImageTile;
 
 /**
- *
- * @author ProjectKevin
+ * Segunda nave del juego. Agilidad.
+ * 
+ * @author Denis
  */
 public class Aphelion extends Player {
     public static final int FIRES_LONG = 28;

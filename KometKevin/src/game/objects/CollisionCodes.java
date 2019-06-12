@@ -5,7 +5,7 @@ package game.objects;
  * Ambas variables son bitArrays, una indica el tipo y el otro con los tipos que
  * colisionan
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public enum CollisionCodes {
     TEAM1    (0b00000000001), TEAM1_COL    (0b11111111100),

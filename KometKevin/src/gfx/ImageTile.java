@@ -3,7 +3,7 @@ package gfx;
 /**
  * Matriz de imagenes para dar soporte a Sprites.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class ImageTile extends Image {
     

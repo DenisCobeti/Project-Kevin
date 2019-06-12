@@ -8,8 +8,9 @@ import game.objects.ships.sekul.SekulIX;
 import game.objects.ships.hammer.HammerHead;
 
 /**
- *
- * @author Denis Florin Cobeti
+ * Factoria para la creación de naves.
+ * 
+ * @author Denis
  */
 public class ShipFactory {
     

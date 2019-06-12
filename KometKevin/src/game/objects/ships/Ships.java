@@ -2,7 +2,7 @@ package game.objects.ships;
 
 /**
  *
- * @author Project Kevin
+ * @author Denis
  */
 public enum Ships {
     /**

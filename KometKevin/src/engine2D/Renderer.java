@@ -11,7 +11,7 @@ import java.awt.image.DataBufferInt;
  * Repetir codigo.
  * No usar constructores en los metodos.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class Renderer {
     private final int screenWidth;

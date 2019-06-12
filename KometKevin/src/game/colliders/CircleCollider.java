@@ -6,7 +6,7 @@ import game.objects.GameObject;
  * Colisionador circular. 
  * Asteroides y habilidades. Coste computacional muy bajo.
  * 
- * @author Project Kevin 
+ * @author Arturo
  */
 public class CircleCollider extends AbstractCollider {
     private int radius;

@@ -12,7 +12,8 @@ import gfx.ImageTile;
 /**
  * Escuadra de naves que lanza la hammer.
  * Tras un breve retardo se dirigen a la dirección señalada por el raton
- * @author Project Kevin
+ * 
+ * @author Arturo
  */
 public class Squad extends GameObject{
 

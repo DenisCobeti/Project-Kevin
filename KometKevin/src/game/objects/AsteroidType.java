@@ -4,7 +4,8 @@ import gfx.Image;
 
 /**
  * Enumerado que establece los tipos de asteroides
- * @author Komet Kevin
+ * 
+ * @author Denis y Arturo
  */
 public enum AsteroidType {
     

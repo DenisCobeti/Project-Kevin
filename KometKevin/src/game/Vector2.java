@@ -4,7 +4,7 @@ package game;
  * Vector que representa un punto en la pantalla.
  * Contiene operaciones básicas para vectores bidimensionales
  * 
- * @author Project Kevin
+ * @author MitMaro (EXTERNO)
  */
 public class Vector2 {
     

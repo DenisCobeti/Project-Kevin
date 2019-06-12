@@ -13,7 +13,8 @@ import static game.objects.ships.aphelion.Aphelion.FIRES_LONG;
 
 /**
  * Esta clase necesita mucho amor, pq este codigo es un asco
- * @author ProjectKevin
+ * 
+ * @author Denis
  */
 public class Laser extends GameObject {   
     public Player support;

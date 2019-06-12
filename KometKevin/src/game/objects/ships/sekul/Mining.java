@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author alumno
+ * @author Ramiro
  */
 public class Mining extends GameObject{
     

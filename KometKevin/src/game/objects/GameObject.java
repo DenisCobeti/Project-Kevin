@@ -11,7 +11,7 @@ import java.util.Stack;
 /**
  * Objeto del motor gráfico. Todo objeto en GameManager hereda de esta clase.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public abstract class GameObject {
     protected String tag;

@@ -13,7 +13,7 @@ import gfx.ImageTile;
 
 /**
  *
- * @author
+ * @author Sergio
  */
 public class Bartleby extends Player {
     private static final int FIRE1_SPEED = 14;

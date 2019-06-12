@@ -12,7 +12,7 @@ import java.awt.event.MouseWheelListener;
 /**
  * Clase encargada de todo el control de los perifericos de entrada.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class Input implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {   
     private int camX, camY;

@@ -7,7 +7,7 @@ import game.Vector2;
  * Colisionador de recta.
  * Habilidades especiales basadas en lasers. Coste computacional bajo.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class RayCollider extends AbstractCollider {
     private Vector2 aiming; 

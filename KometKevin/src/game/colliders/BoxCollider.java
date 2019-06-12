@@ -7,7 +7,7 @@ import game.objects.GameObject;
  * Colisionador rectangular con dirección. 
  * Naves y habilidades. Coste computacional alto.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class BoxCollider extends AbstractCollider {
     private Vector2 aiming; 

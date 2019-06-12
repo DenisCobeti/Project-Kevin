@@ -11,7 +11,7 @@ import gfx.ImageTile;
 
 /**
  *
- * @author
+ * @author Ramiro
  */
 public class SekulIX extends Player {
     private static final int FIRE1_SPEED = 10;

@@ -21,10 +21,9 @@ import com.jcraft.jorbis.DspState;
 import com.jcraft.jorbis.Info;
 
 /**
- * Simple Clip like player for OGG's. 
- * Code is mostly taken from the example provided with JOrbis.
+ * Clip de sonido. Cuenta con las funciones basicas de manipulación
  * 
- * @author Project kevin
+ * @author JCraft (EXTERNO)
  */
 public class SoundClip {
 	private final int BUFSIZE = 4096 * 2;

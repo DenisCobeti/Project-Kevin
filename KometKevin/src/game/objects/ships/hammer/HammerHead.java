@@ -12,8 +12,9 @@ import gfx.Image;
 import gfx.ImageTile;
 
 /**
- * Nave de tipo HammerHead
- * @author ProjectKevin
+ * Primera nave del juego. Resistencia
+ * 
+ * @author Arturo
  */
 public class HammerHead extends Player {
     private static final int FIRE1_SPEED = 14;

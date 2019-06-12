@@ -10,7 +10,7 @@ import gfx.ImageTile;
 
 /**
  *
- * @author 
+ * @author Ramiro
  */
  
 public class Mine extends GameObject {

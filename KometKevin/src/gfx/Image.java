@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
  * Objecto que carga una imagen y la transforma en un vector de RGB para su 
  * carga a la Window mediante el Renderer.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class Image {
     private int w, h;

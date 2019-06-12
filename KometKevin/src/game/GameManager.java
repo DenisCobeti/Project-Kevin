@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Clase que contiene los objetos del videojuego.
  * Colección de todo lo que se ha de computar y mostrar por pantalla.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class GameManager extends AbstractGame {
     private final Camera camera;
@@ -38,7 +38,6 @@ public class GameManager extends AbstractGame {
         hud = new HUD(player);
         
         PowerUpFactory.getPowerUp(PowerUpType.LIFE, 150, 150, this);
-        
     }
 
     @Override

@@ -4,7 +4,7 @@ package engine2D;
  * Clase que contiene el hilo del motor sobre el que se ejecuta el juego.
  * Cuenta con todos los parametros de las clases del paquete.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class GameContainer implements Runnable {
     private final double UPDATE_CAP = 1.0/60.0; // min. 1/25 - max. 1/60
@@ -67,7 +67,6 @@ public class GameContainer implements Runnable {
         double firstTime = 0;
         double lastTime = System.nanoTime() / 1e9d;
         double passedTime = 0;
-        //double unprocessedTime = 0;
         
         // Variables de monitorización
         double frameTime = 0;

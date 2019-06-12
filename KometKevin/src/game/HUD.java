@@ -8,7 +8,7 @@ import gfx.MonoFont;
 
 /**
  * Esto sera un gameObjet especial como es el caso de Camera
- * @author Project Kevin
+ * @author Arturo
  */
 public class HUD {
     private static final int MARGIN_X = 10;

@@ -23,10 +23,10 @@ import javax.swing.JPanel;
  * Clase con un JFrame para la representación de la ventana de la aplicación.
  * Contiene los menus iniciales y el canvas para el dibujado
  * 
- * @author Project Kevin
+ * @author Denis y Arturo
  */
 public class Window extends JFrame{
-    private static final String GAME_NAME = "Kommet Kevin v.0.2.1";
+    private static final String GAME_NAME = "Kommet Kevin v.0.4.0";
     
     private SoundClip menuClip;
     private SoundClip gameClip;

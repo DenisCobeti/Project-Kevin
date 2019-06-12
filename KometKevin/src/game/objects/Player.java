@@ -7,8 +7,9 @@ import game.Vector2;
 import gfx.ImageTile;
 
 /**
- * Ojo que el eje Y esta invertido, asi de guay es java.
- * @author Project Kevin
+ * Clase player. Incluye la movilidad comun a todas las naves.
+ * 
+ * @author Arturo
  */
 public abstract class Player extends GameObject {
     

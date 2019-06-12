@@ -10,7 +10,7 @@ import gfx.ImageTile;
 
 /**
  *
- * @author 
+ * @author Ramiro
  */
  
 //Fallos al cambiar el tamaño de la imagen

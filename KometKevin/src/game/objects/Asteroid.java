@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * Clase asteroide
- * @author Komet Kevin
+ * @author Ramiro
  */
 public class Asteroid extends GameObject {
     

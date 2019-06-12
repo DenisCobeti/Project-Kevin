@@ -1,6 +1,5 @@
 package game.objects;
 
-import game.AsteroidManager;
 import game.GameManager;
 import gfx.Image;
 

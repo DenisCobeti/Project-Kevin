@@ -12,7 +12,8 @@ import gfx.ImageTile;
 /**
  * Proyectil de la segunda habilidad de la HammerHead.
  * Provoca una explosión al chocar o tras un tiempo.
- * @author Project Kevin
+ * 
+ * @author Arturo
  */
 public class Flak extends GameObject{ 
     private int radius = 4;

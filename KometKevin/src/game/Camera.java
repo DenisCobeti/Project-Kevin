@@ -8,7 +8,7 @@ import game.objects.GameObject;
  * Camara a mostrar en la Window. Busca un objecto en el GameManager con el tag
  * determinado e informa al Renderer y al Input de los offsets de la misma.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class Camera {
     private float camX, camY;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package IO;
 
 import java.io.File;
@@ -17,7 +12,7 @@ import java.util.Collections;
 
 /**
  *
- * @author Neblis
+ * @author Denis
  */
 public class ScoreManager {
     // An arraylist of the type "score" we will use to work with the scores inside the class

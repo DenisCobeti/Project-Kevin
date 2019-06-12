@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Conecta el motor gráfico con el codigo del juego.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public abstract class AbstractGame {
     protected ArrayList<GameObject> objects;

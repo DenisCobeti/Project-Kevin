@@ -4,7 +4,7 @@ package gfx;
  * Matriz de caracteres para escribir cadenas de texto.
  * Fuentes monoespaciadas de Unicode U0020 a U005A. Números y mayusculas.
  * 
- * @author Project Kevin
+ * @author Arturo
  */
 public class MonoFont extends ImageTile{
     // Fuentes prefabricadas

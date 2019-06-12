@@ -10,8 +10,9 @@ import game.objects.GameObject;
 import gfx.Image;
 
 /**
- *
- * @author Project Kevin
+ * Clase proyectil genérico.
+ * 
+ * @author Arturo
  */
 public class Projectile extends GameObject {
     private Image image; 

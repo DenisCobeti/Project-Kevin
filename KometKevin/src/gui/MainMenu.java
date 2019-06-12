@@ -30,10 +30,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JMenuItem;
 
-
 /**
  *
- * @author Project Kevin
+ * @author Denis
  */
 public class MainMenu extends JPanel {
 
