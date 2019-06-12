@@ -1,6 +1,7 @@
 package gui;
 
 import IO.ScoreManager;
+import engine2D.Window;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,7 +32,7 @@ public class ScorePopup extends GamePopup {
     private static final int SPACE_BETWEEN_BUTTONS = 10;
     private ScoreManager scoreManager;
     
-    public ScorePopup(int score, ScoreManager scoreManager) {
+    public ScorePopup(int score, ScoreManager scoreManager, Window window) {
         super();
         this.setPopupSize(SCREEN_WIDTH/3, SCREEN_HEIGHT/3);
         this.setLayout(new BorderLayout(100, 100));
@@ -53,7 +54,18 @@ public class ScorePopup extends GamePopup {
                 System.exit(0);
             }
         });
-        
+        restart.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                scoreManager.addScore(name.getText(), score);
+                window.restartGame();
+            }
+        });
+        exitMenu.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                scoreManager.addScore(name.getText(), score);
+                window.returnMenuPopup();
+            }
+        });
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_BUTTONS));
         box.add(restart);
         box.add(Box.createHorizontalStrut(SPACE_BETWEEN_BUTTONS));

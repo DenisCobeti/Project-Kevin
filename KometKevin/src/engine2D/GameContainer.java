@@ -1,5 +1,8 @@
 package engine2D;
 
+import game.GameManager;
+import game.objects.Player;
+
 /**
  * Clase que contiene el hilo del motor sobre el que se ejecuta el juego.
  * Cuenta con todos los parametros de las clases del paquete.
@@ -150,4 +153,12 @@ public class GameContainer implements Runnable {
     public Window getWindow() {return window;}
     public Input getInput() {return input;}
     public Renderer getRenderer() {return renderer;}
+
+    void killPlayer() {
+        ((GameManager)game).killPlayer();
+    }
+
+    void restart(boolean ship) {
+        ((GameManager)game).restart(ship);
+    }
 }

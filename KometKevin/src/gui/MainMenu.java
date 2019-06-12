@@ -207,6 +207,9 @@ public class MainMenu extends JPanel {
     
     private void startSelectLabelMouseClicked(MouseEvent evt) {
         //player = new HammerHead(0,0, (GameManager)window.getGameContainer().getGame());
+        if (player != null){
+            window.killPlayer();
+        }
         player = ShipFactory.getPlayer(Ships.values()[shipsIterator], 
                     (GameManager)window.getGameContainer().getGame());
         

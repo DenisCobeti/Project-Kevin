@@ -58,7 +58,6 @@ public class GameManager extends AbstractGame {
                 objects.remove(i);
                 i--;
                 if(obj instanceof Player) {
-                    player = null;
                     gc.pause();
                     gc.getWindow().deadPLayer((Player)obj);
                 }
@@ -109,4 +108,30 @@ public class GameManager extends AbstractGame {
         camera.setTarget(player);
         hud.setTarget(player);
     }
+    /**
+     * Reinicia la partida, borrando el jugador acual o no
+     * @param ship si la nueva nave es del mismo tipo o no
+     */
+    public void restart(boolean ship) {
+        for (GameObject obj : objects) {
+            obj.setDispose(true);
+            if (ship && obj instanceof Player) obj.setDispose(false);
+        }
+        if(ship){
+            player.setScore(0);
+            objects.add(0, player);
+        }
+        objects.add(new GravPool(background.getW()/2, background.getH()/2));
+        
+    }
+    public void killPlayer() {
+        for (GameObject obj : objects) {
+            if(obj instanceof Player) {
+                objects.remove(obj);
+                player = null;
+            }
+        }
+    }
+
+    
 }

@@ -42,6 +42,7 @@ public class Window extends JFrame{
     private BufferedImage image;
     private BufferStrategy bs;
     private Graphics g;
+    private ScorePopup popup;
     
     private final int screenWidth;
     private final int screenHeight;
@@ -136,7 +137,7 @@ public class Window extends JFrame{
     }
     
     public void deadPLayer(Player player){
-        ScorePopup popup = new ScorePopup(player.getScore(), this.menu.getScoreManager());
+        popup = new ScorePopup(player.getScore(), this.menu.getScoreManager(), this);
         
         popup.setEnabled(true);
         popup.show(this, screenWidth/3, screenHeight/3);
@@ -155,6 +156,34 @@ public class Window extends JFrame{
         paused = false;
     }
     
+    public void restartGame(){
+        popup.setVisible(false);
+        popup = null;
+        gc.restart(true);
+        gc.resume();
+    }
+    
+    public void returnMenu(PauseMenu menu){
+        menu.setVisible(false);
+        menu = null;
+        gc.restart(false);
+        gameClip.stop();
+        menuClip.loop();
+        getCardLayout().next(cards);
+    }
+    
+    public void returnMenuPopup(){
+        popup.setVisible(false);
+        popup = null;
+        gc.restart(false);
+        gameClip.stop();
+        menuClip.loop();
+        getCardLayout().next(cards);
+    }
+    
+    public void killPlayer(){
+        gc.killPlayer();
+    }
     public void exitGame(){
         this.dispose();
         System.exit(0);

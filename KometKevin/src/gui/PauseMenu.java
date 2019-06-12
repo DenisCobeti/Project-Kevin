@@ -38,9 +38,9 @@ public class PauseMenu extends GamePopup{
         resume = initMenuButton(RESUME, buttonSize);
         exitMenu = initMenuButton(EXIT_MENU, buttonSize);
         
-        exit.addMouseListener(new MouseAdapter() {
+        exitMenu.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                
+                window.returnMenu(get());
             }
         });
         resume.addMouseListener(new MouseAdapter() {
@@ -96,4 +96,7 @@ public class PauseMenu extends GamePopup{
         return label;
     }
     
+    private PauseMenu get(){
+        return this;
+    }
 }
