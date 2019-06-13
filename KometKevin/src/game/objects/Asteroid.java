@@ -113,7 +113,7 @@ public class Asteroid extends GameObject {
     public void render(GameContainer gc, Renderer r) {
         r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
 //        r.drawFillCircle((int)center.x, (int)center.y, width/2 - 3, 0xffff0000);
-        r.drawTestText(""+healthPoints, MonoFont.STANDARD, (int)position.x, (int)position.y, 0xff00ffff);
+//        r.drawTestText(""+healthPoints, MonoFont.STANDARD, (int)position.x, (int)position.y, 0xff00ffff);
     }
     
     @Override
