@@ -107,6 +107,7 @@ public class GameManager extends AbstractGame {
      */
     public void clear(boolean restart) {      
         objects.clear();
+        am.resetCounters();
         objects.add(gravity);
 
         if(restart){

@@ -100,7 +100,7 @@ public class Asteroid extends GameObject {
             if (type.getSize() >= 1) {
                 divided = true;
                 for (int i = 0; i < type.getDivides(); i++) {
-                    am.getStack().push(new Asteroid(this, am));
+                    am.getDelayedAsteroids().push(new Asteroid(this, am));
                 }
             } else if (type.equals(AsteroidType.Little) && hasPowerUp) {
                 new PowerUp((int)this.getPosition().clone().x, 

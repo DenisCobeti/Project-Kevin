@@ -3,7 +3,6 @@ package game;
 import engine2D.Config;
 import game.objects.Asteroid;
 import game.objects.AsteroidType;
-import gfx.Image;
 import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -92,16 +91,30 @@ public class AsteroidManager {
         }
         gm.getObjects().add(kevin);
         return true;
-            
-
     } 
     
-    public Stack<Asteroid> getStack(){return delayedAsteroids;}
-    
-    public Image getImage(){return null;}
-    
+    /**
+     * Restea a 0 los conteos de los asteroides. Usar este metodo tras eliminar
+     * todos los asteroides del GameManager
+     */
+    public void resetCounters() {
+        for (int i = 0; i < countAsteroidTypes.length; i++) {
+            countAsteroidTypes[i] = 0;
+        }  
+    }
+
+    /**
+     * Resta un asteroide de su contador predeterminado. Usar este metodo tras 
+     * eliminar un asteroide en el GameManager
+     * @param asteroid tipo de asteroide que ha muerto
+     */    
     public void subAsteroid(Asteroid asteroid){
         countAsteroidTypes[asteroid.getType().getSize()]--;
+    }
+
+    // Getter
+    public Stack<Asteroid> getDelayedAsteroids() {
+        return delayedAsteroids;
     }
 }
     
