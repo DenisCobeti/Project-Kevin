@@ -53,6 +53,8 @@ public class Asteroid extends GameObject {
         this.type = father.type.getSubtype();
         this.image = type.getImg();
         
+        System.out.println(type.getSize());
+
         this.width = image.getW();
         this.height = image.getH();
         
@@ -100,8 +102,10 @@ public class Asteroid extends GameObject {
                     am.getStack().push(new Asteroid(this, am));
                 }
             } else if (type.equals(AsteroidType.Little) && hasPowerUp) {
-                PowerUpType.getPowerUp((int)this.getPosition().clone().x, 
-                                          (int)this.getPosition().clone().y, gm);
+                new PowerUp((int)this.getPosition().clone().x, 
+                            (int)this.getPosition().clone().y, 
+                            PowerUpType.values()[(int) (Math.random() * PowerUpType.values().length)],
+                            gm);
             }
         }
     }

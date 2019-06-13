@@ -5,7 +5,6 @@ import engine2D.Renderer;
 import game.GameManager;
 import game.Vector2;
 import game.colliders.CircleCollider;
-import gfx.Image;
 
 /**
  * Cambiar el valor total de los cds (cdValues) puede dar problemas
@@ -26,9 +25,9 @@ public class PowerUp extends GameObject {
     
     private Player player;
     
-    public PowerUp(int x, int y, PowerUpType type, double value, Image image, GameManager gm) {
+    public PowerUp(int x, int y, PowerUpType type, GameManager gm) {
         this.tag = "asteroid";
-        this.image = image;
+        this.image = type.getImage();
 
         this.width = image.getW();
         this.height = image.getH();
@@ -44,16 +43,15 @@ public class PowerUp extends GameObject {
         this.collider = new CircleCollider(this, 26);
         
         this.temporal = false;
-        this.value = value;
+        this.value = type.getValue();
         this.picked = false;
         
         gm.getObjects().add(this);
-        
     }
     
-    public PowerUp(int x, int y, PowerUpType type, double value, float duration, Image image, GameManager gm) {
+    public PowerUp(int x, int y, PowerUpType type, float duration, GameManager gm) {
         this.tag = "asteroid";
-        this.image = image;
+        this.image = type.getImage();
 
         this.width = image.getW();
         this.height = image.getH();
@@ -69,21 +67,13 @@ public class PowerUp extends GameObject {
         this.collider = new CircleCollider(this, 26);
         
         this.temporal = true;
-        this.value = value;
+        this.value = type.getValue();
         this.duration = duration;
         this.picked = false;
         
         gm.getObjects().add(this);
     }
-    
-    public void setType(PowerUpType type){
-        this.type = type;
-    }
-    
-    public void setValue(int value){
-        this.value = value;
-    }
-
+   
     @Override
     public void render(GameContainer gc, Renderer r) {
         if (!picked){
@@ -148,5 +138,13 @@ public class PowerUp extends GameObject {
                     break;
             }
         }
+    }
+    
+    public void setType(PowerUpType type){
+        this.type = type;
+    }
+    
+    public void setValue(int value){
+        this.value = value;
     }
 }
