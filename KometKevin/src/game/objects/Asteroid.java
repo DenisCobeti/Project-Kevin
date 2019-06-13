@@ -8,14 +8,16 @@ import game.Vector2;
 import game.colliders.CircleCollider;
 import gfx.MonoFont;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Clase asteroide
- * @author Ramiro
+ * @author Ramiro, Denis y Arturo
  */
 public class Asteroid extends GameObject {
     
-    private static final int POWERUP_PROBABILITY = 50;
+    private static final int POWERUP_PROBABILITY = 40;
+    private static ThreadLocalRandom random = ThreadLocalRandom.current();
     
     private double angle = 0;
     private double damage = 2;
@@ -80,7 +82,7 @@ public class Asteroid extends GameObject {
         this.am = am;
         
         if (this.type.getSize() < 1){
-           if((int)(Math.random() * 100 + 1) < POWERUP_PROBABILITY) {
+           if(random.nextInt(100) < POWERUP_PROBABILITY) {
                 hasPowerUp = true;
             }
         }

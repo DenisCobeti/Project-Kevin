@@ -46,7 +46,7 @@ public class AsteroidManager {
                     countAsteroidTypes[i]++;
                 }
             }
-        }
+        }        
         counter += dt;
     }
     
@@ -69,7 +69,6 @@ public class AsteroidManager {
         if (counter %(3*dt)==0) {
             Vector2 aux= new Vector2(x,y);
             aux.subtract(kevin.getCenter());
-            //aux = kevin.getCenter().getSubtracted(aux)
             kevin.setVelocity(Vector2.toCartesian(9, aux.getAngle()));
         } else {
             double velx=3+random.nextDouble();
@@ -90,7 +89,6 @@ public class AsteroidManager {
                     break;
             }
             kevin.setVelocity(new Vector2(velx, vely));
-            //gm.getObjects().add(kevin);
         }
         gm.getObjects().add(kevin);
         return true;
