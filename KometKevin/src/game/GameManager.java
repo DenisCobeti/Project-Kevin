@@ -9,10 +9,7 @@ import game.objects.*;
 import game.objects.ships.ShipFactory;
 import gfx.Image;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Clase que contiene los objetos del videojuego.
@@ -62,8 +59,10 @@ public class GameManager extends AbstractGame {
                              || y < 0 || y > background.getH()) {
                 objects.remove(i);
                 i--;
-                if(obj instanceof Player) {
+                if (obj instanceof Player) {
                     gc.getWindow().deadPLayer((Player)obj);
+                } else if (obj instanceof Asteroid) {
+                    am.subAsteroid((Asteroid)obj);
                 }
             }
         }

@@ -9,8 +9,6 @@ import game.objects.Player;
 import game.objects.ships.Ships;
 import gfx.ImageTile;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Segunda nave del juego. Agilidad.

@@ -120,6 +120,13 @@ public class Asteroid extends GameObject {
     public void effect(GameObject go) {
         go.setHealthPoints(go.getHealthPoints() - damage);
         divided = false;
-        am.subAsteroid(type);
+    }
+
+    public AsteroidType getType() {
+        return type;
+    }
+
+    public void setType(AsteroidType type) {
+        this.type = type;
     }
 }

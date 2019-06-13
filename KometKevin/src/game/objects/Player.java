@@ -4,7 +4,6 @@ import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
 import game.Vector2;
-import game.objects.ships.Ships;
 import gfx.ImageTile;
 
 /**

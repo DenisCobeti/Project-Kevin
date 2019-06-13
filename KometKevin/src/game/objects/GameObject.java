@@ -49,6 +49,7 @@ public abstract class GameObject {
     /**
      * Comprueba si el objecto esta muerto. Por lo general si no tiene vida o ha 
      * de ser eliminado del GameManager
+     * @return si esta muerto
      */
     public boolean isDead() {
         return healthPoints <= 0 || dispose;

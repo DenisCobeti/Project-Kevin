@@ -22,7 +22,7 @@ public class Load extends GameObject{
     private double anim;
     
     private double timer = 0.4;
-    private double damage = 0.2;
+    private double damage = 0.8;
     
     public Load(int x, int y, ImageTile image) {
         this.tag = "projectile";

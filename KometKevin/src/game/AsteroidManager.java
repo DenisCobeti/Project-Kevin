@@ -102,8 +102,8 @@ public class AsteroidManager {
     
     public Image getImage(){return null;}
     
-    public void subAsteroid(AsteroidType type){
-        countAsteroidTypes[type.getSize()]--;
+    public void subAsteroid(Asteroid asteroid){
+        countAsteroidTypes[asteroid.getType().getSize()]--;
     }
 }
     
