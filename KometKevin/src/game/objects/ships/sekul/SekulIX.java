@@ -17,7 +17,7 @@ public class SekulIX extends Player {
     private static final int FIRE1_SPEED = 10;
     private static final int FIRE2_SPEED = 80;
     
-    private Image artillery = new Image("/projectiles/fire.png");
+    private Image artillery = new Image("/projectiles/rocket.png");
     
     private DetonationWave wave;
     private Mining mining;

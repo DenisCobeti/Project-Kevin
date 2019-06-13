@@ -204,7 +204,6 @@ public class Config {
     public int getPrimaryFire() {return primaryFire;}
     public int getSecondaryFire() {return secondaryFire;}
     public static int getKeyPause() {return keyPause;}
-    
     public Font getFont() {return font;}
     
     public void setFullScreen(boolean fullScreen) {this.fullScreen = fullScreen;}
@@ -220,6 +219,4 @@ public class Config {
     public void setKeybrake(int keybrake) {this.keyBrake = keybrake;}
     public void setKeyDumpers(int keyDumpers) {this.keyDumpers = keyDumpers;}
     public void setPrimaryFire(int primaryFire) {this.primaryFire = primaryFire;}
-    public void setSecondaryFire(int secondaryFire) {this.secondaryFire = secondaryFire;}
-    
 }
