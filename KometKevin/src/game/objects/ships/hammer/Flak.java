@@ -16,9 +16,7 @@ import gfx.ImageTile;
  * @author Arturo
  */
 public class Flak extends GameObject{ 
-    private int radius = 4;
-    private int explosionRadius = 5;
-
+    private int undetonatedRadius = 4;
     private boolean detonated = false;
     
     private ImageTile image; 
@@ -42,7 +40,7 @@ public class Flak extends GameObject{
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.FIRE1_COL.getValue();
-        this.collider = new CircleCollider(this, radius);
+        this.collider = new CircleCollider(this, undetonatedRadius);
     }
 
     @Override
@@ -50,16 +48,16 @@ public class Flak extends GameObject{
         position.add(velocity);
         center.set(position.x + width/2, position.y + height/2);
         aiming.set(velocity.getNormalized());
-        while(!collisions.empty()) {
-            if (detonated) effect(collisions.pop());
-            else collisions.pop();
-        }
         if ((healthPoints <= 0 || timer < 0) && !detonated) {
             detonated = true;
             ((CircleCollider)collider).setRadius(width);
         }
+        while(!collisions.empty()) {
+            if (detonated) effect(collisions.pop());
+            else collisions.pop();
+        }
         if (detonated) {
-            anim += dt * 60;
+            anim += dt * 30;
             if (anim >= (image.getW() / width)) dispose = true;
         }
         timer -= dt;

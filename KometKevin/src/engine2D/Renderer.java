@@ -368,6 +368,23 @@ public class Renderer {
         }
     }
     
+    // Metodos para testeo
+    
+    /**
+     * Escribe el texto con los offsets de la camara. Se usa para mostrar algun 
+     * valor de un objeto.
+     */
+    public void drawTestText(String text, MonoFont font, int offX, int offY, int color) {
+        drawText(text, font, offX - camX, offY - camY, color);
+    }
+    
+    /**
+     * Coloca un punto con los offsets de la camara. Se usa para mostrar vectores
+     */
+    public void drawTestDot(int offX, int offY, int color) {
+        setPixel(offX - camX, offY - camY, color);
+    }
+    
     // Getters & Setters
     public void setCamX(int camX) {this.camX = camX;}
     public void setCamY(int camY) {this.camY = camY;}

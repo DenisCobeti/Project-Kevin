@@ -6,6 +6,7 @@ import game.AsteroidManager;
 import game.GameManager;
 import game.Vector2;
 import game.colliders.CircleCollider;
+import gfx.MonoFont;
 import java.util.Random;
 
 /**
@@ -52,8 +53,6 @@ public class Asteroid extends GameObject {
         this.tag = "asteroid";
         this.type = father.type.getSubtype();
         this.image = type.getImg();
-        
-        System.out.println(type.getSize());
 
         this.width = image.getW();
         this.height = image.getH();
@@ -113,7 +112,8 @@ public class Asteroid extends GameObject {
     @Override
     public void render(GameContainer gc, Renderer r) {
         r.drawRotatedImage(image, (int)position.x, (int)position.y, angle);
-        //r.drawFillCircle((int)center.x, (int)center.y, width/2 - 3, 0xffff0000);
+//        r.drawFillCircle((int)center.x, (int)center.y, width/2 - 3, 0xffff0000);
+        r.drawTestText(""+healthPoints, MonoFont.STANDARD, (int)position.x, (int)position.y, 0xff00ffff);
     }
     
     @Override

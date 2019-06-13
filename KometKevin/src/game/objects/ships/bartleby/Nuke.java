@@ -14,9 +14,7 @@ import gfx.ImageTile;
  * @author Sergio
  */
 public class Nuke extends GameObject{ 
-    private int radius = 4;
-    private int explosionRadius = width;
-
+    private int undetonatedRadius = 4;
     private boolean detonated = false;
     
     private ImageTile image; 
@@ -39,7 +37,7 @@ public class Nuke extends GameObject{
         
         collCode = CollisionCodes.FIRE1.getValue();
         collides = CollisionCodes.GRAVPOOL_COL.getValue();//0b10111111100;
-        this.collider = new CircleCollider(this, radius);
+        this.collider = new CircleCollider(this, undetonatedRadius);
     }
 
     @Override
@@ -49,13 +47,13 @@ public class Nuke extends GameObject{
             center.set(position.x + width/2, position.y + height/2);
             aiming.set(velocity.getNormalized());
         }
+        if (healthPoints <= 0 && !detonated) {
+            detonated = true;
+            ((CircleCollider)collider).setRadius(width / 2);
+        }
         while(!collisions.empty()) {
             if (detonated) effect(collisions.pop());
             else collisions.pop();
-        }
-        if (healthPoints <= 0 && !detonated) {
-            detonated = true;
-            ((CircleCollider)collider).setRadius(explosionRadius);
         }
         if (detonated) {
             anim += dt*20;
@@ -70,8 +68,8 @@ public class Nuke extends GameObject{
 
     @Override
     public void render(GameContainer gc, Renderer r) {
-        //r.drawFillCircle((int)position.x, (int)position.y, explosionRadius, 0xffff0000);
         r.drawRotatedImageTile(image, (int)position.x, (int)position.y, (int)anim, 0, aiming.getAngle());
+//        r.drawFillCircle((int)center.x, (int)center.y, ((CircleCollider)collider).getRadius(), 0xffff0000);
     }
 
     @Override
