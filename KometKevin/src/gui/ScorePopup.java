@@ -75,12 +75,13 @@ public class ScorePopup extends GamePopup {
         this.add(box, BorderLayout.SOUTH);
         this.add(scoreText, BorderLayout.NORTH);
         this.add(name, BorderLayout.CENTER);
+        name.setEditable(true);
         this.setLocationRelativeTo(window);
     }
     
     private JTextField initNameField(String text){
         
-        JTextField label = new JTextField(text);
+        JTextField label = new JTextField(System.getProperty("user.name"));
         //Dimension dimension = new Dimension(SCREEN_WIDTH/5, SCREEN_HEIGHT/20);
         //Color labelBackground = new Color(0, 0, 0, 220);
         /*
@@ -88,6 +89,10 @@ public class ScorePopup extends GamePopup {
         label.setMaximumSize(size);
         label.setMinimumSize(size);
         */
+        label.requestFocusInWindow();
+        label.setEditable(true);
+        label.requestFocus();
+        
         label.setFont(MainMenu.FONT.deriveFont(MainMenu.FONT_SIZE/2)); // NOI18N
         label.setForeground(Color.WHITE);
         label.setOpaque(true);

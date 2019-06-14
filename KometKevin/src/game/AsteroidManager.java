@@ -1,8 +1,10 @@
 package game;
 
+import audio.SoundClip;
 import engine2D.Config;
 import game.objects.Asteroid;
 import game.objects.AsteroidType;
+import java.io.IOException;
 import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,6 +21,8 @@ public class AsteroidManager {
     private Stack<Asteroid> delayedAsteroids;
     private static int[] countAsteroidTypes; 
     
+    private SoundClip destroySound;
+    
     private double counter = 0;
     
     public AsteroidManager(Camera camera,GameManager gm){  
@@ -27,6 +31,10 @@ public class AsteroidManager {
         this.config = Config.getInstance();
         this.random = ThreadLocalRandom.current();
         delayedAsteroids = new Stack<>();
+        
+        try {
+            destroySound = new SoundClip("./sfx/asteroid/hit.ogg");
+        } catch (IOException ex) {}
         
         countAsteroidTypes = new int[AsteroidType.values().length];
         for (int i = 0; i < countAsteroidTypes.length; i++) {
@@ -63,7 +71,7 @@ public class AsteroidManager {
         if(vertical > y - 50 && vertical < y + config.getScreenHeight() + 50) {
             return false;
         } 
-        Asteroid kevin = new Asteroid(horizontal, vertical, type, this);
+        Asteroid kevin = new Asteroid(horizontal, vertical, type, destroySound, this);
         
         if (counter %(3*dt)==0) {
             Vector2 aux= new Vector2(x,y);

@@ -1,5 +1,6 @@
 package game.objects;
 
+import audio.SoundClip;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.AsteroidManager;
@@ -24,12 +25,15 @@ public class Asteroid extends GameObject {
     private boolean divided = true;
     private double childAngle;
     
+    private SoundClip destroySound;
+    
     private AsteroidType type;
     private AsteroidManager am;
     
     boolean hasPowerUp;
     
-    public Asteroid(double x, double y, AsteroidType type, AsteroidManager am) {
+    public Asteroid(double x, double y, AsteroidType type, SoundClip destroySound, 
+            AsteroidManager am) {
         this.tag = "asteroid";
         this.type = type;
         this.image = type.getImg();
@@ -45,6 +49,7 @@ public class Asteroid extends GameObject {
         collides = CollisionCodes.ASTEROID_COL.getValue();
         this.collider = new CircleCollider(this, width/2 - 2);
         
+        this.destroySound = destroySound;
         this.damage = type.getHealth();
         this.healthPoints = type.getHealth();
         

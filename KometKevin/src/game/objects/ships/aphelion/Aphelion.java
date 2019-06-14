@@ -45,6 +45,7 @@ public class Aphelion extends Player {
         try {
             tpSound = new SoundClip("./sfx/aphelion/tp.ogg");
             laserSound = new SoundClip("./sfx/aphelion/laser.ogg");
+            bombSound = new SoundClip("./sfx/aphelion/explosion.ogg");
         } catch (IOException ex) {}
         
         collider = new BoxCollider(this, 72, 46);
@@ -97,6 +98,7 @@ public class Aphelion extends Player {
         if(gc.getInput().isButtonUp(gc.getConfig().getSecondaryFire())) {
             if (isActive[1]){
                 load.setDetonated(true);
+                bombSound.play();
                 load = null;
                 isActive[1] = false;
                 cds[1] = cdValues[1];
