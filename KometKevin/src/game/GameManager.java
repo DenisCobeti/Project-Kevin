@@ -62,6 +62,9 @@ public class GameManager extends AbstractGame {
                 if (obj instanceof Player) {
                     gc.getWindow().deadPLayer((Player)obj);
                 } else if (obj instanceof Asteroid) {
+                    if (obj.getHealthPoints() <= 0) {
+                        player.setScore(player.getScore() + ((Asteroid)obj).getType().getPoints());
+                    }
                     am.subAsteroid((Asteroid)obj);
                 }
             }
