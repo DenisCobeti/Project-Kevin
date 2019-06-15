@@ -1,5 +1,6 @@
 package game.objects.ships.hammer;
 
+import audio.SoundClip;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
@@ -8,6 +9,7 @@ import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import game.objects.Player;
 import gfx.ImageTile;
+import java.io.IOException;
 
 /**
  * Cuarta habilidad de la HammerHead
@@ -18,6 +20,8 @@ public class Shield extends GameObject {
     public Player support;
     public int num;
     
+    public SoundClip shieldSound;
+    
     public double anim = 0;
 
     public Shield(Player support, int num) {
@@ -27,6 +31,12 @@ public class Shield extends GameObject {
         height = ((ImageTile) image).getTileH();
         this.support = support;
         this.num = num;
+        
+        try {
+            shieldSound = new SoundClip("./sfx/hammer/shield.ogg");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         
         // Ojo con estos vectores que son punteros a los de la nave
         this.center = support.getCenter();
@@ -43,8 +53,10 @@ public class Shield extends GameObject {
         if (!support.getIsActive()[num]) {
             support.setCollides(CollisionCodes.TEAM1_COL.getValue());
             support.getCds()[num] = support.getCdValues()[num];
+            shieldSound.stop();
         } else {
             support.setCollides(0b11000000000);
+            shieldSound.loop();
         }
     }
     
@@ -73,14 +85,15 @@ public class Shield extends GameObject {
     
     @Override
     public void render(GameContainer gc, Renderer r) {
-        if (support.getIsActive()[num])
+        if (support.getIsActive()[num]) {
             r.drawRotatedImageTile((ImageTile)image, (int)position.x - 8, (int)position.y - 36, (int)anim, 0, aiming.getAngle());
+//            r.drawFillCircle((int)center.x, (int)center.y, ((CircleCollider)collider).getRadius(), 0xffff0000);
+        }
     }
 
     @Override
     public void effect(GameObject go) {
         go.setHealthPoints(go.getHealthPoints() - support.getEnergyPoints());
-        //support.setEnergyPoints(support.getEnergyPoints() - 0.1);
     }
     
 }

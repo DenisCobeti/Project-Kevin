@@ -1,5 +1,6 @@
 package game.objects.ships.hammer;
 
+import audio.SoundClip;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
@@ -10,6 +11,9 @@ import game.objects.ships.Projectile;
 import game.objects.ships.Ships;
 import gfx.Image;
 import gfx.ImageTile;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Primera nave del juego. Resistencia
@@ -34,6 +38,8 @@ public class HammerHead extends Player {
     
     private Image artillery = new Image("/projectiles/fire.png");
     private ImageTile flak = new ImageTile("/projectiles/flak.png",28,28);
+    
+    private SoundClip fireSound1, fireSound2;
 
     private Shield shield;
        
@@ -45,6 +51,14 @@ public class HammerHead extends Player {
         
         image = new ImageTile(Ships.Hammer.getSprite(),Ships.Hammer.getSizeX(),
                                                        Ships.Hammer.getSizeY());
+        
+        try {
+            fireSound1 = new SoundClip("./sfx/hammer/throw.ogg");
+            fireSound2 = new SoundClip("./sfx/hammer/throw.ogg");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
         width = ((ImageTile) image).getTileW();
         height = ((ImageTile) image).getTileH();
         
@@ -77,7 +91,13 @@ public class HammerHead extends Player {
     protected void abilitiesCode(GameContainer gc, GameManager gm, float dt) {  
         // Primera Habilidad
         if(gc.getInput().isButton(gc.getConfig().getPrimaryFire()) && cds[0] <= 0 && energyPoints - energyCost[0] >= 0) {
-            dual *= -1; 
+            dual *= -1;
+            
+            if (dual < 0) {
+                if (fireSound1.stopped()) fireSound1.play();
+            } else {
+                if (fireSound2.stopped()) fireSound2.play();
+            }
             
             Vector2 spawn = Vector2.toCartesian(FIRE1_LONG, aiming.getAngle() + FIRE1_ANGLE * dual);
             spawn.add(center);

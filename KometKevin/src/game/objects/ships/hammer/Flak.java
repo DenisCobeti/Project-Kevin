@@ -1,5 +1,6 @@
 package game.objects.ships.hammer;
 
+import audio.SoundClip;
 import engine2D.GameContainer;
 import engine2D.Renderer;
 import game.GameManager;
@@ -8,6 +9,7 @@ import game.colliders.CircleCollider;
 import game.objects.CollisionCodes;
 import game.objects.GameObject;
 import gfx.ImageTile;
+import java.io.IOException;
 
 /**
  * Proyectil de la segunda habilidad de la HammerHead.
