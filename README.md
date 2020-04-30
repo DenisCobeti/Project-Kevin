@@ -29,3 +29,4 @@ Sergio Langarita Benitez
 
 Ramiro Woutersen Uriarte 
 
+Special thanks to [Majoolwip](https://www.youtube.com/channel/UCYdJWlQWeuhDZicBbxM0-mg) who´s [youtube tutorials](https://www.youtube.com/watch?v=4iPEjFUZNsw) served as a basis for the project.
