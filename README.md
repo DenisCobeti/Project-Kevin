@@ -18,3 +18,11 @@ by asteroids.
 
 We will use the game engine disigned specifically for this application, however the separation between the 
 engine and the game will be guaranteed.
+
+## Authors
+
+Arturo García Enguita
+Denis Florin Cobeti
+Sergio Langarita Benitez
+Ramiro Woutersen Uriarte 
+
