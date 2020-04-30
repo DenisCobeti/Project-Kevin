@@ -22,7 +22,10 @@ engine and the game will be guaranteed.
 ## Authors
 
 Arturo García Enguita
+
 Denis Florin Cobeti
+
 Sergio Langarita Benitez
+
 Ramiro Woutersen Uriarte 
 
