@@ -6,10 +6,6 @@ This project is meant only for educational purposes, as it has a lot of optimiza
 prevent it from being used in a serious game development environment. It has been developed 
 more as an experiment than a serious tool.
 
-This project started as general software design documentation that evolved into an actual program, 
-that´s why the prototypes and all the documents are included. These documents are written in Spanish, 
-however the code is exclusively in English.
-
 ## Komet Kevin
 
 Komet Kevin is a videogame done within this engine. It is 2d with vector-based physics.
